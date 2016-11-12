@@ -1,1 +1,1 @@
-This file will contain the link to our blog site.
+https://rkprojectblogs.wordpress.com/
