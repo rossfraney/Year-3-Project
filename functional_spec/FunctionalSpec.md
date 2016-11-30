@@ -1,4 +1,4 @@
-#**1.Introduction**
+# **1.Introduction**
 
 ##1.1 Overview of Project
 This project is a cost effective and easy to use home surveillance / security system which will enable users to keep track of several cameras positioned in various locations of their choosing, via their smartphone or personal computer, over Wi-Fi. The system will be based around a Raspberry pi, and will include motion detection software which will activate image capturing on each individual camera if and only if there is movement in that camera’s frame. These images will be then taken in a pre-set recurring time frame and stored in a drop-box, in order for the user to see them remotely using a VNC server. This will also mean that there will be images available if there is a breach of security in the owner’s home, which can be handed over to authorities to strengthen any resulting legal case that may arise.
