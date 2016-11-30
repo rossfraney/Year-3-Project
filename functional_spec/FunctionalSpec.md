@@ -1,6 +1,6 @@
-1. **1.Introduction**
+#**1.Introduction**
 
-* Overview of Project
+##1.1 Overview of Project
 This project is a cost effective and easy to use home surveillance / security system which will enable users to keep track of several cameras positioned in various locations of their choosing, via their smartphone or personal computer, over Wi-Fi. The system will be based around a Raspberry pi, and will include motion detection software which will activate image capturing on each individual camera if and only if there is movement in that camera’s frame. These images will be then taken in a pre-set recurring time frame and stored in a drop-box, in order for the user to see them remotely using a VNC server. This will also mean that there will be images available if there is a breach of security in the owner’s home, which can be handed over to authorities to strengthen any resulting legal case that may arise.
 
 The user will also have the option of setting up a live link with that video camera through video streaming software such as skype or the likes, in order to view, in real time, the video feed of that camera, which would allow not only a security function, but actually allow a user to communicate with whoever may be in the room in question, allowing the system to be used for the purpose of monitoring young children and / or elderly people that may be under the care of the user.
@@ -15,24 +15,24 @@ The main functions, then, can be summarized as follows:
 -	GPS system that could make use of your phone to determine whether notifications are needed based on whether you are in your home or not. This could be set to automatically arm the system once you are identified as being away from home. 
 -	A mobile application that provides the user with the view of current enabled camera(s). 
 
-*1.2 Project Scope 
+##1.2 Project Scope 
 This system was developed with the home-user in mind, and as such will provide a convenient, cost effective method of monitoring a home, without unnecessary complexity of use, or cost. A large factor of this system is that it will aim not just to satisfy the security needs of its users, but also be useful in a more general, everyday life sense. The versatility of this product means that the target users span a wide range of demographics. New / busy parents, child minders, people with elderly relatives, small businesses in need of till surveillance, etc. More specific, and detailed use cases can be seen in the respective section in this document. 
 
-*1.3 Document Outline
+##1.3 Document Outline
 **Section 2** of this document has been designed to provide a more in-depth non-technical description of the main functions of this surveillance system. This includes the different interfaces the user will interact with, the different options available to the user in terms of configuration and preferences, and example use cases to display the practicality and simplicity of the system, for a multitude of diverse user demographics.
 
 **Section 3** of this document will give a general overview of the system requirements, i.e. the various technical frameworks it must support to function as planned. This will include software/hardware requirements, security requirements, functionality, usability, and accessibility requirements that this system must adhere to, so that it can benefit the widest spanning user-base possible. 
 
 **Section 4** will focus on the individual components/modules of the system, the design decisions in terms of how each will interact with the other, Including a component Diagram. 
 
-*1.4 Motivations
+##1.4 Motivations
 Our main motivation for the development of this system was the fact that currently, home security systems are not something that most people consider, as they are perceived as being expensive, almost “luxury” systems, that the average person could not afford. Unfortunately, this is largely true. However, we believe considering how advanced society has become in terms of technology, home security should be established as a concept that all home owners consider adding to their home, a new “societal norm” if you will.   
 
 Our focus is to achieve this goal of introducing the idea that security should be a fundamental concern for all home owners, and should not be overlooked due to fears of complexity/price, and also to add useful features that can help people in other aspects of their life aside from security, as mentioned above. To do this, we needed to choose a medium that is already a cornerstone in the everyday life of the general public. 
 
 Nowadays many people use smartphones to manage a variety of different aspects of life be it nutrition, time keeping, socialising, fitness, music, media/entertainment, etc. As such, this is a comfortable and well-known platform for a huge number of people. The system should not make users feel like they must learn something new, which can be an off-putting idea for many, particularly for people who may not necessarily be tech-literate. Our desire is to deliver a system that has all the functionality of a high-priced industrial security system and more, but packaged in the familiar format, non-intimidating format of a mobile application.
 
-*1.5 References:
+##1.5 References:
 
 Image Storage:
 https://www.dropbox.com/
@@ -49,8 +49,8 @@ https://www.python.org/
 http://www.learnpython.org/
 
 * * * 
-2.**2.Description**
-* Features
+#**2.Description**
+##2.1 Features
 The main functions in this system involve the user being able to interact with a variety of web cameras that have been set up around their home/place of work/etc., from a remote location such as a mobile device, in order to monitor a particular area using motion detection and image capture, and to take action based on the images being captured.  Although the following features will be explained in more detail in section 3, below is a general outline of the main features the system should provide:
 
 -	An Android Application 
@@ -63,7 +63,7 @@ The main functions in this system involve the user being able to interact with a
 -	User Preferences/Settings (camera sensitivity, enable/disable GPS, change alarm sound etc.)
 
  
-*2.2 Target User Characteristics & Environments
+##2.2 Target User Characteristics & Environments
 In regards to the expected profile of prospective users, the main categories can be summarized as one, or any combination of the following:
 
 -	New Parents who would benefit from the baby monitoring capabilities of this product.
@@ -71,23 +71,22 @@ In regards to the expected profile of prospective users, the main categories can
 -	General Home owners who are living alone, or who’s house is left unoccupied for large portions of the day. 
 -	Anybody interested in adding extra security to a particular asset or number of assets. For example, one may want to add security to the garage/driveway in which they keep their car. Another example may be a business owner interested in monitoring a safe or till.
 
-*2.3 Use Cases
+##2.3 Use Cases
+######USE CASE 1: Setting up a profile
 
-USE CASE 1: Setting up a profile
+######USE CASE 2: Investigating a Triggered Alarm
 
-USE CASE 2: Investigating a Triggered Alarm
+######USE CASE 3: Automatic Arming
 
-USE CASE 3: Automatic Arming
-
-USE CASE 4: 
+######USE CASE 4: 
 
 
-*2.4 Example Scenarios
+##2.4 Example Scenarios
 Outlined below are examples of situations in which this system will prove a useful tool for users in a number of scenarios already listed, in order to display the usefulness and functionality of the system in everyday life.
 
 ---
 
-Scenario 1: Home Security /w Burglary
+######Scenario 1: Home Security /w Burglary
 In this scenario, a user has set up the Raspberry Pi and camera by their living room window. Once they leave the home, a notifciation will be received on their phone and upon accepting, the system will be armed. 
 During the time period in which the user is away from home, while there is no motion being detected, the camera simply takes a photo, compares against the last, and discards it. 
 When there is motion detected however, the speed of the image capuring picks up substantially and the user receives a notification on their mobile device. Once they open the application, they will see which camera the notification is coming from, and will open the dropbox folder for that camera in order to investigate. Here, they will see live images from in real time being uploaded of an intruder in their home, as he enters through the window.
@@ -95,21 +94,21 @@ From this position, the user will have the option to save the images, make a pho
 
 ---
 
-Scenario 2: Monitor a Sleeping Baby
+######Scenario 2: Monitor a Sleeping Baby
 In this example, a parent has set up a camera in the room of their young baby in order to give them time to do necessary chores around the house while the baby sleeps, and be notified if the baby wakes up.
 Upon receiving a notification on their mobile phone, they open the app and move into the camera in question. From here, they can see that the baby has moved but it appears to be still asleep. To investigate further, the parent opens a live video stream with the camera and finds that the baby is in fact awake and unsettled. From here, the parent triggers the alarm (which in this case is actually a soothing lullaby melody), and can now drop what they were doing in order to tend to the baby's needs. 
 
 ---
 
-Scenario 3: Monitoring Front Door
+######Scenario 3: Monitoring Front Door
 Here, the camera has been set up in order to give a view of the outside of the home, namely the front door entrance. The user's phone receives a motion notification (and the door knocks..). The user opens up the camera's folder to investigate. If in this case, the camera shows somebody who is not welcome and/or not expected, the user is now aware without having to expose their presence. In this case however, the user sees a delivery man that had been expected. The user is busy however and as a result, open's up a skype connection and notifies the delivery man that he/she is on the way and will answer the door shortly. 
 
 ---
 
-Scenario 4: Monitoring Elderly Relative/Care Subject
+######Scenario 4: Monitoring Elderly Relative/Care Subject
 In this scenario, the user is taking care of their elderly grandmother who is currently sleeping in the living room (where the surveillance camera has been set-up). The user takes a trip to the shop in order to buy groceries for the evening, however on the way a notification is sent to the user's phone and upon investigation, the user finds that their grandparent has fallen and is in need of assistance. The user can now open a skype connection with the camera, comfort and direct the elderly subject, and begin to make their way home immediately in order to assist. 
 
-*2.4 Constraints
+##2.4 Constraints
 One unfortunate constraint is related to the type of camera that can be used in conjunction with the system. The raspberry pi official camera module is the most obvious choice and can be disguised very well. Although many other cameras can be used, they are, naturally enough, limited to the cameras that are compatible with the Raspberry Pi. There is a list of such cameras on the official Raspberry Pi website. Although the set of all compatible cameras is not limited to this list, these are the only cameras guaranteed to be supported by the Pi, and as such are a safe bet. 
 
 Another constraint to be considered is the number of cameras. The number of cameras on this system will be limited to a maximum of 4, in order to avoid slowing down the system or risking IO problems related to the uploading and comparing of images.
@@ -118,8 +117,8 @@ The alarm on this system will be limited to the one output device, rather than b
 * * * 
 
 
-3.**3.System Requirements**
-*3.1.External Requirements
+#**3.System Requirements**
+##3.1.External Requirements
 **Hardware**: For the user to set up this surveillance system at home, a raspberry pi, and at least one camera is required (ideally the raspberry pi official camera module). As well as this, an android device is required to make use of the mobile application. 
 
 **Software**: This system required the Raspberry Pi to be running a version of Raspbeon OS. As well as this, it is required that the user’s phone is running android (preferably 6.0(+) Marshmallow). 
@@ -129,7 +128,7 @@ A home internet connection (or wherever the system is stationed), naturally, is 
 A drop box account is also required as this is where the system will store images, and therefore is the medium through which users will be capable of viewing images from the camera in question once the system has detected motion.
 
 
-*3.2.Product Functions
+##3.2.Product Functions
 ######The Application 
 The system will provide the application downloadable from the google play store, which will feature a main page of all available cameras that the user has set up in a tile format. These cameras will only be activated once there has been motion detected at which point, a notification would be sent to the user’s phone, the app would be opened, and the user will find the corresponding tile highlighted. From here the user would have a multitude of options such as viewing the live feed from the camera, opening the folder where images are being stored in order to view what the motion was, deactivate the alarm triggered by the motion, and also send a text message to authorities in order to alert them of the disturbance if the user feels such action is necessary based on the images they see have been captured. The application would also be connected to the user’s drop box account, so that images being uploaded in real time by the system can be viewed regardless of where the user is. 
 
@@ -157,7 +156,7 @@ The user would also be given the option to change the settings and preferences o
 
  
 
-*3.3.Usability Goals
+##3.3.Usability Goals
 ######Scalability
 Using multiple cameras on this system is a very important feature, so the user can monitor more than a single area at any one time. The obvious concern here is the trade-off between more cameras and the additional overhead in terms of bandwidth and storage. Thus, while currently the system is planned to cap it at four cameras at any one time, in the future an obvious area of expansion to consider is expanding this limit. 
 
@@ -186,14 +185,14 @@ The UI for this system should be sleek, minimalistic, and clean while still prov
 
 
 
-4.**4.System Architecture**
+#**4.System Architecture**
 
 
 
-*4.1.System Module/Component Diagram
+##4.1.System Module/Component Diagram
 ![](file://C:/Users/Ross/Desktop/Capture.PNG)
 
-*4.2 Interaction Diagram Explanation 
+##4.2 Interaction Diagram Explanation 
 - Here, the **Local application logic** section covers all of the interactions at a high level between each physical component and the application itself.
 The Android application will interact with the GPS in order to satisfy the Automatic arming function. The application will also interact with the Backend system module in order to access the components in that respective section.
 Also in the local application, the Raspberry pi will receive data from the camera module and motion sensor in order to determine whether or not images are to be stored. As well as this the VNC server will be set up to view the Raspberry Pi's live feed. 
