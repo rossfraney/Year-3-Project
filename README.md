@@ -1,0 +1,1 @@
+This is a Repository that has been set up in order to document the full development process of our Raspberry Pi based Home Surveillance system. 
