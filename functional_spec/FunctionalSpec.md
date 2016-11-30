@@ -188,7 +188,7 @@ The UI for this system should be sleek, minimalistic, and clean while still prov
 # **4. System Architecture**
 
 ## 4.1 System Module/Component Diagram
-![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/blob/master/functional_spec/ComponentDiagram.PNG)
+![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/a7fe4c6dd3cca9f5bb45a209609d437886805cd5/functional_spec/ComponentDiagram.PNG)
 
 ## 4.2 Interaction Diagram Explanation 
 - Here, the **Local application logic** section covers all of the interactions at a high level between each physical component and the application itself.
