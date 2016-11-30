@@ -1,4 +1,4 @@
-# **1.Introduction**
+# **1. Introduction**
 
 ## 1.1 Overview of Project
 This project is a cost effective and easy to use home surveillance / security system which will enable users to keep track of several cameras positioned in various locations of their choosing, via their smartphone or personal computer, over Wi-Fi. The system will be based around a Raspberry pi, and will include motion detection software which will activate image capturing on each individual camera if and only if there is movement in that camera’s frame. These images will be then taken in a pre-set recurring time frame and stored in a drop-box, in order for the user to see them remotely using a VNC server. This will also mean that there will be images available if there is a breach of security in the owner’s home, which can be handed over to authorities to strengthen any resulting legal case that may arise.
@@ -49,7 +49,7 @@ https://www.python.org/
 http://www.learnpython.org/
 
 * * * 
-# **2.Description**
+# **2. Description**
 ## 2.1 Features
 The main functions in this system involve the user being able to interact with a variety of web cameras that have been set up around their home/place of work/etc., from a remote location such as a mobile device, in order to monitor a particular area using motion detection and image capture, and to take action based on the images being captured.  Although the following features will be explained in more detail in section 3, below is a general outline of the main features the system should provide:
 
@@ -108,7 +108,7 @@ Here, the camera has been set up in order to give a view of the outside of the h
 ###### Scenario 4: Monitoring Elderly Relative/Care Subject
 In this scenario, the user is taking care of their elderly grandmother who is currently sleeping in the living room (where the surveillance camera has been set-up). The user takes a trip to the shop in order to buy groceries for the evening, however on the way a notification is sent to the user's phone and upon investigation, the user finds that their grandparent has fallen and is in need of assistance. The user can now open a skype connection with the camera, comfort and direct the elderly subject, and begin to make their way home immediately in order to assist. 
 
-## 2.4 Constraints
+## 2.5 Constraints
 One unfortunate constraint is related to the type of camera that can be used in conjunction with the system. The raspberry pi official camera module is the most obvious choice and can be disguised very well. Although many other cameras can be used, they are, naturally enough, limited to the cameras that are compatible with the Raspberry Pi. There is a list of such cameras on the official Raspberry Pi website. Although the set of all compatible cameras is not limited to this list, these are the only cameras guaranteed to be supported by the Pi, and as such are a safe bet. 
 
 Another constraint to be considered is the number of cameras. The number of cameras on this system will be limited to a maximum of 4, in order to avoid slowing down the system or risking IO problems related to the uploading and comparing of images.
@@ -117,8 +117,8 @@ The alarm on this system will be limited to the one output device, rather than b
 * * * 
 
 
-# **3.System Requirements**
-## 3.1.External Requirements
+# **3. System Requirements**
+## 3.1 External Requirements
 **Hardware**: For the user to set up this surveillance system at home, a raspberry pi, and at least one camera is required (ideally the raspberry pi official camera module). As well as this, an android device is required to make use of the mobile application. 
 
 **Software**: This system required the Raspberry Pi to be running a version of Raspbeon OS. As well as this, it is required that the user’s phone is running android (preferably 6.0(+) Marshmallow). 
@@ -128,7 +128,7 @@ A home internet connection (or wherever the system is stationed), naturally, is 
 A drop box account is also required as this is where the system will store images, and therefore is the medium through which users will be capable of viewing images from the camera in question once the system has detected motion.
 
 
-## 3.2.Product Functions
+## 3.2 Product Functions
 ###### The Application 
 The system will provide the application downloadable from the google play store, which will feature a main page of all available cameras that the user has set up in a tile format. These cameras will only be activated once there has been motion detected at which point, a notification would be sent to the user’s phone, the app would be opened, and the user will find the corresponding tile highlighted. From here the user would have a multitude of options such as viewing the live feed from the camera, opening the folder where images are being stored in order to view what the motion was, deactivate the alarm triggered by the motion, and also send a text message to authorities in order to alert them of the disturbance if the user feels such action is necessary based on the images they see have been captured. The application would also be connected to the user’s drop box account, so that images being uploaded in real time by the system can be viewed regardless of where the user is. 
 
@@ -156,7 +156,7 @@ The user would also be given the option to change the settings and preferences o
 
  
 
-## 3.3.Usability Goals
+## 3.3 Usability Goals
 ###### Scalability
 Using multiple cameras on this system is a very important feature, so the user can monitor more than a single area at any one time. The obvious concern here is the trade-off between more cameras and the additional overhead in terms of bandwidth and storage. Thus, while currently the system is planned to cap it at four cameras at any one time, in the future an obvious area of expansion to consider is expanding this limit. 
 
@@ -185,11 +185,9 @@ The UI for this system should be sleek, minimalistic, and clean while still prov
 
 
 
-# **4.System Architecture**
+# **4. System Architecture**
 
-
-
-## 4.1.System Module/Component Diagram
+## 4.1 System Module/Component Diagram
 ![](file://C:/Users/Ross/Desktop/Capture.PNG)
 
 ## 4.2 Interaction Diagram Explanation 
