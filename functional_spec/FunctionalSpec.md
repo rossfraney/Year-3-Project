@@ -302,10 +302,13 @@ As well as this, the Authentication module will require the user to sign into th
 
 ### GANTT Chart Explanation
 
+---
+
 ## 6.3 Task View
+![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/fd8274b4011c155a12847e184a9629a62800ec0e/functional_spec/GANTT.PNG)
 
 ### Task View Explanation
-
+![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/c52c8fc305558425c0575f50469b05637eb90281/functional_spec/TaskView.PNG)
 
 # **7.Appendices**
 
