@@ -314,7 +314,7 @@ As well as this, the Authentication module will require the user to sign into th
 
 ## Possible Requirements Problems
 
-###### Requirement: The Application
+#### Requirement: The Application
 
 **Possible Problem**: Implementing App folder that has access to Dropbox file system.
 
