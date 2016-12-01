@@ -129,6 +129,23 @@ In regards to the expected profile of prospective users, the main categories can
 
 
 ###### USE CASE 3: Automatic Arming
+| Use Case 3            | Automatic Arming                                                        |
+|-----------------------|-------------------------------------------------------------------------|
+| Goal in Context       | Automatically arm the Surveillance system once the user leaves the home |
+| Preconditions         | Raspberry Pi Powered on, Application granted GPS location access        |
+| Success End Condition | System is armed once user leaves home                                   |
+| Failed End Condition  | System fails to arm once user leaves home                               |
+| Actors                | User                                                                    |
+| Step                  | Action                                                                  |
+| 1                     | User Leaves Home, forgetting to arm the system                          |
+| 2                     | User's device receives notification offering to arm the system          |
+| 3                     | User Chooses "Yes"                                                      |
+| 4                     | System is now armed and waiting to detect motion                        |
+|  Branches             |                                                                         |
+| 3B                    | User Chooses "No"                                                       |
+| 4B                    | System remains unarmed                                                  |
+
+---
 
 ###### USE CASE 4: 
 
