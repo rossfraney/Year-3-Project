@@ -305,7 +305,7 @@ As well as this, the Authentication module will require the user to sign into th
 ---
 
 ## 6.3 Task View
-![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/8cc9be53ffcd3d5050e1a7ad4486fb541c10a18b/functional_spec/TaskView.PNG)
+![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/dd5da3112f4fdbb3ed603094472e6087b9cb5db5/functional_spec/TaskView.PNG)
 
 ### Task View Explanation
 
