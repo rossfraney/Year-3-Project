@@ -148,8 +148,24 @@ In regards to the expected profile of prospective users, the main categories can
 ---
 
 ###### USE CASE 4: 
+| Use Case 4            | Open Skype Connection                                                 |
+|-----------------------|-----------------------------------------------------------------------|
+| Goal in Context       | Open skype on the Raspberry pi and connect with it using a VNC Server |
+| Preconditions         | App profile Authenticated/w Skype account, System is armed            |
+| Success End Condition | User can see live video from the Camera                               |
+| Failed End Condition  | Skype call fails to initialize                                        |
+| Actors                | User                                                                  |
+| Step                  | Action                                                                |
+| 1                     | User opens a camera inside the application                            |
+| 2                     | User wants to communicate with other side, chooses "Live Feed" option |
+| 3                     | User is prompted to enter VNC Server Password                         |
+| 4                     | Password accepted and user can see Skype call on Raspberry Pi screen  |
+|  Branches             |                                                                       |
+| 4B                    | Password is declined and user is brought back to App's Dropbox folder |
 
+---
 
+---
 ## 2.4 Example Scenarios
 Outlined below are examples of situations in which this system will prove a useful tool for users in a number of scenarios already listed, in order to display the usefulness and functionality of the system in everyday life.
 
