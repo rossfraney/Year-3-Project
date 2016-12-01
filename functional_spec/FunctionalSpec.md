@@ -296,5 +296,17 @@ As well as this, the Authentication module will require the user to sign into th
 ![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/38c1c189007a60b456c052731342b45c019e725e/functional_spec/DFD.png)
 
 
+# 7.Appendices
+
+## Possible Requirements Problems
+
+###### Requirement: The Application
+
+*Possible Problem*: Implementing App folder that has access to Dropbox file system.
+*Proposed Solution*: If there is an issue with implementing dropbox files we can simply sync the phones photo album with the drop box account and link there instead.
+
+*Possible Problem*: Integrating VNC Server with App.
+*Proposed Solution*: Use Remote Ripple app which is developed by the same company as TightVNC server, in order to view the VNC.
+
 
 
