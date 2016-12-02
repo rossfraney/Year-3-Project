@@ -474,7 +474,7 @@ The UI for this system should be sleek, minimalistic, and clean while still prov
 
 ### 4.1 System Module/Component Diagram
 
-![](https://i.gyazo.com/ae45a8097fd8862b7bde5bf8ef65366a.png)
+![](https://i.gyazo.com/71a7ffb573c6b2c3fe9fd8c71d406386.png)
 
 &nbsp;
 
@@ -505,7 +505,7 @@ This diagram shows how the Raspberry Pi interacts with the external hardware and
 
 ### 5.2 Context Diagram
 
-![](https://i.gyazo.com/71a7ffb573c6b2c3fe9fd8c71d406386.png)
+![](https://i.gyazo.com/ae45a8097fd8862b7bde5bf8ef65366a.png)
 
 
 &nbsp;
