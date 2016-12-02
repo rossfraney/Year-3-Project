@@ -197,8 +197,6 @@ In regards to the expected profile of prospective users, the main categories can
 &nbsp;
 
 ### 2.3 Use Cases
-
-
 | **Use Case 1**            | Configuring a Profile                                                      |
 |---------------------------|----------------------------------------------------------------------------|
 | Goal in Context           | Set up the application to work with the camera(s)                          |
@@ -240,13 +238,7 @@ In regards to the expected profile of prospective users, the main categories can
 | 4C                         | User presses "Call emergency services" / "Call Neighbor" button           |
 | 4D                         | User saves one or more of the captured images to phone                     |
 
-
-
 ---
-
-
-
-
 
 | **Use Case 3**             | Automatic Arming                                                        |
 |----------------------------|-------------------------------------------------------------------------|
@@ -264,11 +256,7 @@ In regards to the expected profile of prospective users, the main categories can
 | 3B                         | User Chooses "No"                                                       |
 | 4B                         | System remains unarmed                                                  |
 
-
-
 ---
-
-
 
 | **Use Case 4**            | Open Skype Connection                                                 |
 |---------------------------|-----------------------------------------------------------------------|
@@ -299,7 +287,6 @@ In this scenario, a user has set up the Raspberry Pi and camera by their living 
 During the time in which the user is away from home, while there is no motion being detected, the camera simply takes a photo, compares against the last, and discards it. 
 When there is motion detected however, the speed of the image capturing picks up substantially and the user receives a notification on their mobile device. Once they open the application, they will see which camera the notification is coming from, and will open the Dropbox folder for that camera to investigate. Here, they will see live images from in real time being uploaded of an intruder in their home, as he enters through the window.
 From this position, the user will have the option to save the images, make a phone call (contact the police, for example), or open a live video feed connection with the camera. The user touches the button to call the police and are immediately connected so that they can explain their situation, and can provide all the footage necessary to use as evidence against the intruder.
-
 
 &nbsp;
 
@@ -433,7 +420,6 @@ The UI for this system should be sleek, minimalistic, and clean while still prov
 # **4. System Architecture**
 
 ### 4.1 System Module/Component Diagram
-
 ![](https://i.gyazo.com/71a7ffb573c6b2c3fe9fd8c71d406386.png)
 
 &nbsp;
@@ -462,7 +448,6 @@ This diagram shows how the Raspberry Pi interacts with the external hardware and
 &nbsp;
 
 ### 5.2 Context Diagram
-
 ![](https://i.gyazo.com/ae45a8097fd8862b7bde5bf8ef65366a.png)
 
 &nbsp;
@@ -494,13 +479,11 @@ The **Software** requirements for this project are as follows:
 &nbsp;
 
 ### 6.2 GANTT Chart 
-
 ![](https://i.gyazo.com/3ca6e798862ee6ebef7c174762785dbf.png)
 
 &nbsp;
 
 ### 6.3 Task View
-
 ![](https://i.gyazo.com/74fd059addbe91c9e1a7dec1de2d8176.png)
 
 &nbsp;
@@ -522,7 +505,6 @@ The **Software** requirements for this project are as follows:
 **Possible Problem**: Sending notifications from the Pi to the Application.
 **Proposed Solution**: As a means of notifying the application (and subsequently the android device) as soon as motion is detected, rather than worrying about pushing notifications from the software we have written on the Raspberry Pi itself, the device could simply receive a notification each time the size of the camera's respective Dropbox folder grows.
 
----
 
 #### Requirement: Motion Detection
 
@@ -530,7 +512,7 @@ The **Software** requirements for this project are as follows:
 
 **Proposed Solution**: In order to fix the above problem, images for comparison could be stored locally on the Raspberry Pi itself rather than going to the Dropbox server. This means the only time the size of the Dropbox folders will change is when that particular camera has captured motion, meaning the notifications will only be sent to the android device at appropriate times.
 
----
+
 
 #### Requirement: Multiple Alarm Triggers
 
@@ -538,7 +520,7 @@ The **Software** requirements for this project are as follows:
 
 **Proposed Solution**: In the python Code stored on the raspberry Pi, it may be possible to set different notifications for each type of sensor, and possibly even each camera, which would be a welcome edition. The only uncertainty around this is whether it is possible in android notifications there Android programming is a completely unfamiliar area to the team. 
 
----
+
 
 #### Requirement: GPS Tracking
 
@@ -546,7 +528,7 @@ The **Software** requirements for this project are as follows:
 
 **Proposed Solution**: 3rd party software may be a more viable option such as google maps or other similar services that track GPS location. Generally, this is considered an unsatisfactory solution by the team, however it is preferred over the alternative of simply not implementing the GPS feature.
 
----
+
 
 #### Requirement: One Click Response
 
@@ -554,7 +536,7 @@ The **Software** requirements for this project are as follows:
 
 **Proposed Solution**: In order to prevent the above from happening, a solution may be to slightly bend the simplistic design goal of the "one click" aspect of that particular response, and add an extra "are you sure" prompt, to safeguard against an accidental click. As the other options are not necessarily largely consequential, the team feels no need to add this restraint to all options.  
 
----
+
 
 #### Requirement: Multiple Alarm Sounds
 
@@ -562,7 +544,7 @@ The **Software** requirements for this project are as follows:
 
 **Proposed Solution**: Build all alarm sounds that may be useful (such as the previously mentioned lullaby melody) into the code itself, meaning they can be stored locally on the Pi.
 
----
+
 
 #### Requirement: User Preferences
 
@@ -572,11 +554,7 @@ The **Software** requirements for this project are as follows:
 
 &nbsp;
 
-&nbsp;
-
 ### 7.2 Challenges/Learning Requirements
-
-&nbsp;
 
 #### Using the Raspberry Pi
 The task of facilitating much of this system using a Raspberry Pi is certainly going to be a potential challenge and a massive learning experience for both team members, as neither have had any appreciable experience interacting with a Raspberry Pi in the past. We will need to quickly discover the basics of setup and configuration and how to use the Pi in conjunction with our external software (for example Skype, Emacs editor, Motion Detection Packages, VNC server, and of course programming on the device, either through SSH or directly). This will certainly prove a valuable learning experience for both of us, but will also be a significant challenge both in terms research and implementation considering our relatively tight time schedule, and it's intertwining with examinations. 
