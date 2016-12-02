@@ -1,5 +1,5 @@
 # Table of Contents
-#####1.Introduction
+##### 1.Introduction
 
   * 1.1 Overview of Project
   * 1.2 Project Scope
@@ -8,7 +8,7 @@
   * 1.5 Reference Links
   * 1.6 Glossary
 
-#####2.Description
+##### 2.Description
 
 - 2.1 Features
 - 2.2 Target User Characteristics & Environments
