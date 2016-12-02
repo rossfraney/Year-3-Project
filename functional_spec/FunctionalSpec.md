@@ -98,7 +98,7 @@ The main functions of the system can be summarized as follows:
 -	GPS system that will make use of the android devices GPS location to determine whether notifications are needed based on whether you are in your home or not. This allows the system to be configured to automatically arm the system once the device is identified as being away from home. 
 
 -	A mobile application that provides the user with the view of current enabled camera(s). 
--	
+
 &nbsp;
 
 ### 1.2 Project Scope 
