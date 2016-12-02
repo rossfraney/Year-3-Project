@@ -153,13 +153,13 @@ https://www.extremetech.com/computing/124317-what-is-raspberry-pi-2
 
 ## 1.6 Glossary
 
-- **Raspberry Pi**: *"The Raspberry Pi is a small, barebones computer developed by The Raspberry Pi Foundation, a UK charity, with the intention of providing low-cost computers and free software to students. Their ultimate goal is to foster computer science education and they hope that this small, affordable computer will be a tool that enables that."" - ExtremeTech.com
+- **Raspberry Pi**: "*The Raspberry Pi is a small, barebones computer developed by The Raspberry Pi Foundation, a UK charity, with the intention of providing low-cost computers and free software to students. Their ultimate goal is to foster computer science education and they hope that this small, affordable computer will be a tool that enables that.*"" - ExtremeTech.com
 
-- **VNC Server**: "*Virtual network computing (VNC) is a type of remote-control software that makes it possible to control another computer over a network connection. Keystrokes and mouse clicks are transmitted from one computer to another, allowing technical support staff to manage a desktop, server, or other networked device without being in the same physical location."* - searchnetworking.techtarget
+- **VNC Server**: "*Virtual network computing (VNC) is a type of remote-control software that makes it possible to control another computer over a network connection. Keystrokes and mouse clicks are transmitted from one computer to another, allowing technical support staff to manage a desktop, server, or other networked device without being in the same physical location.*" - searchnetworking.techtarget
 
 - **GPS**: "*Global Positioning System: a global system of U.S. navigational satellites developed to provide precise positional and velocity data and global time synchronization for air, sea, and land travel.*" - Dictionary.com
 
-- **SSH**: "*SSH can refer both to the cryptographic network protocol and to the suite of utilities that implement that protocol. SSH uses the client-server model, connecting a secure shell client application, the end at which the session is displayed, with an SSH server, the end at which the session runs."* - searchnetworking.techtarget
+- **SSH**: "*SSH can refer both to the cryptographic network protocol and to the suite of utilities that implement that protocol. SSH uses the client-server model, connecting a secure shell client application, the end at which the session is displayed, with an SSH server, the end at which the session runs.*" - searchnetworking.techtarget
 
 
 # **2. Description**
