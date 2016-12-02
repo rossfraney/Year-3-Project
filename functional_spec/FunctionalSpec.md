@@ -1,5 +1,5 @@
 # Table of Contents
-##### 1.Introduction
+##### 1. Introduction
 
   * 1.1 Overview of Project
   * 1.2 Project Scope
@@ -8,7 +8,7 @@
   * 1.5 Reference Links
   * 1.6 Glossary
 
-##### 2.Description
+##### 2. Description
 
 - 2.1 Features
 - 2.2 Target User Characteristics & Environments
@@ -16,29 +16,29 @@
 - 2.4 Example Scenarios
 - 2.5 Constraints
 
-##### 3.System Requirements
+##### 3. System Requirements
 
 - 3.1 External Requirements
 - 3.2 Product Functions
 - 3.3 Usability Goals
 
-##### 4.System Architecture
+##### 4. System Architecture
 
 - 4.1 System Module/Component Diagram
 - 4.2 Interaction Diagram Explanation
 
-##### 5.High-Level Design
+##### 5. High-Level Design
 
 - 5.1 Design Overview
 - 5.2 Context Diagram
 
-##### 6.Preliminary Schedule**
+##### 6. Preliminary Schedule**
 
-- 6.1 Overview of Prelinary Schedule
+- 6.1 Overview of Preliminary Schedule
 - 6.2 GANTT Chart
 - 6.3 Task View
 
-##### 7.Appendices
+##### 7. Appendices
 
 - 7.1 Possible Requirements Problems
 - 7.2 Learning Challenges
@@ -50,7 +50,7 @@
 &nbsp;
 
 &nbsp;
-# **1.Introduction**
+# **1. Introduction**
 
 ### 1.1 Overview of Project
 
@@ -99,9 +99,9 @@ This system was developed with the home-user in mind, and as such will provide a
 
 **Section 5** is a high-level overview of the design of the system. A context diagram will represent this design as well as an accompanying explanation of the interactions in the diagram.
 
-**Section 6** outlines the Preliminary schedule for the completion of individual tasks involved in the overall completion of the project. Inluded in this section is a GANNT chart, as well as a task view chart. Section 6 also outlines the hardware and software requirements needed on the *teams* end to carry out the tasks mentioned.
+**Section 6** outlines the Preliminary schedule for the completion of individual tasks involved in the overall completion of the project. Included in this section is a GANNT chart, as well as a task view chart. Section 6 also outlines the hardware and software requirements needed on the *teams* end to carry out the tasks mentioned.
 
-**Section 7**, labelled "Appendices", will explain the anticipated problems, proposed solutions, and learning challenges associtated with the development of this system. 
+**Section 7**, labelled "Appendices", will explain the anticipated problems, proposed solutions, and learning challenges associated with the development of this system. 
 
 ### 1.4 Motivations
 
@@ -162,7 +162,7 @@ https://www.extremetech.com/computing/124317-what-is-raspberry-pi-2
 - **SSH**: "*SSH can refer both to the cryptographic network protocol and to the suite of utilities that implement that protocol. SSH uses the client-server model, connecting a secure shell client application, the end at which the session is displayed, with an SSH server, the end at which the session runs."* - searchnetworking.techtarget
 
 
-# **2.Description**
+# **2. Description**
 
 ### 2.1 Features
 
@@ -372,13 +372,13 @@ The alarm on this system will be limited to the one output device, rather than b
 
 &nbsp;
 
-# **3.System Requirements**
+# **3. System Requirements**
 
 ### 3.1 External Requirements
 
 **Hardware**: For the user to set up this surveillance system at home, a Raspberry Pi, and at least one camera is required (ideally the Raspberry Pi official camera module). As well as this, an android device is required to make use of the mobile application. 
 
-**Software**: This system required the Raspberry Pi to be running a version of Raspbeon OS. As well as this, it is required that the user’s phone is running android (preferably 6.0(+) Marshmallow). 
+**Software**: This system required the Raspberry Pi to be running a version of Raspbian OS. As well as this, it is required that the user’s phone is running android (preferably 6.0(+) Marshmallow). 
 
 
 
@@ -470,7 +470,7 @@ Finally, the application will require the user to grant Dropbox access via the A
 The UI for this system should be sleek, minimalistic, and clean while still providing the user with all the functionality mentioned above. It is important that the application is not overly cluttered or complex looking as an integral aspect of the advantage of this system over others in the field is the fact that it is accessible both in price and usability, to all home owners, as specified above. 
 
 
-# **4.System Architecture**
+# **4. System Architecture**
 
 ### 4.1 System Module/Component Diagram
 
@@ -494,12 +494,12 @@ As well as this, the Authentication module will require the user to sign into th
 
 &nbsp;
 
-# **5.High-Level Design**
+# **5. High-Level Design**
 
 ### 5.1 Design Overview 
-Here we provide a Context Diagram illustrating how our system will be connected and what data will be transferred between each component. We chose this diagram as it is the easiest way to visuallize which parts of the project must be linked to eachother. We feel that this diagram accurately conveys a high-level representation of how the components of this system will be connected and the information needed to be passed between componenents. 
+Here we provide a Context Diagram illustrating how our system will be connected and what data will be transferred between each component. We chose this diagram as it is the easiest way to visualize which parts of the project must be linked to each other. We feel that this diagram accurately conveys a high-level representation of how the components of this system will be connected and the information needed to be passed between components. 
 
-This diagram shows how the Raspberry Pi interacts with the external hardware and software that will be used as part of the system development. The Pi will need to be linked to the Android applicaiton, which is represented as the "USER", the DROPBOX account, the external SPEAKER, the ALARM system and the CAMERAS. The only real interconnection between the external entities will be between the user's android application and their corresponding Dropbox account which will allow the use of Dropbox functionality to view and delete images stored from the motion detecting camera.
+This diagram shows how the Raspberry Pi interacts with the external hardware and software that will be used as part of the system development. The Pi will need to be linked to the Android application, which is represented as the "USER", the DROPBOX account, the external SPEAKER, the ALARM system and the CAMERAS. The only real interconnection between the external entities will be between the user's android application and their corresponding Dropbox account which will allow the use of Dropbox functionality to view and delete images stored from the motion detecting camera.
 
 &nbsp;
 
@@ -513,11 +513,11 @@ This diagram shows how the Raspberry Pi interacts with the external hardware and
 &nbsp;
 
 
-# **6.Preliminary Schedule**
+# **6. Preliminary Schedule**
 
-### 6.1 Overview of Prelinary Schedule:
+### 6.1 Overview of Preliminary Schedule:
 
-The schedule below(6.2) was desgined using smartsheet.com and shows a breakdown of what we have initially suspected to be the main tasks as part of this project. It is divided into columns of the Task Name, Start Date, End Date, Duration in days, and current Status of each task. These start and end dates are of course tentative and subject to change. Also inclluded are our schedules for the tasks that were already completed as part of this project for completeness sake(i.e Creating the GitLab Account, the initial Proposal Form, and this Functional Specification.
+The schedule below (6.2) was designed using smartsheet.com and shows a breakdown of what we have initially suspected to be the main tasks as part of this project. It is divided into columns of the Task Name, Start Date, End Date, Duration in days, and status of each task. These start and end dates are of course tentative and subject to change. Also included are our schedules for the tasks that were already completed as part of this project for completeness sake (i.e. Creating the GitLab Account, the initial Proposal Form, and this Functional Specification.
 
 Below, a GANTT chart can be seen which shows this same information in a more visual representation of the time allocated to each task. The current completed tasks have been represented as a blue bar, while the incomplete tasks are represented by a green bar. Over the course of the project we will be updating this GANTT chart as tasks are completed or as the timeline is adjusted for individual tasks.
 
@@ -555,7 +555,7 @@ The **Software** requirements for this project are as follows:
 &nbsp;
 
  
-# **7.Appendices**
+# **7. Appendices**
 
 ### 7.1 Possible Requirements Problems
 
@@ -629,27 +629,27 @@ The **Software** requirements for this project are as follows:
 &nbsp;
 
 #### Using the Raspberry Pi
-The task of actually running the majority of this project through the use of a Raspberry Pi is certainly going to be a potential challenge and a massive learning experience for both team members, as neither have had any appreciable experience interacting with a Raspberry Pi in the past. We will need to quickly discover the basics of setup and configuration and how to use the Pi in conjunction with our external software (for example Skype, Emacs editor, Motion Detection Packages, VNC server, and of course programming on the device, either through SSH or directly). This will certainly prove a valuable learning experience for both of us, but will also be a significant challenge both in terms research and implementation considering our relatively tight time schedule, and it's intertwining with examinations. 
+The task of facilitating much of this system using a Raspberry Pi is certainly going to be a potential challenge and a massive learning experience for both team members, as neither have had any appreciable experience interacting with a Raspberry Pi in the past. We will need to quickly discover the basics of setup and configuration and how to use the Pi in conjunction with our external software (for example Skype, Emacs editor, Motion Detection Packages, VNC server, and of course programming on the device, either through SSH or directly). This will certainly prove a valuable learning experience for both of us, but will also be a significant challenge both in terms research and implementation considering our relatively tight time schedule, and it's intertwining with examinations. 
 
-Another challenge associated with the Raspberry Pi will be the development of Configuration Scripts which will allow the Pi to run the our program correctly upon startup. This is an absolutely essential aspect of the final product when considering the user may not be tech literate, and even if this is not the case, could not be expected to SSH into the Raspberry Pi and run a terminal command each time the system is needed. This aspect of the project will facilitate the improvement in the basic bash scripting knowledge we have so far gained through this course and allow us to implement those skills in a real-life scenario for the first time.
+Another challenge associated with the Raspberry Pi will be the development of Configuration Scripts which will allow the Pi to run our program correctly upon startup. This is an essential aspect of the final product when considering the user may not be tech literate, and even if this is not the case, could not be expected to SSH into the Raspberry Pi and run a terminal command each time the system is needed. This aspect of the project will facilitate the improvement in the basic bash scripting knowledge we have so far gained through this course and allow us to implement those skills in a real-life scenario for the first time.
 
 
 #### No Python Experience
-This is considered one of the largest challenges of the project and as such, a suitable chunk of our time schedule has been dedicated to completing this task. As well as this it has been placed very early on the schedule, which should allow any unforseen problems to be dealt with as soon as possible. Both members are going into this project completely new to the language of Python. The general concepts surrounding Object Oriented Programming should, hopefully, carry over from our time spent learning Java and C++. However, developing our largest and most challenging program in an untouched language is certainly going to be one of the main challenges that this project will produce, yet when completed, will surely have provided us with an invlauable improvement to our programming capacities.
+This is considered one of the largest challenges of the project and as such, a suitable chunk of our time schedule has been dedicated to completing this task. As well as this it has been placed very early on the schedule, which should allow any unforeseen problems to be dealt with as soon as possible. Both members are going into this project completely new to the language of Python. The general concepts surrounding Object Oriented Programming should, hopefully, carry over from our time spent learning Java and C++. However, developing our largest and most challenging program in an untouched language is certainly going to be one of the main challenges that this project will produce, yet when completed, will surely have provided us with an invaluable improvement to our programming capacities.
 
 
 #### Creating an Android Application
-For our project we must build an android application, which again is something that neither team member has prior experience in. The basic design and construction of the application is exspected (perhaps naively) to be relatively straightforward, due to the extensive wealth of help online and also our experience coding in OO languages. However, the main challenges will likely come with linking this application to external / 3rd party software such as Skype and Dropbox, and also including features such as GPS using our own code. The research material on these particular features may be more limited and will certainly require more skill and thought when implementing them correctly.
+For our project, we must build an android application, which again is something that neither team member has prior experience in. The basic design and construction of the application is expected (perhaps naively) to be relatively straightforward, due to the extensive wealth of help online and also our experience coding in OO languages. However, the main challenges will likely come with linking this application to external / 3rd party software such as Skype and Dropbox, and also the inclusion of features such as GPS using our own code. The research material on these features may be more limited and will certainly require more skill and thought when implementing them correctly.
 
 Designing the application is also an opportunity to expand our skills in UI design and usability. As multiple modules have been focused on this topic over the course of the past three years, this is a valuable opportunity to implement what has been learned in a real-world scenario. 
 
 
 #### GPS Inclusion in Code
-Including GPS functionality into the code whereby the Pi will be able to detect the user's location based on their android device with the application installed is another feature that we plan to include in this project and is also untouched territory for us. We have no Application development practise under our belts, as mentioned above, and to join with this we have also never implemented any sort of location based programming in any aspects so far in our past coding experiences. Although a proposed solution of using third party software has been mentioned, this really is not an ideal solution, and we are confident that with enough research, we can overcome this problem using our own solution. This being said, it is certainly one of the largest areas of concern for the team.
+Including GPS functionality into the code whereby the Pi will be able to detect the user's location based on their android device with the application installed is another feature that we plan to include in this project and is also untouched territory for us. We have no Application development practice under our belts, as mentioned above, and to join with this we have also never implemented any sort of location based programming in any aspects so far in our past coding experiences. Although a proposed solution of using third party software has been mentioned, this is not an ideal solution, and we are confident that with enough research, we can overcome this problem using our own solution. It is certainly one of the largest areas of concern for the team.
 
 
 #### No Dropbox Experience
-Prior to the development of this project, neither member had any experience in using the Dropbox file storage system. This is an aspect of learning that is expected to be straightforward and relatively pain-free. However, the main challenge will of course come with correctly applying this to link correctly with both the Raspberry Pi, and our android application. Integrating third party software in programming is something that has never been done to this degree, and this in compbination with assuring the Dropbx account is also synchronized with an android application (another unfamiliar hurdle) is certainly a challenge.
+Prior to the development of this project, neither member had any experience in using the Dropbox file storage system. This is an aspect of learning that is expected to be straightforward and relatively pain-free. However, the main challenge will of course come with correctly applying this to link correctly with both the Raspberry Pi, and our android application. Integrating third party software in programming is something that has never been done to this degree, and this in combination with assuring the Dropbx account is also synchronized with an android application (another unfamiliar hurdle) is certainly a challenge.
 
 
 
