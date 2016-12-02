@@ -98,12 +98,14 @@ The main functions of the system can be summarized as follows:
 -	GPS system that will make use of the android devices GPS location to determine whether notifications are needed based on whether you are in your home or not. This allows the system to be configured to automatically arm the system once the device is identified as being away from home. 
 
 -	A mobile application that provides the user with the view of current enabled camera(s). 
+-	
 &nbsp;
 
 ### 1.2 Project Scope 
 
 This system was developed with the home-user in mind, and as such will provide a convenient, cost effective method of monitoring a home, without unnecessary complexity of use, or cost. A large distinguishing factor of this system is that it will aim not just to satisfy the security needs of its users, but also be useful in a more general, everyday life sense. The versatility of this product means that the set of target users spans a wide range of demographics. New / busy parents, child minders, people with elderly relatives, small businesses in need of till surveillance, etc. More specific and detailed use cases and scenarios can be seen in section 2.3 / 2.4 in this document. 
 
+&nbsp;
 
 ### 1.3 Document Outline
 
@@ -121,6 +123,7 @@ This system was developed with the home-user in mind, and as such will provide a
 
 **Section 7**, labelled "Appendices", will explain the anticipated problems, proposed solutions, and learning challenges associated with the development of this system. 
 
+&nbsp;
 
 ### 1.4 Motivations
 
@@ -130,6 +133,7 @@ Our focus is to achieve this goal of introducing the idea that security should b
 
 Enter the above-mentioned smartphone. Nowadays many people use smartphones to manage a variety of different aspects of life be it nutrition, time keeping, socializing, fitness, music, media/entertainment, etc. As such, this is a comfortable and well-known platform for a huge number of people. The system should not make users feel like they must learn something new, which can be an off-putting idea for many, particularly for people who may not necessarily be tech-literate. The aim of this project is to deliver a system which has all the functionality of a high-priced industrial security system and more, but packaged in the familiar, non-intimidating format of a mobile application.
 
+&nbsp;
 
 ### 1.5 Reference Links
 
@@ -415,7 +419,6 @@ However, assuming an adequate internet connection, and with the restriction on t
 ##### Portability
 
 A big advantage of this system over similar security/surveillance systems is how easy it is to move around. If a user wishes to set up the system in a different location, all that is required is to move a very small Raspberry Pi and any cameras necessary for their particular goals. 
-
 
 ##### Setup
 
