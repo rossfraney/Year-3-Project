@@ -3,7 +3,7 @@
 
   * 1.1 Overview of Project
   * 1.2 Project Scope
-  * 1.3 Document Outline)
+  * 1.3 Document Outline
   * 1.4 Motivations
   * 1.5 Reference Links
   * 1.6 Glossary
