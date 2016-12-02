@@ -474,7 +474,7 @@ The UI for this system should be sleek, minimalistic, and clean while still prov
 
 ### 4.1 System Module/Component Diagram
 
-![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/42bcf38de5a9ece24f840d4a248ab0b944eb1bc0/functional_spec/ComponentDiagram.PNG)
+![](https://i.gyazo.com/ae45a8097fd8862b7bde5bf8ef65366a.png)
 
 &nbsp;
 
@@ -505,7 +505,7 @@ This diagram shows how the Raspberry Pi interacts with the external hardware and
 
 ### 5.2 Context Diagram
 
-![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/42bcf38de5a9ece24f840d4a248ab0b944eb1bc0/functional_spec/DFD.png)
+![](https://i.gyazo.com/71a7ffb573c6b2c3fe9fd8c71d406386.png)
 
 
 &nbsp;
@@ -541,13 +541,13 @@ The **Software** requirements for this project are as follows:
 
 ### 6.2 GANTT Chart 
 
-![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/7e38807116d4e53bea31d1a70b9e0aa27f37f404/functional_spec/GANTT.PNG)
+![](https://i.gyazo.com/3ca6e798862ee6ebef7c174762785dbf.png)
 
 &nbsp;
 
 ### 6.3 Task View
 
-![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/7e38807116d4e53bea31d1a70b9e0aa27f37f404/functional_spec/TaskView.PNG)
+![](https://i.gyazo.com/74fd059addbe91c9e1a7dec1de2d8176.png)
 
 
 &nbsp;
