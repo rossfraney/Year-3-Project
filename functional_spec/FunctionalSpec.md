@@ -64,7 +64,7 @@
       - [Requirement: One Click Response](#requirement--one-click-response)
       - [Requirement: Multiple Alarm Sounds](#requirement--multiple-alarm-sounds)
       - [Requirement: User Preferences](#requirement--user-preferences)
-    + [7.2 Challenges/Learning Requirements](#72-challenges-learning-requirements)
+    + [7.2 Challenges/Learning Requirements](#72-challenges-and-learning-requirements)
       - [Using the Raspberry Pi](#using-the-raspberry-pi)
       - [No Python Experience](#no-python-experience)
       - [Creating an Android Application](#creating-an-android-application)
@@ -579,7 +579,7 @@ The **Software** requirements for this project are as follows:
 
 &nbsp;
 
-### 7.2 Challenges/Learning Requirements
+### 7.2 Challenges and Learning Requirements
 
 #### Using the Raspberry Pi
 The task of facilitating much of this system using a Raspberry Pi is certainly going to be a potential challenge and a massive learning experience for both team members, as neither have had any appreciable experience interacting with a Raspberry Pi in the past. We will need to quickly discover the basics of setup and configuration and how to use the Pi in conjunction with our external software (for example Skype, Emacs editor, Motion Detection Packages, VNC server, and of course programming on the device, either through SSH or directly). This will certainly prove a valuable learning experience for both of us, but will also be a significant challenge both in terms research and implementation considering our relatively tight time schedule, and it's intertwining with examinations. 
