@@ -238,7 +238,6 @@ In regards to the expected profile of prospective users, the main categories can
 
 
 
-##### USE CASE 2: Investigating a Triggered Alarm
 
 | **Use Case 2**             | Investigate Triggered Alarm                                                |
 |----------------------------|----------------------------------------------------------------------------|
@@ -286,8 +285,6 @@ In regards to the expected profile of prospective users, the main categories can
 ---
 
 
-
-##### USE CASE 4: Open Skype Connection 
 
 | **Use Case 4**            | Open Skype Connection                                                 |
 |---------------------------|-----------------------------------------------------------------------|
