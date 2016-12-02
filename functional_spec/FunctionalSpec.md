@@ -511,7 +511,7 @@ This diagram shows how the Raspberry Pi interacts with the external hardware and
 
 ### 5.2 Context Diagram
 
-![](file://C:/Users/Ross/Desktop/DFD.png)
+![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/7e38807116d4e53bea31d1a70b9e0aa27f37f404/functional_spec/ComponentDiagram.PNG)
 
 
 &nbsp;
@@ -547,13 +547,13 @@ The **Software** requirements for this project are as follows:
 
 ### 6.2 GANTT Chart 
 
-![](file://C:/Users/Ross/Desktop/GANTT.png)
+![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/7e38807116d4e53bea31d1a70b9e0aa27f37f404/functional_spec/GANTT.PNG)
 
 &nbsp;
 
 ### 6.3 Task View
 
-![](file://C:/Users/Ross/Desktop/TaskView.png)
+![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/7e38807116d4e53bea31d1a70b9e0aa27f37f404/functional_spec/TaskView.PNG)
 
 
 &nbsp;
