@@ -214,24 +214,23 @@ In regards to the expected profile of prospective users, the main categories can
 
 ### 2.3 Use Cases
 
-##### USE CASE 1: Setting up a profile
 
-| Use Case 1            | Configuring a Profile                                                      |
-|-----------------------|----------------------------------------------------------------------------|
-| Goal in Context       | Set up the application to work with the camera(s)                          |
-| Preconditions         | Possession of Security Pi system, Skype & Dropbox account, Android Device  |
-| Success End Condition | Application configured & synchronized with Drobox & Skype                 |
-| Failed End Condition  | Application not synchronized with accounts correctly                       |
-| Actors                | User                                                                       |
-| Step                  | Action                                                                     |
-| 1                     | Download the application from the Google Play Store                        |
-| 2                     | Upon prompt, enter Dropbox Username & Password                             |
-| 3                     | Upon prompt, enter Skype Username & Password                               |
-| 4                     | Enter the name & Dropbox Folder of First Camera                            |
-| 5                     | Create Application Username & Password                                    |
-| 6                     | Add New Camera                                                             |
-| Branches              |                                                                            |
-| 6B                    | Skip                                                                       |
+| **Use Case 1**            | Configuring a Profile                                                      |
+|---------------------------|----------------------------------------------------------------------------|
+| Goal in Context           | Set up the application to work with the camera(s)                          |
+| Preconditions             | Possession of Security Pi system, Skype & Dropbox account, Android Device  |
+| Success End Condition     | Application configured & synchronized with Drobox & Skype                 |
+| Failed End Condition      | Application not synchronized with accounts correctly                       |
+| Actors                    | User                                                                       |
+| Step                      | Action                                                                     |
+| 1                         | Download the application from the Google Play Store                        |
+| 2                         | Upon prompt, enter Dropbox Username & Password                             |
+| 3                         | Upon prompt, enter Skype Username & Password                               |
+| 4                         | Enter the name & Dropbox Folder of First Camera                            |
+| 5                         | Create Application Username & Password                                    |
+| 6                         | Add New Camera                                                             |
+| **Branches**                  |                                                                            |
+| 6B                        | Skip                                                                       |
 
 
 
@@ -241,22 +240,22 @@ In regards to the expected profile of prospective users, the main categories can
 
 ##### USE CASE 2: Investigating a Triggered Alarm
 
-| Use Case 2            | Investigate Triggered Alarm                                                |
-|-----------------------|----------------------------------------------------------------------------|
-| Goal in Context       | Respond to an alarm by viewing images captured	                         |
-| Preconditions         | Security System armed, App configured and Motion detected                  |
-| Success End Condition | View images of motion captured from android device              			 |
-| Failed End Condition  | Not capable of viewing Images                                              |
-| Actors                | User                                                                       |
-| Step                  | Action                                                                     |
-| 1                     | Android Device receives a buzz notification                                |
-| 2                     | User opens application and sees the highlighted camera in question         |
-| 3                     | User opens Camera and sees the recently captured images                    |
-| 4                     | User decides there is nothing concerning and stops alarm & image capturing |
-| Branches              |                                                                            |
-| 4B                    | User opens Skype connection with camera                                    |
-| 4C                    | User presses "Call emergency services" / "Call Neighbor" button           |
-| 4D                    | User saves one or more of the captured images to phone                     |
+| **Use Case 2**             | Investigate Triggered Alarm                                                |
+|----------------------------|----------------------------------------------------------------------------|
+| Goal in Context            | Respond to an alarm by viewing images captured	                         |
+| Preconditions              | Security System armed, App configured and Motion detected                  |
+| Success End Condition      | View images of motion captured from android device              			 |
+| Failed End Condition       | Not capable of viewing Images                                              |
+| Actors                     | User                                                                       |
+| Step                       | Action                                                                     |
+| 1                          | Android Device receives a buzz notification                                |
+| 2                          | User opens application and sees the highlighted camera in question         |
+| 3                          | User opens Camera and sees the recently captured images                    |
+| 4                          | User decides there is nothing concerning and stops alarm & image capturing |
+| **Branches**               |                                                                            |
+| 4B                         | User opens Skype connection with camera                                    |
+| 4C                         | User presses "Call emergency services" / "Call Neighbor" button           |
+| 4D                         | User saves one or more of the captured images to phone                     |
 
 
 
@@ -266,23 +265,21 @@ In regards to the expected profile of prospective users, the main categories can
 
 
 
-##### USE CASE 3: Automatic Arming
-
-| Use Case 3            | Automatic Arming                                                        |
-|-----------------------|-------------------------------------------------------------------------|
-| Goal in Context       | Automatically arm the Surveillance system once the user leaves the home |
-| Preconditions         | Raspberry Pi Powered on, Application granted GPS location access        |
-| Success End Condition | System is armed once user leaves home                                   |
-| Failed End Condition  | System fails to arm once user leaves home                               |
-| Actors                | User                                                                    |
-| Step                  | Action                                                                  |
-| 1                     | User Leaves Home, forgetting to arm the system                          |
-| 2                     | User's device receives notification offering to arm the system          |
-| 3                     | User Chooses "Yes"                                                      |
-| 4                     | System is now armed and waiting to detect motion                        |
-|  Branches             |                                                                         |
-| 3B                    | User Chooses "No"                                                       |
-| 4B                    | System remains unarmed                                                  |
+| **Use Case 3**             | Automatic Arming                                                        |
+|----------------------------|-------------------------------------------------------------------------|
+| Goal in Context            | Automatically arm the Surveillance system once the user leaves the home |
+| Preconditions              | Raspberry Pi Powered on, Application granted GPS location access        |
+| Success End Condition      | System is armed once user leaves home                                   |
+| Failed End Condition       | System fails to arm once user leaves home                               |
+| Actors                     | User                                                                    |
+| Step                       | Action                                                                  |
+| 1                          | User Leaves Home, forgetting to arm the system                          |
+| 2                          | User's device receives notification offering to arm the system          |
+| 3                          | User Chooses "Yes"                                                      |
+| 4                          | System is now armed and waiting to detect motion                        |
+| **Branches**               |                                                                         |
+| 3B                         | User Chooses "No"                                                       |
+| 4B                         | System remains unarmed                                                  |
 
 
 
@@ -292,20 +289,20 @@ In regards to the expected profile of prospective users, the main categories can
 
 ##### USE CASE 4: Open Skype Connection 
 
-| Use Case 4            | Open Skype Connection                                                 |
-|-----------------------|-----------------------------------------------------------------------|
-| Goal in Context       | Open skype on the Raspberry pi and connect with it using a VNC Server |
-| Preconditions         | App profile Authenticated/w Skype account, System is armed            |
-| Success End Condition | User can see live video from the Camera                               |
-| Failed End Condition  | Skype call fails to initialize                                        |
-| Actors                | User                                                                  |
-| Step                  | Action                                                                |
-| 1                     | User opens a camera inside the application                            |
-| 2                     | User wants to communicate with other side, chooses "Live Feed" option |
-| 3                     | User is prompted to enter VNC Server Password                         |
-| 4                     | Password accepted and user can see Skype call on Raspberry Pi screen  |
-|  Branches             |                                                                       |
-| 4B                    | Password is declined and user is brought back to App's Dropbox folder |
+| **Use Case 4**            | Open Skype Connection                                                 |
+|---------------------------|-----------------------------------------------------------------------|
+| Goal in Context           | Open skype on the Raspberry pi and connect with it using a VNC Server |
+| Preconditions             | App profile Authenticated/w Skype account, System is armed            |
+| Success End Condition     | User can see live video from the Camera                               |
+| Failed End Condition      | Skype call fails to initialize                                        |
+| Actors                    | User                                                                  |
+| Step                      | Action                                                                |
+| 1                         | User opens a camera inside the application                            |
+| 2                         | User wants to communicate with other side, chooses "Live Feed" option |
+| 3                         | User is prompted to enter VNC Server Password                         |
+| 4                         | Password accepted and user can see Skype call on Raspberry Pi screen  |
+| **Branches**              |                                                                       |
+| 4B                        | Password is declined and user is brought back to App's Dropbox folder |
 
 ---
 
