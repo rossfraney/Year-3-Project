@@ -25,7 +25,7 @@
         * [Scenario 2: Monitor a Sleeping Baby](#scenario-2--monitor-a-sleeping-baby)
         * [Scenario 3: Monitoring Front Door](#scenario-3--monitoring-front-door)
         * [Scenario 4: Monitoring Elderly Relative/Care Subject](#scenario-4--monitoring-elderly-relative-care-subject)
-    + [2.4 Constraints](#24-constraints)
+    + [2.5 Constraints](#25-constraints)
 - [**3. System Requirements**](#--3-system-requirements--)
     + [3.1 External Requirements](#31-external-requirements)
     + [3.2 Product Functions](#32-product-functions)
@@ -337,7 +337,7 @@ In this scenario, the user is taking care of their elderly grandmother who is cu
 
 ---
 
-### 2.4 Constraints
+### 2.5 Constraints
 
 One unfortunate constraint is related to the type of camera that can be used in conjunction with the system. The Raspberry Pi official camera module is the most obvious choice and can be disguised very well. Although many other cameras can be used, they are, naturally enough, limited to the cameras that are compatible with the Raspberry Pi. There is a list of such cameras on the official Raspberry Pi website. Although the set of all compatible cameras is not limited to this list, these are the only cameras guaranteed to be supported by the Pi, and as such are a safe bet. 
 
