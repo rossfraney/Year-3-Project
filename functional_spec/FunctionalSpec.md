@@ -1,51 +1,75 @@
-# Table of Contents
-##### 1. Introduction
+# CA326 Functional Specification - Home Surveillance System
+### Team Members:
+- Ross Franey
+- Kieran Turgoose
 
-  * 1.1 Overview of Project
-  * 1.2 Project Scope
-  * 1.3 Document Outline
-  * 1.4 Motivations
-  * 1.5 Reference Links
-  * 1.6 Glossary
 
-##### 2. Description
-
-- 2.1 Features
-- 2.2 Target User Characteristics & Environments
-- 2.3 Use Cases
-- 2.4 Example Scenarios
-- 2.5 Constraints
-
-##### 3. System Requirements
-
-- 3.1 External Requirements
-- 3.2 Product Functions
-- 3.3 Usability Goals
-
-##### 4. System Architecture
-
-- 4.1 System Module/Component Diagram
-- 4.2 Interaction Diagram Explanation
-
-##### 5. High-Level Design
-
-- 5.1 Design Overview
-- 5.2 Context Diagram
-
-##### 6. Preliminary Schedule
-
-- 6.1 Overview of Preliminary Schedule
-- 6.2 GANTT Chart
-- 6.3 Task View
-
-##### 7. Appendices
-
-- 7.1 Possible Requirements Problems
-- 7.2 Learning Challenges
-
-&nbsp;
-
-&nbsp;
+# Table Of Contents
+- [**1. Introduction**](#--1-introduction--)
+    + [1.1 Overview of Project](#11-overview-of-project)
+    + [1.2 Project Scope](#12-project-scope)
+    + [1.3 Document Outline](#13-document-outline)
+    + [1.4 Motivations](#14-motivations)
+    + [1.5 Reference Links](#15-reference-links)
+        * [Image Storage:](#image-storage-)
+        * [Security checks:](#security-checks-)
+        * [Learning Python:](#learning-python-)
+        * [Glossary References:](#glossary-references-)
+  * [1.6 Glossary](#16-glossary)
+- [**2. Description**](#--2-description--)
+    + [2.1 Features](#21-features)
+    + [2.2 Target User Characteristics & Environments](#22-target-user-characteristics---environments)
+    + [2.3 Use Cases](#23-use-cases)
+    + [2.4 Example Scenarios](#24-example-scenarios)
+        * [Scenario 1: Home Security /w Burglary](#scenario-1--home-security--w-burglary)
+        * [Scenario 2: Monitor a Sleeping Baby](#scenario-2--monitor-a-sleeping-baby)
+        * [Scenario 3: Monitoring Front Door](#scenario-3--monitoring-front-door)
+        * [Scenario 4: Monitoring Elderly Relative/Care Subject](#scenario-4--monitoring-elderly-relative-care-subject)
+    + [2.4 Constraints](#24-constraints)
+- [**3. System Requirements**](#--3-system-requirements--)
+    + [3.1 External Requirements](#31-external-requirements)
+    + [3.2 Product Functions](#32-product-functions)
+        * [The Application](#the-application)
+        * [Motion Detection](#motion-detection)
+        * [Image Storing](#image-storing)
+        * [Multiple Alarm Triggers](#multiple-alarm-triggers)
+        * [GPS Tracking & Automatic Arming](#gps-tracking---automatic-arming)
+        * [One-Click responses](#one-click-responses)
+        * [Multiple Alarm Sounds](#multiple-alarm-sounds)
+        * [User Preferences](#user-preferences)
+    + [3.3 Usability Goals](#33-usability-goals)
+        * [Scalability](#scalability)
+        * [Performance](#performance)
+        * [Portability](#portability)
+        * [Setup](#setup)
+        * [Maintenance](#maintenance)
+        * [Security](#security)
+        * [User Interface](#user-interface)
+- [**4. System Architecture**](#--4-system-architecture--)
+    + [4.1 System Module/Component Diagram](#41-system-module-component-diagram)
+    + [4.2 Interaction Diagram Explanation](#42-interaction-diagram-explanation)
+- [**5. High-Level Design**](#--5-high-level-design--)
+    + [5.1 Design Overview](#51-design-overview)
+    + [5.2 Context Diagram](#52-context-diagram)
+- [**6. Preliminary Schedule**](#--6-preliminary-schedule--)
+    + [6.1 Overview of Preliminary Schedule:](#61-overview-of-preliminary-schedule-)
+    + [6.2 GANTT Chart](#62-gantt-chart)
+    + [6.3 Task View](#63-task-view)
+- [**7. Appendices**](#--7-appendices--)
+    + [7.1 Possible Requirements Problems](#71-possible-requirements-problems)
+      - [Requirement: The Application](#requirement--the-application)
+      - [Requirement: Motion Detection](#requirement--motion-detection)
+      - [Requirement: Multiple Alarm Triggers](#requirement--multiple-alarm-triggers)
+      - [Requirement: GPS Tracking](#requirement--gps-tracking)
+      - [Requirement: One Click Response](#requirement--one-click-response)
+      - [Requirement: Multiple Alarm Sounds](#requirement--multiple-alarm-sounds)
+      - [Requirement: User Preferences](#requirement--user-preferences)
+    + [7.2 Challenges/Learning Requirements](#72-challenges-learning-requirements)
+      - [Using the Raspberry Pi](#using-the-raspberry-pi)
+      - [No Python Experience](#no-python-experience)
+      - [Creating an Android Application](#creating-an-android-application)
+      - [GPS Inclusion in Code](#gps-inclusion-in-code)
+      - [No Dropbox Experience](#no-dropbox-experience)
 
 &nbsp;
 
