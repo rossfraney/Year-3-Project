@@ -525,9 +525,11 @@ The **Software** requirements for this project are as follows:
 
 **Proposed Solution**: If there is an issue with implementing Dropbox files we can simply sync the phones photo album with the drop box account and link there instead.
 
+
 **Possible Problem**: Integrating VNC Server with App.
 
 **Proposed Solution**: Use Remote Ripple app which is developed by the same company as TightVNC server.
+
 
 **Possible Problem**: Sending notifications from the Pi to the Application.
 
