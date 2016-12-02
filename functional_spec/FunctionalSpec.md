@@ -26,7 +26,7 @@
         * [Scenario 3: Monitoring Front Door](#scenario-3--monitoring-front-door)
         * [Scenario 4: Monitoring Elderly Relative/Care Subject](#scenario-4--monitoring-elderly-relative-care-subject)
     + [2.5 Constraints](#25-constraints)
-- [**3. System Requirements**](#--3-system-requirements--)
+- [**3. System Requirements**](#3-system-requirements)
     + [3.1 External Requirements](#31-external-requirements)
     + [3.2 Product Functions](#32-product-functions)
         * [The Application](#the-application)
