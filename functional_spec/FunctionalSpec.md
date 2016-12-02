@@ -481,7 +481,7 @@ This diagram shows how the Raspberry Pi interacts with the external hardware and
 
 ### 6.1 Overview of Preliminary Schedule:
 
-The schedule below (6.2) was designed using smartsheet.com and shows a breakdown of what we have initially suspected to be the main tasks as part of this project. It is divided into columns of the Task Name, Start Date, End Date, Duration in days, and status of each task. These start and end dates are of course tentative and subject to change. Also included are our schedules for the tasks that were already completed as part of this project for completeness sake (i.e. Creating the GitLab Account, the initial Proposal Form, and this Functional Specification.
+The schedule below (6.3) was designed using smartsheet.com and shows a breakdown of what we have initially suspected to be the main tasks as part of this project. It is divided into columns of the Task Name, Start Date, End Date, Duration in days, and status of each task. These start and end dates are of course tentative and subject to change. Also included are our schedules for the tasks that were already completed as part of this project for completeness sake (i.e. Creating the GitLab Account, the initial Proposal Form, and this Functional Specification.
 
 Below, a GANTT chart can be seen which shows this same information in a more visual representation of the time allocated to each task. The current completed tasks have been represented as a blue bar, while the incomplete tasks are represented by a green bar. Over the course of the project we will be updating this GANTT chart as tasks are completed or as the timeline is adjusted for individual tasks.
 
