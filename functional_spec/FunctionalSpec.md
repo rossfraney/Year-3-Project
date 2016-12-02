@@ -48,7 +48,7 @@
 - [**4. System Architecture**](#4-system-architecture)
     + [4.1 System Module/Component Diagram](#41-system-module-component-diagram)
     + [4.2 Interaction Diagram Explanation](#42-interaction-diagram-explanation)
-- [**5. High-Level Design**](#--5-high-level-design--)
+- [**5. High-Level Design**](#5-high-level-design)
     + [5.1 Design Overview](#51-design-overview)
     + [5.2 Context Diagram](#52-context-diagram)
 - [**6. Preliminary Schedule**](#6-preliminary-schedule)
