@@ -32,7 +32,7 @@
 - 5.1 Design Overview
 - 5.2 Context Diagram
 
-##### 6. Preliminary Schedule**
+##### 6. Preliminary Schedule
 
 - 6.1 Overview of Preliminary Schedule
 - 6.2 GANTT Chart
@@ -50,6 +50,7 @@
 &nbsp;
 
 &nbsp;
+
 # **1. Introduction**
 
 ### 1.1 Overview of Project
