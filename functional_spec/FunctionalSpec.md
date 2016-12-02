@@ -80,13 +80,6 @@ The main functions of the system can be summarized as follows:
 
 This system was developed with the home-user in mind, and as such will provide a convenient, cost effective method of monitoring a home, without unnecessary complexity of use, or cost. A large distinguishing factor of this system is that it will aim not just to satisfy the security needs of its users, but also be useful in a more general, everyday life sense. The versatility of this product means that the set of target users spans a wide range of demographics. New / busy parents, child minders, people with elderly relatives, small businesses in need of till surveillance, etc. More specific and detailed use cases and scenarios can be seen in section 2.3 / 2.4 in this document. 
 
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
 
 ### 1.3 Document Outline
 
@@ -104,6 +97,7 @@ This system was developed with the home-user in mind, and as such will provide a
 
 **Section 7**, labelled "Appendices", will explain the anticipated problems, proposed solutions, and learning challenges associated with the development of this system. 
 
+
 ### 1.4 Motivations
 
 Our main motivation for the development of this system was the fact that currently, home security systems are not something that most people consider a viable option, as they are perceived as being expensive, almost “luxury” systems, that the average person could not afford. Unfortunately, this is largely true. However, we believe considering how much progress society has made in terms of technological advancement, home security should be established as a concept that all home owners consider adding to their home, a new “societal norm” if you will. This trend can be seen in several areas of the Tech-World, that is, the idea of new technology being inaccessible and high-end, until cheaper and cheaper methods are developed, eventually normalizing the use of the technology and making it a staple in society. A good example of this is the development process of smart phones. Once a luxury product, the smartphone is now considered a necessity for an ever-growing majority of people. 
@@ -111,6 +105,7 @@ Our main motivation for the development of this system was the fact that current
 Our focus is to achieve this goal of introducing the idea that security should be a fundamental concern for all home owners, and should not be overlooked due to fears of complexity/price, while also adding useful features that can help people in other aspects of their life aside from security, as mentioned above. To do this, we needed to choose a medium that is already a cornerstone in the everyday life of the public. 
 
 Enter the above-mentioned smartphone. Nowadays many people use smartphones to manage a variety of different aspects of life be it nutrition, time keeping, socializing, fitness, music, media/entertainment, etc. As such, this is a comfortable and well-known platform for a huge number of people. The system should not make users feel like they must learn something new, which can be an off-putting idea for many, particularly for people who may not necessarily be tech-literate. The aim of this project is to deliver a system which has all the functionality of a high-priced industrial security system and more, but packaged in the familiar, non-intimidating format of a mobile application.
+
 
 ### 1.5 Reference Links
 
@@ -131,7 +126,6 @@ http://info.ssl.com/
 https://www.dropbox.com/help/27
 
 ---
-
 
 ##### Learning Python:
 
@@ -162,14 +156,13 @@ https://www.extremetech.com/computing/124317-what-is-raspberry-pi-2
 
 - **SSH**: "*SSH can refer both to the cryptographic network protocol and to the suite of utilities that implement that protocol. SSH uses the client-server model, connecting a secure shell client application, the end at which the session is displayed, with an SSH server, the end at which the session runs.*" - searchnetworking.techtarget
 
+&nbsp;
 
 # **2. Description**
 
 ### 2.1 Features
 
 The main functions in this system involve the user being able to interact with a variety of web cameras that have been set up around the home, place of work, etc. This interaction can be from a remote location using a mobile device, to monitor a certain area using motion detection and image capture, and to take actions based on the images being captured. Although the following features will be explained in more detail in section 3, below is a general outline of the main features the system should provide:
-
-
 
 -	An Android Application 
 
@@ -189,8 +182,6 @@ The main functions in this system involve the user being able to interact with a
 
 &nbsp;
 
-&nbsp;
-
 ### 2.2 Target User Characteristics & Environments
 
 In regards to the expected profile of prospective users, the main categories can be summarized as one, or any combination of the following:
@@ -202,14 +193,6 @@ In regards to the expected profile of prospective users, the main categories can
 -	General Home owners who are living alone, or who’s house is left unoccupied for large portions of the day. 
 
 -	Anybody interested in adding extra security to an asset or number of assets. For example, one may want to add security to the garage/driveway in which they keep their car. Another example may be a business owner interested in monitoring a safe or till.
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
 
 &nbsp;
 
@@ -310,8 +293,6 @@ In regards to the expected profile of prospective users, the main categories can
 
 Outlined below are examples of situations in which this system will prove a useful tool for users in several scenarios already listed, to display the usefulness and functionality of the system in everyday life.
 
-
-
 ##### Scenario 1: Home Security /w Burglary
 
 In this scenario, a user has set up the Raspberry Pi and camera by their living room window. Once they leave the home, a notification will be received on their phone and upon accepting, the system will be armed. 
@@ -322,50 +303,26 @@ From this position, the user will have the option to save the images, make a pho
 
 &nbsp;
 
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
-&nbsp;
-
 ---
-
-
 
 ##### Scenario 2: Monitor a Sleeping Baby
 
 In this example, a parent has set up a camera in the room of their young baby to give them time to do necessary chores around the house while the baby sleeps, and be notified if the baby wakes up.
 Upon receiving a notification on their mobile phone, they open the app and move into the camera in question. From here, they can see that the baby has moved but it appears to be still asleep. To investigate further, the parent opens a live video stream with the camera and finds that the baby is in fact awake and unsettled. From here, the parent triggers the alarm (which in this case is a soothing lullaby melody), and can now drop what they were doing to tend to the baby's needs. 
 
-
-
 ---
-
-
 
 ##### Scenario 3: Monitoring Front Door
 
 Here, the camera has been set up to give a view of the outside of the home, namely the front door entrance. The user's phone receives a motion notification (and the door knocks). The user opens the camera's folder to investigate. If in this case, the camera shows somebody who is not welcome and/or not expected, the user is now aware without having to expose their presence. In this case however, the user sees a delivery man that had been expected. The user is busy however and thus, opens a skype connection and notifies the delivery man that he/she is on the way and will answer the door shortly. 
 
-
-
 ---
-
-
 
 ##### Scenario 4: Monitoring Elderly Relative/Care Subject
 
 In this scenario, the user is taking care of their elderly grandmother who is currently sleeping in the living room (where the surveillance camera has been set-up). The user takes a trip to the shop to buy groceries for the evening, however on the way a notification is sent to the user's phone and upon investigation, the user finds that their grandparent has fallen and is in need of assistance. The user can now open a skype connection with the camera, comfort and direct the elderly subject, and begin to make their way home immediately to assist. 
 
 ---
-
-&nbsp;
 
 ### 2.4 Constraints
 
@@ -377,10 +334,6 @@ The alarm on this system will be limited to the one output device, rather than b
 
 &nbsp;
 
-&nbsp;
-
-&nbsp;
-
 # **3. System Requirements**
 
 ### 3.1 External Requirements
@@ -388,8 +341,6 @@ The alarm on this system will be limited to the one output device, rather than b
 **Hardware**: For the user to set up this surveillance system at home, a Raspberry Pi, and at least one camera is required (ideally the Raspberry Pi official camera module). As well as this, an android device is required to make use of the mobile application. 
 
 **Software**: This system required the Raspberry Pi to be running a version of Raspbian OS. As well as this, it is required that the user’s phone is running android (preferably 6.0(+) Marshmallow). 
-
-
 
 **Environment**: For the system to send real-time notifications to the user’s mobile phone, it is necessary that the user has some sort of internet connection outside of the home, in which they are connected to through their android device.
 A home internet connection (or wherever the system is stationed), naturally, is also required.
@@ -440,7 +391,6 @@ The user would also be given the option to change the settings and preferences o
 
 &nbsp;
 
-
 ### 3.3 Usability Goals
 
 ##### Scalability
@@ -478,6 +428,7 @@ Finally, the application will require the user to grant Dropbox access via the A
 
 The UI for this system should be sleek, minimalistic, and clean while still providing the user with all the functionality mentioned above. It is important that the application is not overly cluttered or complex looking as an integral aspect of the advantage of this system over others in the field is the fact that it is accessible both in price and usability, to all home owners, as specified above. 
 
+&nbsp;
 
 # **4. System Architecture**
 
@@ -501,8 +452,6 @@ As well as this, the Authentication module will require the user to sign into th
 
 &nbsp;
 
-&nbsp;
-
 # **5. High-Level Design**
 
 ### 5.1 Design Overview 
@@ -516,11 +465,7 @@ This diagram shows how the Raspberry Pi interacts with the external hardware and
 
 ![](https://i.gyazo.com/ae45a8097fd8862b7bde5bf8ef65366a.png)
 
-
 &nbsp;
-
-&nbsp;
-
 
 # **6. Preliminary Schedule**
 
@@ -558,12 +503,8 @@ The **Software** requirements for this project are as follows:
 
 ![](https://i.gyazo.com/74fd059addbe91c9e1a7dec1de2d8176.png)
 
-
 &nbsp;
 
-&nbsp;
-
- 
 # **7. Appendices**
 
 ### 7.1 Possible Requirements Problems
