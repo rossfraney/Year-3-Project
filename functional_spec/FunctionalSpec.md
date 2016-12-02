@@ -288,8 +288,6 @@ During the time in which the user is away from home, while there is no motion be
 When there is motion detected however, the speed of the image capturing picks up substantially and the user receives a notification on their mobile device. Once they open the application, they will see which camera the notification is coming from, and will open the Dropbox folder for that camera to investigate. Here, they will see live images from in real time being uploaded of an intruder in their home, as he enters through the window.
 From this position, the user will have the option to save the images, make a phone call (contact the police, for example), or open a live video feed connection with the camera. The user touches the button to call the police and are immediately connected so that they can explain their situation, and can provide all the footage necessary to use as evidence against the intruder.
 
-&nbsp;
-
 ---
 
 ##### Scenario 2: Monitor a Sleeping Baby
