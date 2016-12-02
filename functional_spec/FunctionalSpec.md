@@ -474,7 +474,7 @@ The UI for this system should be sleek, minimalistic, and clean while still prov
 
 ### 4.1 System Module/Component Diagram
 
-![](file://C:/Users/Ross/Desktop/ComponentDiagram.png)
+![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/42bcf38de5a9ece24f840d4a248ab0b944eb1bc0/functional_spec/ComponentDiagram.PNG)
 
 &nbsp;
 
@@ -505,7 +505,7 @@ This diagram shows how the Raspberry Pi interacts with the external hardware and
 
 ### 5.2 Context Diagram
 
-![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/7e38807116d4e53bea31d1a70b9e0aa27f37f404/functional_spec/ComponentDiagram.PNG)
+![](https://gitlab.computing.dcu.ie/franeyr3/2017-CA326-franeyr3-SecuriPi/raw/42bcf38de5a9ece24f840d4a248ab0b944eb1bc0/functional_spec/DFD.png)
 
 
 &nbsp;
