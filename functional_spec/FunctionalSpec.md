@@ -522,12 +522,15 @@ The **Software** requirements for this project are as follows:
 #### Requirement: The Application
 
 **Possible Problem**: Implementing App folder that has access to Dropbox file system.
+
 **Proposed Solution**: If there is an issue with implementing Dropbox files we can simply sync the phones photo album with the drop box account and link there instead.
 
 **Possible Problem**: Integrating VNC Server with App.
+
 **Proposed Solution**: Use Remote Ripple app which is developed by the same company as TightVNC server.
 
 **Possible Problem**: Sending notifications from the Pi to the Application.
+
 **Proposed Solution**: As a means of notifying the application (and subsequently the android device) as soon as motion is detected, rather than worrying about pushing notifications from the software we have written on the Raspberry Pi itself, the device could simply receive a notification each time the size of the camera's respective Dropbox folder grows.
 
 
