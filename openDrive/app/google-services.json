@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "769249180998",
+    "firebase_url": "https://opendrive-157614.firebaseio.com",
+    "project_id": "opendrive-157614",
+    "storage_bucket": "opendrive-157614.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769249180998:android:9170915d5ce9855f",
+        "android_client_info": {
+          "package_name": "com.example.ross.opendrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769249180998-l65t07a1cumshiotv5sb3k74i0m90hs6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ross.opendrive",
+            "certificate_hash": "aeea7037e31bc6b2f6cc5b09a521da5855151327"
+          }
+        },
+        {
+          "client_id": "769249180998-upluurmmnf3bvssq68tq766e2ncjpku3.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "769249180998-vsattu4m0tfe57dcekgmduudn34sbvem.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSHCZSsfT5mbzcd38MKI7nU-e2BMjqTSc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769249180998-upluurmmnf3bvssq68tq766e2ncjpku3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
