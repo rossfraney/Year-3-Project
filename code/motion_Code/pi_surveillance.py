@@ -1,9 +1,10 @@
 # import the necessary packages
+
+##NOT NEEDED IF I DONT USE PICAMERA AND RAWCAPTURE> CAN ALSO REMOVE "RESOLUTION"
+#from picamera.array import PiRGBArray
+#from picamera import PiCamera
+
 from pyimagesearch.tempimage import TempImage
-from dropbox.client import DropboxOAuth2FlowNoRedirect
-from dropbox.client import DropboxClient
-from picamera.array import PiRGBArray
-from picamera import PiCamera
 from imutils.video import VideoStream
 import argparse
 import warnings
@@ -12,7 +13,10 @@ import imutils
 import json
 import time
 import cv2
- 
+
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-c", "--conf", required=True,
@@ -20,29 +24,31 @@ ap.add_argument("-c", "--conf", required=True,
 ap.add_argument("-p", "--picamera", type=int, default=-1,
 	help="whether or not the Raspberry Pi camera should be used")
 args = vars(ap.parse_args())
- 
+
+#GoogleDrive Authentication
+gauth = GoogleAuth()
+gauth.LocalWebserverAuth()
+drive = GoogleDrive(gauth)
+
+
 # filter warnings, load the configuration and initialize the Dropbox
 # client
 warnings.filterwarnings("ignore")
 conf = json.load(open(args["conf"]))
 client = None
-if conf["use_dropbox"]:
-	# connect to dropbox and start the session authorization process
-	flow = DropboxOAuth2FlowNoRedirect(conf["dropbox_key"], conf["dropbox_secret"])
-	print "[INFO] Authorize this application: {}".format(flow.start())
-	authCode = raw_input("Enter auth code here: ").strip()
- 
-	# finish the authorization and grab the Dropbox client
-	(accessToken, userID) = flow.finish(authCode)
-       # accessToken = ("ESUo89RO1EAAAAAAAAAAOow5LaDkCJwFD3tSE4vn4gM")
-	client = DropboxClient(accessToken)
-	print "[SUCCESS] dropbox account linked"
         
 # initialize the camera and grab a reference to the raw camera capture
 camera = cv2.VideoCapture(0)
-#camera.resolution = tuple(conf["resolution"])
-#camera.framerate = conf["fps"]
-rawCapture = PiRGBArray(camera, size=tuple(conf["resolution"]))
+#Camera Width
+camera.set(3,conf["Width"])
+#Camera Height
+camera.set(4,conf["Height"])
+
+camera.set(5,conf["fps"])
+
+##NOT SURE WHETHER TO KEEP IN THE RAWCAPTURE & TRUNCATES...TEST PERFORMANCE DIFFERENCES LOCALLY
+##IS THIS ONLY FOR PICAMERA? I THINK SO.
+#rawCapture = PiRGBArray(camera, size=tuple(conf["resolution"]))
  
 # allow the camera to warmup, then initialize the average frame, last
 # uploaded timestamp, and frame motion counter
@@ -54,16 +60,13 @@ motionCounter = 0
 # capture frames from the camera
 while True:
         (grabbed, frame) = camera.read()
-        text = "Unoccupied"
+        text = "No Movement"
 
         if not grabbed:
                 break
-#for f in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-	# grab the raw NumPy array representing the image and initialize
-	# the timestamp and occupied/unoccupied text
-	#frame = frame.array
+
+	# initialise the timestamp
 	timestamp = datetime.datetime.now()
-	#text = "Unoccupied"
  
 	# resize the frame, convert it to grayscale, and blur it
 	frame = imutils.resize(frame, width=500)
@@ -74,7 +77,7 @@ while True:
 	if avg is None:
 		print "[INFO] starting background model..."
 		avg = gray.copy().astype("float")
-		rawCapture.truncate(0)
+		#rawCapture.truncate(0)
 		continue
  
 	# accumulate the weighted average between the current frame and
@@ -100,8 +103,8 @@ while True:
 		# compute the bounding box for the contour, draw it on the frame,
 		# and update the text
 		(x, y, w, h) = cv2.boundingRect(c)
-		cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-		text = "Occupied"
+		cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+		text = "Movement Detected"
  
 	# draw the text and timestamp on the frame
 	ts = timestamp.strftime("%A %d %B %Y %I:%M:%S%p")
@@ -110,7 +113,7 @@ while True:
 	cv2.putText(frame, ts, (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX,
 		0.35, (0, 0, 255), 1)
 # check to see if the room is occupied
-	if text == "Occupied":
+	if text == "Movement Detected":
 		# check to see if enough time has passed between uploads
 		if (timestamp - lastUploaded).seconds >= conf["min_upload_seconds"]:
 			# increment the motion counter
@@ -119,21 +122,21 @@ while True:
 			# check to see if the number of frames with consistent motion is
 			# high enough
 			if motionCounter >= conf["min_motion_frames"]:
-				# check to see if dropbox sohuld be used
-				if conf["use_dropbox"]:
-					# write the image to temporary file
-					t = TempImage()
-					cv2.imwrite(t.path, frame)
- 
-					# upload the image to Dropbox and cleanup the tempory image
-					print "[UPLOAD] {}".format(ts)
-					path = "{base_path}/{timestamp}.jpg".format(
-						base_path=conf["dropbox_base_path"], timestamp=ts)
-					client.put_file(path, open(t.path, "rb"))
-					t.cleanup()
- 
+				# write the image to temporary file
+				t = TempImage()
+				cv2.imwrite(t.path, frame)
+
+                                #Drive Upload
+                                file1 = drive.CreateFile()
+                                file1.SetContentFile(t.path)
+                                file1.Upload()
+                                print('Created file%s with mimeType %s' % (file1['title'],
+				  file1['mimeType']))
+
+                                t.cleanup()
 				# update the last uploaded timestamp and reset the motion
 				# counter
+
 				lastUploaded = timestamp
 				motionCounter = 0
  
@@ -145,11 +148,13 @@ while True:
 	if conf["show_video"]:
 		# display the security feed
 		cv2.imshow("Security Feed", frame)
+             	#cv2.imshow("Thresh", thresh)
+                #cv2.imshow("Frame Delta", frameDelta)   
 		key = cv2.waitKey(1) & 0xFF
  
-		# if the `q` key is pressed, break from the lop
+		# if the `q` key is pressed, break from the loop
 		if key == ord("q"):
 			break
  
 	# clear the stream in preparation for the next frame
-	rawCapture.truncate(0)
+	#rawCapture.truncate(0)
