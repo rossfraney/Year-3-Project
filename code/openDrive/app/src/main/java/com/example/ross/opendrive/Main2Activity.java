@@ -1,13 +1,8 @@
 package com.example.ross.opendrive;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.SyncRequest;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,29 +24,22 @@ import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.Metadata;
 import com.google.android.gms.drive.MetadataBuffer;
-import com.google.android.gms.drive.MetadataChangeSet;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
 import com.google.android.gms.drive.events.DriveEvent;
 import com.google.android.gms.drive.query.Filters;
 import com.google.android.gms.drive.query.Query;
 import com.google.android.gms.drive.query.SearchableField;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.client.util.ExponentialBackOff;
-import com.google.api.services.drive.DriveScopes;
-import com.google.api.services.drive.model.StartPageToken;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONException;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
 import static android.app.Activity.RESULT_OK;
-import static java.lang.Thread.sleep;
+import static com.google.api.client.http.HttpMethods.POST;
 
 public class Main2Activity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -59,21 +47,19 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
     private Button openButton;
     private Button signOutButton;
-    private Button notifyButton;
+    private Button deleteButton;
     private static final String TAG = "BaseDriveActivity";
     protected static final int REQUEST_CODE_RESOLUTION = 1;
+    private static final int REQUEST_CODE_DELETER = 2;
     private static final int REQUEST_CODE_OPENER = 3;
     private DriveFolder driveFolder;
-    public DriveApi.MetadataBufferResult currentState;
     public int count;
     public int count2;
 
-    //private Bitmap mBitmapToSave;
     /**
      * File that is selected with the open file activity.
      */
     private DriveId mSelectedFileDriveId;
-    private DriveEvent driveService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +73,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         signOutButton.setOnClickListener(this);
         findViewById(R.id.signOutButton).setVisibility(View.GONE);
 
-        notifyButton = (Button) findViewById(R.id.notifyButton);
-        notifyButton.setOnClickListener(this);
+        deleteButton = (Button) findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(this);
 
         FirebaseMessaging.getInstance().subscribeToTopic("test");
         FirebaseInstanceId.getInstance().getToken();
@@ -113,6 +99,12 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             mSelectedFileDriveId = data.getParcelableExtra(
                     OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
             open();
+        }
+        if (requestCode == REQUEST_CODE_DELETER && resultCode == RESULT_OK) {
+            showMessage("Working");
+            mSelectedFileDriveId = data.getParcelableExtra(
+                    OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
+            delete();
         }
     }
 
@@ -143,29 +135,6 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
         findViewById(R.id.signOutButton).setVisibility(View.VISIBLE);
-        Query query = new Query.Builder().addFilter(Filters.and(
-
-                Filters.eq(SearchableField.MIME_TYPE, "image/jpeg"))).build();
-
-        Drive.DriveApi.query(getGoogleApiClient(), query)
-                .setResultCallback(new ResultCallback<DriveApi.MetadataBufferResult>() {
-
-                    @Override
-                    public void onResult(DriveApi.MetadataBufferResult result) {
-                        if (!result.getStatus().isSuccess()) {
-                            showMessage("Problem while retrieving files");
-                            return;
-                        } else {
-                            MetadataBuffer mdb = result.getMetadataBuffer();
-                            for (Metadata md : mdb) {
-                                count++;
-                                Log.d(TAG, md.getTitle());
-                            }
-                            mdb = null;
-                            showMessage("Got first set");
-                        }
-                    }
-                });
     }
 
 
@@ -219,9 +188,24 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             startActivity(new Intent(this, LoggedOut.class));
         }
 
-        if (view == notifyButton) {
-            getFilesInFolder();
+        if (view == deleteButton) {
+            /*Toast.makeText(this, "Opening drive to delete", Toast.LENGTH_SHORT).show();
+            IntentSender intentSender = Drive.DriveApi
+                    .newOpenFileActivityBuilder()
+                    .setMimeType(new String[]{"image/jpeg"})
+                    .build(getGoogleApiClient());
+            try {
+                startIntentSenderForResult(intentSender, REQUEST_CODE_DELETER, null, 0, 0, 0);
+            } catch (IntentSender.SendIntentException e) {
+                Log.w(TAG, "Unable to send intent", e);
+            }*/
+            try {
+                sendPost.POST();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
     private void open() {
@@ -248,6 +232,29 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 }
             };
 
+    private void delete(){
+        DriveFile driveFile = mSelectedFileDriveId.asDriveFile();
+        driveFile.open(getGoogleApiClient(), DriveFile.MODE_READ_ONLY, null)
+                .setResultCallback(driveContentsCallback1);
+        mSelectedFileDriveId = null;
+    }
+
+    private ResultCallback<DriveApi.DriveContentsResult> driveContentsCallback1 =
+            new ResultCallback<DriveApi.DriveContentsResult>() {
+                @Override
+                public void onResult(DriveApi.DriveContentsResult result) {
+                    if (!result.getStatus().isSuccess()) {
+                        showMessage("Error while opening the file contents");
+                        return;
+                    }
+                    DriveContents contents = result.getDriveContents();
+                    contents.getDriveId().asDriveFile().delete(mGoogleApiClient);
+                    ImageView imageView = (ImageView) findViewById(R.id.imageViewpic);
+                    imageView.setImageBitmap(null);
+                    showMessage("Delete Working");
+                }
+            };
+
     private void signOut() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             mGoogleApiClient.clearDefaultAccountAndReconnect().setResultCallback(new ResultCallback<Status>() {
@@ -259,49 +266,4 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    final private ResultCallback<com.google.android.gms.common.api.Status> syncCallback = new ResultCallback<com.google.android.gms.common.api.Status>() {
-        @Override
-        public void onResult(Status status) {
-            if (!status.getStatus().isSuccess()) {
-                showMessage(status.toString());
-            } else {
-                showMessage("updated");
-            }
-        }
-    };
-
-    private void getFilesInFolder() {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Drive.DriveApi.requestSync(getGoogleApiClient()).setResultCallback(syncCallback);
-                Query query = new Query.Builder().addFilter(Filters.and(
-                        Filters.eq(SearchableField.MIME_TYPE, "image/jpeg"))).build();
-
-                Drive.DriveApi.query(getGoogleApiClient(), query)
-                        .setResultCallback(new ResultCallback<DriveApi.MetadataBufferResult>() {
-                            @Override
-                            public void onResult(@NonNull DriveApi.MetadataBufferResult metadataBufferResult) {
-                                if (!metadataBufferResult.getStatus().isSuccess()) {
-                                    showMessage("error");
-                                    return;
-                                } else {
-                                    MetadataBuffer mdb = metadataBufferResult.getMetadataBuffer();
-                                    for (Metadata md : mdb) {
-                                        count2++;
-                                        Log.d(TAG, md.getTitle());
-                                    }
-                                    if (count2 != count) {
-                                        showMessage("Changes");
-                                        count = count2;
-                                    } else
-                                        showMessage("no change");
-                                }
-                                count2 = 0;
-                            }
-                        });
-            }
-        });
-        t.start();
-    }
 }
