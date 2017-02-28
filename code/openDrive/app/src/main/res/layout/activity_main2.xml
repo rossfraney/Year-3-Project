@@ -11,22 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.ross.opendrive.Main2Activity">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/openButton"
-        android:text="View Camera"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:id="@+id/signOutButton"
-        android:text="Sign Out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,25 +18,49 @@
         android:id="@+id/textView1"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/signOutButton"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:layout_toStartOf="@+id/signOutButton" />
+        android:layout_alignEnd="@+id/imageViewpic" />
 
     <ImageView
-        android:layout_width="400dp"
-        android:layout_height="350dp"
-        app:srcCompat="@color/cast_expanded_controller_ad_label_background_color"
+        app:srcCompat="@mipmap/ic_launcher"
         android:id="@+id/imageViewpic"
-        android:layout_centerVertical="true"
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        android:contentDescription="Drive Images"
+        android:scaleType="centerCrop"
+        android:cropToPadding="false"
+        android:scaleX=".5"
+        android:scaleY=".5"
+        android:layout_below="@+id/textView1"
         android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/deleteButton"
-        android:text="Delete Images"
+        android:id="@+id/emergencyCall"
+        android:text="Call 999"
+        style="@android:style/Widget.Button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textNeighbour"
+        android:text="Text Neighbour"
+        style="@android:style/Widget.Button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/openButton"
+        android:text="Open Images"
+        style="@android:style/Widget.Button"
+        android:layout_below="@+id/imageViewpic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp" />
 
 
 </RelativeLayout>

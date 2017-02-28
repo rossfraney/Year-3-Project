@@ -43,7 +43,7 @@ public class sendPost extends Main2Activity {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                String url = "https://www.googleapis.com/drive/v3/changes/watch";
+                String url = "https://www.googleapis.com/drive/v2/changes/watch";
                 String data = null;
                 String result = null;
                     //Connect
@@ -51,7 +51,6 @@ public class sendPost extends Main2Activity {
                     httpcon = (HttpURLConnection) ((new URL(url).openConnection()));
                     httpcon.setDoOutput(true);
                     httpcon.setRequestProperty("Content-Type", "application/json");
-                    httpcon.setRequestProperty("Accept", "application/json");
                     httpcon.setRequestMethod("POST");
                     httpcon.connect();
 
@@ -68,7 +67,7 @@ public class sendPost extends Main2Activity {
                     OutputStream os = httpcon.getOutputStream();
                     BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
                     writer.write(data);
-                    Log.d(TAG, "Sent Post to Google :D");
+                    Log.d(TAG, "Sent POST to Google");
                     writer.close();
                     os.close();
 
@@ -93,6 +92,7 @@ public class sendPost extends Main2Activity {
                     e.printStackTrace();
                 }
             }
-        }); t.start();
+        });
+        t.start();
     }
 }

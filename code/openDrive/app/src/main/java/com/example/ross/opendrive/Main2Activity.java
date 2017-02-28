@@ -1,16 +1,22 @@
 package com.example.ross.opendrive;
+
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -20,42 +26,31 @@ import com.google.android.gms.drive.Drive;
 import com.google.android.gms.drive.DriveApi;
 import com.google.android.gms.drive.DriveContents;
 import com.google.android.gms.drive.DriveFile;
-import com.google.android.gms.drive.DriveFolder;
 import com.google.android.gms.drive.DriveId;
-import com.google.android.gms.drive.Metadata;
-import com.google.android.gms.drive.MetadataBuffer;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
-import com.google.android.gms.drive.events.DriveEvent;
-import com.google.android.gms.drive.query.Filters;
-import com.google.android.gms.drive.query.Query;
-import com.google.android.gms.drive.query.SearchableField;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import org.json.JSONException;
 
 import java.io.InputStream;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
+import static android.R.id.list;
 import static android.app.Activity.RESULT_OK;
-import static com.google.api.client.http.HttpMethods.POST;
 
 public class Main2Activity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private GoogleApiClient mGoogleApiClient;
     private Button openButton;
-    private Button signOutButton;
-    private Button deleteButton;
+    private Button emergencyCall;
+    private Button textNeighbour;
     private static final String TAG = "BaseDriveActivity";
     protected static final int REQUEST_CODE_RESOLUTION = 1;
     private static final int REQUEST_CODE_DELETER = 2;
     private static final int REQUEST_CODE_OPENER = 3;
-    private DriveFolder driveFolder;
-    public int count;
-    public int count2;
-
     /**
      * File that is selected with the open file activity.
      */
@@ -69,12 +64,11 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         openButton = (Button) findViewById(R.id.openButton);
         openButton.setOnClickListener(this);
 
-        signOutButton = (Button) findViewById(R.id.signOutButton);
-        signOutButton.setOnClickListener(this);
-        findViewById(R.id.signOutButton).setVisibility(View.GONE);
+        emergencyCall = (Button) findViewById(R.id.emergencyCall);
+        emergencyCall.setOnClickListener(this);
 
-        deleteButton = (Button) findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(this);
+        textNeighbour = (Button) findViewById(R.id.textNeighbour);
+        textNeighbour.setOnClickListener(this);
 
         FirebaseMessaging.getInstance().subscribeToTopic("test");
         FirebaseInstanceId.getInstance().getToken();
@@ -134,7 +128,10 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
-        findViewById(R.id.signOutButton).setVisibility(View.VISIBLE);
+        //findViewById(R.id.signOutButton).setVisibility(View.VISIBLE);
+        TextView tv1 = (TextView)findViewById(R.id.textView1);
+        tv1.setText("Welcome Back!");
+
     }
 
 
@@ -182,31 +179,62 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             }
         }
 
-        if (view == signOutButton) {
-            finish();
-            signOut();
-            startActivity(new Intent(this, LoggedOut.class));
-        }
+        if (view == textNeighbour) {
+            Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+            sendIntent.setData(Uri.parse("smsto:" + "0861921718"));
+            sendIntent.putExtra("sms_body", "Security Alert: Hi, could you please check my home as there has been action recorded on my security camera. Thanks!");
 
-        if (view == deleteButton) {
-            /*Toast.makeText(this, "Opening drive to delete", Toast.LENGTH_SHORT).show();
-            IntentSender intentSender = Drive.DriveApi
-                    .newOpenFileActivityBuilder()
-                    .setMimeType(new String[]{"image/jpeg"})
-                    .build(getGoogleApiClient());
             try {
-                startIntentSenderForResult(intentSender, REQUEST_CODE_DELETER, null, 0, 0, 0);
-            } catch (IntentSender.SendIntentException e) {
-                Log.w(TAG, "Unable to send intent", e);
-            }*/
-            try {
-                sendPost.POST();
-            } catch (JSONException e) {
-                e.printStackTrace();
+                startActivity(sendIntent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                ex.printStackTrace();
             }
         }
 
+        if (view == emergencyCall) {
+            String number = "0861921718";
+            Uri call = Uri.parse("tel:" + number);
+            Intent surf = new Intent(Intent.ACTION_CALL, call);
+            startActivity(surf);
+            showMessage("Calling Emergency Services");
+        }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.deletefiles, menu); //your file name
+        inflater.inflate(R.menu.signout, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.signOut:
+                finish();
+                signOut();
+                startActivity(new Intent(this, LoggedOut.class));
+                return true;
+
+            case R.id.deleteFiles:
+                Toast.makeText(this, "Opening drive to delete", Toast.LENGTH_SHORT).show();
+                IntentSender intentSender = Drive.DriveApi
+                        .newOpenFileActivityBuilder()
+                        .setMimeType(new String[]{"image/jpeg"})
+                        .build(getGoogleApiClient());
+                try {
+                    startIntentSenderForResult(intentSender, REQUEST_CODE_DELETER, null, 0, 0, 0);
+                } catch (IntentSender.SendIntentException e) {
+                    Log.w(TAG, "Unable to send intent", e);
+                }
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
     private void open() {
         DriveFile driveFile = mSelectedFileDriveId.asDriveFile();
