@@ -1,9 +1,13 @@
-# import the necessary packages
+#Instructions for use#
+#In working directory, must have the pyimagesearch folder, "clients.json" file(download this from API credentials)
+#, conf.json, python file.
+#Run by entering command: "python pi_surveillance.py --conf conf.json"
 
-##NOT NEEDED IF I DONT USE PICAMERA AND RAWCAPTURE> CAN ALSO REMOVE "RESOLUTION"
-#from picamera.array import PiRGBArray
-#from picamera import PiCamera
-	#"resolution": [1920, 1080],
+
+
+
+
+# import the necessary packages
 
 from pyimagesearch.tempimage import TempImage
 from imutils.video import VideoStream
