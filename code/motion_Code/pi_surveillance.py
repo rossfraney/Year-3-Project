@@ -3,6 +3,7 @@
 ##NOT NEEDED IF I DONT USE PICAMERA AND RAWCAPTURE> CAN ALSO REMOVE "RESOLUTION"
 #from picamera.array import PiRGBArray
 #from picamera import PiCamera
+	#"resolution": [1920, 1080],
 
 from pyimagesearch.tempimage import TempImage
 from imutils.video import VideoStream
@@ -13,6 +14,8 @@ import imutils
 import json
 import time
 import cv2
+
+from pyfcm import FCMNotification
 
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
@@ -35,7 +38,7 @@ drive = GoogleDrive(gauth)
 # client
 warnings.filterwarnings("ignore")
 conf = json.load(open(args["conf"]))
-client = None
+#client = None
         
 # initialize the camera and grab a reference to the raw camera capture
 camera = cv2.VideoCapture(0)
@@ -55,7 +58,8 @@ camera.set(5,conf["fps"])
 print "[INFO] warming up..."
 time.sleep(conf["camera_warmup_time"])
 avg = None
-lastUploaded = datetime.datetime.now()
+print datetime.datetime.now()
+lastUploaded = datetime.datetime.utcnow()
 motionCounter = 0
 # capture frames from the camera
 while True:
@@ -66,7 +70,7 @@ while True:
                 break
 
 	# initialise the timestamp
-	timestamp = datetime.datetime.now()
+	timestamp = datetime.datetime.utcnow()
  
 	# resize the frame, convert it to grayscale, and blur it
 	frame = imutils.resize(frame, width=500)
@@ -108,7 +112,7 @@ while True:
  
 	# draw the text and timestamp on the frame
 	ts = timestamp.strftime("%A %d %B %Y %I:%M:%S%p")
-	cv2.putText(frame, "Room Status: {}".format(text), (10, 20),
+	cv2.putText(frame, "Movement Status: {}".format(text), (10, 20),
 		cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 	cv2.putText(frame, ts, (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX,
 		0.35, (0, 0, 255), 1)
@@ -122,6 +126,15 @@ while True:
 			# check to see if the number of frames with consistent motion is
 			# high enough
 			if motionCounter >= conf["min_motion_frames"]:
+
+				# Notifications to the App
+				push_service = FCMNotification(api_key="AAAAsxrS_UY:APA91bGuW6Ir3I7V4s_p2g6ToQZJO-6XPG-obxiLB2zGnr88mqxa_hkccMJPVJTvjZoRnYYJAtM10oouUjK5T54hN75F33FZdq6eUNMP9GAF3_KV2i-E_e64IzoYSM4shE4GJ-8M4UKV")
+				registration_id = "fhpisJCj0ek:APA91bHiEqtGefOA6MxZWnwqTo3JjLnjX-TPYW9V5izYJPAfbT_4UnkyiIyoqVjvrIFRH_A418nnta3l0qj4bX4Y-G4KcWM5Wp_iXmcbmjPWADvEBaMYWkcTa-3tJd-yBlkuvxUduRKd"
+				message_title = "Motion Detected!"
+				message_body = "Your SecuriPi system has detected movement and uploaded the corresponding images."
+		
+				result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
+		
 				# write the image to temporary file
 				t = TempImage()
 				cv2.imwrite(t.path, frame)
@@ -139,7 +152,7 @@ while True:
 
 				lastUploaded = timestamp
 				motionCounter = 0
- 
+
 	# otherwise, the room is not occupied
 	else:
 		motionCounter = 0
