@@ -41,6 +41,7 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".setNeighbour"></activity>
     </application>
 
 </manifest>

@@ -21,10 +21,15 @@ import com.google.firebase.messaging.RemoteMessage;
  */
 public class MyFirebaseMessagingService extends FirebaseMessagingService{
     private static final String TAG = "MyFirebaseMsgService";
+    public static boolean notis;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        sendNotification(remoteMessage.getData().get("message"));
+        if(notis == true) {
+            sendNotification(remoteMessage.getData().get("message"));
+        }
+        else
+            Log.d(TAG, "Notifications toggled off");
     }
 
     
@@ -32,14 +37,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
     private void sendNotification(String body) {
         Intent intent = new Intent(this, Main2Activity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0/*request code*/, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0/*request code*/, intent, 0);
 
         //set sound of notification
         Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION); //could change to alarm?
 
         NotificationCompat.Builder notifiBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Firebase Cloud Messaging")
+                .setContentTitle("Camera Detected Motion")
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(notificationSound)

@@ -11,15 +11,44 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.ross.opendrive.Main2Activity">
 
-    <TextView
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome"
-        android:id="@+id/textView1"
-        android:layout_alignParentTop="true"
+        android:id="@+id/textNeighbour"
+        android:text="Text Neighbour"
+        style="@android:style/Widget.Button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emergencyCall"
+        android:text="Call 999"
+        style="@android:style/Widget.Button"
+        android:layout_above="@+id/textNeighbour"
         android:layout_alignParentStart="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_alignEnd="@+id/textNeighbour" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/openButton"
+        android:text="Open Images"
+        style="@android:style/Widget.Button"
+        android:layout_alignParentBottom="true"
         android:layout_alignEnd="@+id/imageViewpic" />
+
+    <ToggleButton
+        android:text="Notifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/toggleButton"
+        android:textOn="Notifications On"
+        android:textOff="Notifications Off"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:checked="false" />
 
     <ImageView
         app:srcCompat="@mipmap/ic_launcher"
@@ -31,36 +60,36 @@
         android:cropToPadding="false"
         android:scaleX=".5"
         android:scaleY=".5"
-        android:layout_below="@+id/textView1"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toggleButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome"
+        android:id="@+id/textView1"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignBaseline="@+id/toggleButton"
+        android:layout_alignBottom="@+id/toggleButton"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/emergencyCall"
-        android:text="Call 999"
-        style="@android:style/Widget.Button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toggleButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/imageViewpic"
+        android:id="@+id/webView" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textNeighbour"
-        android:text="Text Neighbour"
+        android:id="@+id/videoFeed"
+        android:text="Live Video Feed"
         style="@android:style/Widget.Button"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/openButton"
-        android:text="Open Images"
-        style="@android:style/Widget.Button"
-        android:layout_below="@+id/imageViewpic"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp" />
+        android:layout_above="@+id/openButton"
+        android:layout_alignStart="@+id/openButton"
+        android:layout_alignTop="@+id/emergencyCall" />
 
 
 </RelativeLayout>

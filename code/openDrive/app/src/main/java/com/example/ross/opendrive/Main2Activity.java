@@ -2,9 +2,11 @@ package com.example.ross.opendrive;
 
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,10 +49,14 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     private Button openButton;
     private Button emergencyCall;
     private Button textNeighbour;
+    private Button toggleButton;
     private static final String TAG = "BaseDriveActivity";
     protected static final int REQUEST_CODE_RESOLUTION = 1;
     private static final int REQUEST_CODE_DELETER = 2;
     private static final int REQUEST_CODE_OPENER = 3;
+
+
+    public String neighboursNum;
     /**
      * File that is selected with the open file activity.
      */
@@ -70,11 +76,15 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         textNeighbour = (Button) findViewById(R.id.textNeighbour);
         textNeighbour.setOnClickListener(this);
 
+        toggleButton = (Button) findViewById((R.id.toggleButton));
+        toggleButton.setOnClickListener(this);
+
+        findViewById(R.id.webView).setVisibility(View.INVISIBLE);
+
         FirebaseMessaging.getInstance().subscribeToTopic("test");
         FirebaseInstanceId.getInstance().getToken();
 
     }
-
     /**
      * Called when activity gets visible. A connection to Drive services need to
      * be initiated as soon as the activity is visible. Registers
@@ -109,7 +119,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addApi(Drive.API)
                     .addScope(Drive.SCOPE_FILE)
-                    .addScope(Drive.SCOPE_APPFOLDER) // required for App Folder sample
+                    //.addScope(Drive.SCOPE_APPFOLDER) // required for App Folder sample
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .build();
@@ -129,7 +139,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
         //findViewById(R.id.signOutButton).setVisibility(View.VISIBLE);
-        TextView tv1 = (TextView)findViewById(R.id.textView1);
+        TextView tv1 = (TextView) findViewById(R.id.textView1);
         tv1.setText("Welcome Back!");
 
     }
@@ -166,37 +176,52 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onClick(View view) {
-        if (view == openButton) {
-            Toast.makeText(this, "Working up til this  point", Toast.LENGTH_SHORT).show();
-            IntentSender intentSender = Drive.DriveApi
-                    .newOpenFileActivityBuilder()
-                    .setMimeType(new String[]{"image/jpeg"})
-                    .build(getGoogleApiClient());
-            try {
-                startIntentSenderForResult(intentSender, REQUEST_CODE_OPENER, null, 0, 0, 0);
-            } catch (IntentSender.SendIntentException e) {
-                Log.w(TAG, "Unable to send intent", e);
-            }
-        }
+        switch(view.getId()) {
+            case R.id.openButton:
+                Toast.makeText(this, "Working up til this  point", Toast.LENGTH_SHORT).show();
+                IntentSender intentSender = Drive.DriveApi
+                        .newOpenFileActivityBuilder()
+                        .setMimeType(new String[]{"image/jpeg"})
+                        .build(getGoogleApiClient());
+                try {
+                    startIntentSenderForResult(intentSender, REQUEST_CODE_OPENER, null, 0, 0, 0);
+                } catch (IntentSender.SendIntentException e) {
+                    Log.w(TAG, "Unable to send intent", e);
+                }
 
-        if (view == textNeighbour) {
-            Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
-            sendIntent.setData(Uri.parse("smsto:" + "0861921718"));
-            sendIntent.putExtra("sms_body", "Security Alert: Hi, could you please check my home as there has been action recorded on my security camera. Thanks!");
+            case R.id.textNeighbour:
+                neighboursNum = setNeighbour.getNum();
+                Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+                sendIntent.setData(Uri.parse("smsto:" + neighboursNum));
+                sendIntent.putExtra("sms_body", "Security Alert: Hi, could you please check my home as there has been action recorded on my security camera. Thanks!");
+                try {
+                    startActivity(sendIntent);
+                } catch (android.content.ActivityNotFoundException ex) {
+                    ex.printStackTrace();
+                }
 
-            try {
-                startActivity(sendIntent);
-            } catch (android.content.ActivityNotFoundException ex) {
-                ex.printStackTrace();
-            }
-        }
+            case R.id.emergencyCall:
+                String number = "0861921718";
+                Uri call = Uri.parse("tel:" + number);
+                Intent surf = new Intent(Intent.ACTION_CALL, call);
+                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    showMessage("You do not have permission");
+                    return;
+                }
+                startActivity(surf);
+                showMessage("Calling Emergency Services");
 
-        if (view == emergencyCall) {
-            String number = "0861921718";
-            Uri call = Uri.parse("tel:" + number);
-            Intent surf = new Intent(Intent.ACTION_CALL, call);
-            startActivity(surf);
-            showMessage("Calling Emergency Services");
+            case R.id.toggleButton:
+                if(MyFirebaseMessagingService.notis == true) {
+                    MyFirebaseMessagingService.notis = false;
+                }
+                else {
+                    MyFirebaseMessagingService.notis = true;
+                }
+
+            case R.id.webView:
+                findViewById(R.id.webView).setVisibility(View.INVISIBLE);
+                //open connection to website hosting stream
         }
     }
 
@@ -205,6 +230,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.deletefiles, menu); //your file name
         inflater.inflate(R.menu.signout, menu);
+        inflater.inflate(R.menu.setneighbour, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -228,6 +254,10 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 } catch (IntentSender.SendIntentException e) {
                     Log.w(TAG, "Unable to send intent", e);
                 }
+                return true;
+
+            case R.id.setNeighbour:
+                startActivity(new Intent(this, setNeighbour.class));
                 return true;
 
             default:
