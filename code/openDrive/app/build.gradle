@@ -46,6 +46,7 @@ android {
         compile('com.google.apis:google-api-services-drive:v2-rev254-1.22.0') {
             exclude group: 'org.apache.httpcomponents'
         }
+        compile files('libs/jsch-0.1.54.jar')
 }
 apply plugin: 'com.google.gms.google-services'
 

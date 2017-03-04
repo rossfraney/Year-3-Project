@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,8 +35,20 @@ import com.google.android.gms.drive.OpenFileActivityBuilder;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.io.ByteArrayOutputStream;
+import java.util.Properties;
+
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+import android.os.Bundle;
+import android.app.Activity;
+import android.widget.ToggleButton;
+
 
 import java.io.InputStream;
+import java.util.Properties;
 
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -49,11 +62,13 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     private Button openButton;
     private Button emergencyCall;
     private Button textNeighbour;
-    private Button toggleButton;
+    private ToggleButton toggleButton;
+    private Button videoFeed;
     private static final String TAG = "BaseDriveActivity";
     protected static final int REQUEST_CODE_RESOLUTION = 1;
     private static final int REQUEST_CODE_DELETER = 2;
     private static final int REQUEST_CODE_OPENER = 3;
+    private String myHost = "192.168.43.50";
 
 
     public String neighboursNum;
@@ -76,15 +91,31 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         textNeighbour = (Button) findViewById(R.id.textNeighbour);
         textNeighbour.setOnClickListener(this);
 
-        toggleButton = (Button) findViewById((R.id.toggleButton));
-        toggleButton.setOnClickListener(this);
+        toggleButton = (ToggleButton) findViewById((R.id.toggleButton));
+        toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    showMessage("Notifications Enabled");
+                    MyFirebaseMessagingService.notis = true;
+                } else{
+                    showMessage("Notifications Disabled");
+                    MyFirebaseMessagingService.notis = false;
+                }
+            }
+        });
+
+        videoFeed = (Button) findViewById((R.id.videoFeed));
+        videoFeed.setOnClickListener(this);
 
         findViewById(R.id.webView).setVisibility(View.INVISIBLE);
 
         FirebaseMessaging.getInstance().subscribeToTopic("test");
         FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG,FirebaseInstanceId.getInstance().getToken() );
 
     }
+
     /**
      * Called when activity gets visible. A connection to Drive services need to
      * be initiated as soon as the activity is visible. Registers
@@ -176,8 +207,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.openButton:
+            if(view == openButton) {
                 Toast.makeText(this, "Working up til this  point", Toast.LENGTH_SHORT).show();
                 IntentSender intentSender = Drive.DriveApi
                         .newOpenFileActivityBuilder()
@@ -188,8 +218,9 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 } catch (IntentSender.SendIntentException e) {
                     Log.w(TAG, "Unable to send intent", e);
                 }
+            }
 
-            case R.id.textNeighbour:
+            if(view == textNeighbour) {
                 neighboursNum = setNeighbour.getNum();
                 Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
                 sendIntent.setData(Uri.parse("smsto:" + neighboursNum));
@@ -199,8 +230,9 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 } catch (android.content.ActivityNotFoundException ex) {
                     ex.printStackTrace();
                 }
+            }
 
-            case R.id.emergencyCall:
+            if(view == emergencyCall) {
                 String number = "0861921718";
                 Uri call = Uri.parse("tel:" + number);
                 Intent surf = new Intent(Intent.ACTION_CALL, call);
@@ -210,19 +242,69 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 }
                 startActivity(surf);
                 showMessage("Calling Emergency Services");
+            }
+            if(view == videoFeed) {
+                Thread t = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            JSch jsch = new JSch();
+                            Session session = jsch.getSession("pi", myHost, 22);
+                            session.setPassword("raspberry");
 
-            case R.id.toggleButton:
-                if(MyFirebaseMessagingService.notis == true) {
-                    MyFirebaseMessagingService.notis = false;
-                }
-                else {
-                    MyFirebaseMessagingService.notis = true;
-                }
+                            // Avoid asking for key confirmation
+                            Properties prop = new Properties();
+                            prop.put("StrictHostKeyChecking", "no");
+                            session.setConfig(prop);
 
-            case R.id.webView:
-                findViewById(R.id.webView).setVisibility(View.INVISIBLE);
+                            Log.d(TAG, "SSH Connecting");
+                            session.connect();
+                            Log.d(TAG, "SSH connected");
+
+
+                            Channel channelssh = session.openChannel("exec");
+                            ((ChannelExec) channelssh).setCommand("python /home/pi/securiPi/pi_surveillance.py --conf /home/pi/securiPi/conf.json ");
+                           // ((ChannelExec) channelssh).setCommand("pkill -f python");
+                            channelssh.setInputStream(null);
+                            ((ChannelExec) channelssh).setErrStream(System.err);
+                            InputStream in = channelssh.getInputStream();
+
+                            channelssh.connect();
+                            byte[] tmp = new byte[1024];
+                            while (true)
+                            {
+                                while (in.available() > 0)
+                                {
+                                    int i = in.read(tmp, 0, 1024);
+                                    if (i < 0)
+                                        break;
+                                    System.out.print(new String(tmp, 0, i));
+                                }
+                                if (channelssh.isClosed())
+                                {
+                                    System.out.println("exit-status: " + channelssh.getExitStatus());
+                                    break;
+                                }
+                                try
+                                {
+                                    Thread.sleep(1000);
+                                }
+                                catch (Exception ee)
+                                {
+                                }
+                            }
+
+                            channelssh.disconnect();
+                            session.disconnect();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                t.start();
+                //findViewById(R.id.webView).setVisibility(View.VISIBLE);
                 //open connection to website hosting stream
-        }
+            }
     }
 
     @Override
