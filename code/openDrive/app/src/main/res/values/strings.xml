@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">openDrive</string>
+    <string-array name="alarm_sounds">
+        <item>Standard Alarm</item>
+        <item>Dog Bark</item>
+        <item>Lullaby</item>
+        <item>Police Siren</item>
+    </string-array>
 </resources>

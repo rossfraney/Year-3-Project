@@ -21,7 +21,7 @@ import com.google.firebase.messaging.RemoteMessage;
  */
 public class MyFirebaseMessagingService extends FirebaseMessagingService{
     private static final String TAG = "MyFirebaseMsgService";
-    public static boolean notis;
+    public static boolean notis = true;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -36,15 +36,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
     //display notification
     private void sendNotification(String body) {
         Intent intent = new Intent(this, Main2Activity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0/*request code*/, intent, 0);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0/*request code*/, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //set sound of notification
         Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION); //could change to alarm?
 
         NotificationCompat.Builder notifiBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Camera Detected Motion")
+                .setContentTitle("Motion Detected!")
                 .setContentText(body)
                 .setAutoCancel(true)
                 .setSound(notificationSound)

@@ -12,13 +12,24 @@
     tools:context="com.example.ross.opendrive.Main2Activity">
 
     <Button
+        android:id="@+id/stopCamera"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textNeighbour"
-        android:text="Text Neighbour"
-        style="@android:style/Widget.Button"
+        android:layout_alignEnd="@+id/startCamera"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toEndOf="@+id/openButton"
+        android:text="Stop Camera" />
+
+    <Button
+        android:id="@+id/textNeighbour"
+        style="@android:style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@+id/openButton"
+        android:text="Quick-Text" />
 
     <Button
         android:layout_width="wrap_content"
@@ -28,7 +39,7 @@
         style="@android:style/Widget.Button"
         android:layout_above="@+id/textNeighbour"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/textNeighbour" />
+        android:layout_toStartOf="@+id/openButton" />
 
     <Button
         android:layout_width="wrap_content"
@@ -37,7 +48,8 @@
         android:text="Open Images"
         style="@android:style/Widget.Button"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/imageViewpic" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="21dp" />
 
     <ToggleButton
         android:text="Notifications"
@@ -46,9 +58,9 @@
         android:id="@+id/toggleButton"
         android:textOn="Notifications On"
         android:textOff="Notifications Off"
+        android:checked="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:checked="true" />
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         app:srcCompat="@mipmap/ic_launcher"
@@ -61,35 +73,31 @@
         android:scaleX=".5"
         android:scaleY=".5"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/toggleButton" />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/toggleButton"
+        android:layout_above="@+id/emergencyCall" />
 
     <TextView
+        android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome"
-        android:id="@+id/textView1"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignBaseline="@+id/toggleButton"
         android:layout_alignBottom="@+id/toggleButton"
         android:layout_alignParentStart="true" />
 
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/toggleButton"
-        android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/imageViewpic"
-        android:id="@+id/webView" />
-
     <Button
+        android:id="@+id/startCamera"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/videoFeed"
-        android:text="Live Video Feed"
-        style="@android:style/Widget.Button"
-        android:layout_above="@+id/openButton"
-        android:layout_alignStart="@+id/openButton"
+        android:text="Start Camera"
+        android:layout_above="@+id/stopCamera"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/openButton"
         android:layout_alignTop="@+id/emergencyCall" />
+
 
 
 </RelativeLayout>

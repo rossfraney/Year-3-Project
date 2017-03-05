@@ -22,9 +22,9 @@ public class setNeighbour extends Main2Activity {
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(v == btn) {
-                    showMessage("Done");
                     str = eText.getText().toString();
                     neighboursNum = str;
+                    showMessage("New Number: " + neighboursNum);
                     finish();
                 }
             }

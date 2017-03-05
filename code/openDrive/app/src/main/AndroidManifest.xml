@@ -41,7 +41,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".setNeighbour"></activity>
+        <activity android:name=".setNeighbour" />
+        <activity android:name=".AlarmSound"></activity>
     </application>
 
 </manifest>

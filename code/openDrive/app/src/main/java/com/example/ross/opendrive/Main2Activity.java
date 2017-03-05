@@ -1,5 +1,6 @@
 package com.example.ross.opendrive;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -7,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -35,25 +39,17 @@ import com.google.android.gms.drive.OpenFileActivityBuilder;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Properties;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
-import android.os.Bundle;
-import android.app.Activity;
+
 import android.widget.ToggleButton;
 
 
 import java.io.InputStream;
-import java.util.Properties;
-
-import pub.devrel.easypermissions.EasyPermissions;
-
-import static android.R.id.list;
-import static android.app.Activity.RESULT_OK;
 
 public class Main2Activity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -62,13 +58,14 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     private Button openButton;
     private Button emergencyCall;
     private Button textNeighbour;
-    private ToggleButton toggleButton;
-    private Button videoFeed;
+    private Button startCamera;
+    private Button stopCamera;
+    //private WebView webView;
     private static final String TAG = "BaseDriveActivity";
     protected static final int REQUEST_CODE_RESOLUTION = 1;
     private static final int REQUEST_CODE_DELETER = 2;
     private static final int REQUEST_CODE_OPENER = 3;
-    private String myHost = "192.168.43.50";
+    private static String myHost = "192.168.43.50";
 
 
     public String neighboursNum;
@@ -91,7 +88,12 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         textNeighbour = (Button) findViewById(R.id.textNeighbour);
         textNeighbour.setOnClickListener(this);
 
-        toggleButton = (ToggleButton) findViewById((R.id.toggleButton));
+        startCamera = (Button) findViewById(R.id.startCamera);
+        startCamera.setOnClickListener(this);
+
+        stopCamera = (Button) findViewById(R.id.stopCamera);
+        stopCamera.setOnClickListener(this);
+        ToggleButton toggleButton = (ToggleButton) findViewById((R.id.toggleButton));
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -105,14 +107,20 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        videoFeed = (Button) findViewById((R.id.videoFeed));
-        videoFeed.setOnClickListener(this);
+        /*webView = new WebView(this);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setUserAgentString("Android WebView");
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.getSettings().setBuiltInZoomControls(false);
+        webView.getSettings().setSupportZoom(false);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setDomStorageEnabled(true);
 
-        findViewById(R.id.webView).setVisibility(View.INVISIBLE);
+        webView.setVisibility(View.INVISIBLE);*/
 
-        FirebaseMessaging.getInstance().subscribeToTopic("test");
+        //FirebaseMessaging.getInstance().subscribeToTopic("test");
         FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG,FirebaseInstanceId.getInstance().getToken() );
 
     }
 
@@ -130,13 +138,11 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             mGoogleApiClient.connect();
         }
         if (requestCode == REQUEST_CODE_OPENER && resultCode == RESULT_OK) {
-            showMessage("Working");
             mSelectedFileDriveId = data.getParcelableExtra(
                     OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
             open();
         }
         if (requestCode == REQUEST_CODE_DELETER && resultCode == RESULT_OK) {
-            showMessage("Working");
             mSelectedFileDriveId = data.getParcelableExtra(
                     OpenFileActivityBuilder.EXTRA_RESPONSE_DRIVE_ID);
             delete();
@@ -169,9 +175,9 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
-        //findViewById(R.id.signOutButton).setVisibility(View.VISIBLE);
         TextView tv1 = (TextView) findViewById(R.id.textView1);
         tv1.setText("Welcome Back!");
+        showMessage("Registered for notifications");
 
     }
 
@@ -208,7 +214,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onClick(View view) {
             if(view == openButton) {
-                Toast.makeText(this, "Working up til this  point", Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(this, "Opening Drive...", Toast.LENGTH_SHORT).show();
                 IntentSender intentSender = Drive.DriveApi
                         .newOpenFileActivityBuilder()
                         .setMimeType(new String[]{"image/jpeg"})
@@ -217,7 +223,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                     startIntentSenderForResult(intentSender, REQUEST_CODE_OPENER, null, 0, 0, 0);
                 } catch (IntentSender.SendIntentException e) {
                     Log.w(TAG, "Unable to send intent", e);
-                }
+                }*/
+                openImageOptions();
             }
 
             if(view == textNeighbour) {
@@ -233,17 +240,15 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             }
 
             if(view == emergencyCall) {
-                String number = "0861921718";
-                Uri call = Uri.parse("tel:" + number);
-                Intent surf = new Intent(Intent.ACTION_CALL, call);
+
                 if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     showMessage("You do not have permission");
                     return;
                 }
-                startActivity(surf);
-                showMessage("Calling Emergency Services");
+                emergencyServicesCheck();
             }
-            if(view == videoFeed) {
+
+            if(view == startCamera) {
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -305,6 +310,121 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 //findViewById(R.id.webView).setVisibility(View.VISIBLE);
                 //open connection to website hosting stream
             }
+        if(view == stopCamera){
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        JSch jsch = new JSch();
+                        Session session = jsch.getSession("pi", myHost, 22);
+                        session.setPassword("raspberry");
+
+                        // Avoid asking for key confirmation
+                        Properties prop = new Properties();
+                        prop.put("StrictHostKeyChecking", "no");
+                        session.setConfig(prop);
+
+                        Log.d(TAG, "SSH Connecting");
+                        session.connect();
+                        Log.d(TAG, "SSH connected");
+
+
+                        Channel channelssh = session.openChannel("exec");
+                        ((ChannelExec) channelssh).setCommand("pkill -f python");
+                        channelssh.setInputStream(null);
+                        ((ChannelExec) channelssh).setErrStream(System.err);
+                        InputStream in = channelssh.getInputStream();
+
+                        channelssh.connect();
+                        byte[] tmp = new byte[1024];
+                        while (true)
+                        {
+                            while (in.available() > 0)
+                            {
+                                int i = in.read(tmp, 0, 1024);
+                                if (i < 0)
+                                    break;
+                                System.out.print(new String(tmp, 0, i));
+                            }
+                            if (channelssh.isClosed())
+                            {
+                                System.out.println("exit-status: " + channelssh.getExitStatus());
+                                break;
+                            }
+                            try
+                            {
+                                Thread.sleep(1000);
+                            }
+                            catch (Exception ee)
+                            {
+                            }
+                        }
+
+                        channelssh.disconnect();
+                        session.disconnect();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            t.start();
+        }
+    }
+
+    public void emergencyServicesCheck() {
+        String number = "0861921718";
+        Uri call = Uri.parse("tel:" + number);
+        final Intent surf = new Intent(Intent.ACTION_CALL, call);
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Emergency Dial")
+                .setMessage("Are you sure you want to call Emergency Services?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(surf);
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    public void openImageOptions() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("View Images")
+                .setMessage("Open Drive in-app or open Drive.google.com?")
+                .setPositiveButton("Open Drive", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        showMessage("Opening Drive..");
+                        IntentSender intentSender = Drive.DriveApi
+                                .newOpenFileActivityBuilder()
+                                .setMimeType(new String[]{"image/jpeg"})
+                                .build(getGoogleApiClient());
+                        try {
+                            startIntentSenderForResult(intentSender, REQUEST_CODE_OPENER, null, 0, 0, 0);
+                        } catch (IntentSender.SendIntentException e) {
+                            Log.w(TAG, "Unable to send intent", e);
+                        }
+                    }
+
+                })
+                .setNegativeButton("Open in browser", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/drive"));
+                        startActivity(browserIntent);
+                        //findViewById(R.id.imageViewpic).setVisibility(View.INVISIBLE);
+                        //webView.setVisibility(View.VISIBLE);
+                        //webView.loadUrl("https://www.google.com/drive/");
+                    }
+                })
+                .show();
     }
 
     @Override
@@ -313,6 +433,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         inflater.inflate(R.menu.deletefiles, menu); //your file name
         inflater.inflate(R.menu.signout, menu);
         inflater.inflate(R.menu.setneighbour, menu);
+        inflater.inflate(R.menu.alarmsound, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -326,7 +447,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 return true;
 
             case R.id.deleteFiles:
-                Toast.makeText(this, "Opening drive to delete", Toast.LENGTH_SHORT).show();
+                showMessage("Opening Drive..");
                 IntentSender intentSender = Drive.DriveApi
                         .newOpenFileActivityBuilder()
                         .setMimeType(new String[]{"image/jpeg"})
@@ -341,6 +462,9 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             case R.id.setNeighbour:
                 startActivity(new Intent(this, setNeighbour.class));
                 return true;
+
+            case R.id.alarmSound:
+                startActivity(new Intent(this, AlarmSound.class));
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -404,6 +528,10 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 }
             });
         }
+    }
+
+    public static String getHost(){
+        return myHost;
     }
 
 }
