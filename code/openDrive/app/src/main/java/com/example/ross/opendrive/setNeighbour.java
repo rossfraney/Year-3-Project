@@ -18,6 +18,7 @@ public class setNeighbour extends Main2Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_neighbour);
+        tv1.setText("Enter your neighbour's number and click 'save'");
         eText = (EditText) findViewById(R.id.edittext);
         btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {

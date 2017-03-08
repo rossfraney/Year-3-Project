@@ -3,11 +3,9 @@ package com.example.ross.opendrive;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,20 +31,13 @@ import com.google.android.gms.drive.DriveContents;
 import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
-
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
-
 import java.util.Properties;
-
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
-
 import android.widget.ToggleButton;
-
-
 import java.io.InputStream;
 
 public class Main2Activity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -62,12 +53,12 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     protected static final int REQUEST_CODE_RESOLUTION = 1;
     private static final int REQUEST_CODE_DELETER = 2;
     private static final int REQUEST_CODE_OPENER = 3;
-    //private static String myHost = "192.168.43.50";
-    public static String myHost = "192.168.1.6";
     private String lastKey = "placeholderid";
     private String token;
-
+    public static String myHost = "192.168.1.6";
+    public TextView tv1;
     public String neighboursNum;
+
     /**
      * File that is selected with the open file activity.
      */
@@ -77,6 +68,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        tv1 = (TextView) findViewById(R.id.textView1);
+        tv1.setText("Welcome");
 
         openButton = (Button) findViewById(R.id.openButton);
         openButton.setOnClickListener(this);
@@ -164,7 +157,6 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
-        TextView tv1 = (TextView) findViewById(R.id.textView1);
         tv1.setText("Welcome Back!");
         showMessage("Registered for notifications");
 
@@ -383,9 +375,6 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
     //Make Sure user wants to call emergency services
     public void emergencyServicesCheck() {
-        String number = "999";
-        Uri call = Uri.parse("tel:" + number);
-        final Intent surf = new Intent(Intent.ACTION_CALL, call);
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Emergency Dial")
@@ -394,6 +383,9 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        String number = "999";
+                        Uri call = Uri.parse("tel:" + number);
+                        final Intent surf = new Intent(Intent.ACTION_CALL, call);
                         startActivity(surf);
                     }
 

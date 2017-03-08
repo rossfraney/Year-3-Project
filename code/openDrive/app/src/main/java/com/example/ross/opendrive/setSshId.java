@@ -28,6 +28,7 @@ public class setSshId extends Main2Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_ssh_id);
         eText = (EditText) findViewById(R.id.edittext);
+        tv1.setText("Enter Your Pi's IP Address and tap'TEST'");
         btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
