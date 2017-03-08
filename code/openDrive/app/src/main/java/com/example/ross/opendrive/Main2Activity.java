@@ -3,9 +3,11 @@ package com.example.ross.opendrive;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,12 +34,16 @@ import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
 import com.google.firebase.iid.FirebaseInstanceId;
+
 import java.util.Properties;
+
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
+
 import android.widget.ToggleButton;
+
 import java.io.InputStream;
 
 public class Main2Activity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -89,10 +95,10 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     showMessage("Notifications Enabled");
                     MyFirebaseMessagingService.notis = true;
-                } else{
+                } else {
                     showMessage("Notifications Disabled");
                     MyFirebaseMessagingService.notis = false;
                 }
@@ -163,7 +169,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     JSch jsch = new JSch();
                     Session session = jsch.getSession("pi", Main2Activity.getHost(), 22);
                     session.setPassword("raspberry");
@@ -179,7 +185,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
 
                     Channel channelssh = session.openChannel("exec");
-                    ((ChannelExec) channelssh).setCommand("sed -i -e 's/"+lastKey+"/"+token+"/g' /home/pi/securiPi/notify.py");
+                    ((ChannelExec) channelssh).setCommand("sed -i -e 's/" + lastKey + "/" + token + "/g' /home/pi/securiPi/notify.py");
                     channelssh.setInputStream(null);
                     ((ChannelExec) channelssh).setErrStream(System.err);
                     //InputStream in = channelssh.getInputStream();
@@ -196,7 +202,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 }
                 lastKey = token;
             }
-        });t.start();
+        });
+        t.start();
     }
 
     @Override
@@ -223,62 +230,62 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onClick(View view) {
-            if(view == openButton) {
-                openImageOptions(); //if user hits the open button
-            }
+        if (view == openButton) {
+            openImageOptions(); //if user hits the open button
+        }
 
-            //Changes neighbour's number variable and pre-creates the text message
-            if(view == textNeighbour) {
-                neighboursNum = setNeighbour.getNum();
-                Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
-                sendIntent.setData(Uri.parse("smsto:" + neighboursNum));
-                sendIntent.putExtra("sms_body", "Security Alert: Hi, could you please check" +
-                        "my home as there has been action recorded on my security camera. Thanks!");
-                try {
-                    startActivity(sendIntent);
-                } catch (android.content.ActivityNotFoundException ex) {
-                    ex.printStackTrace();
-                }
+        //Changes neighbour's number variable and pre-creates the text message
+        if (view == textNeighbour) {
+            neighboursNum = setNeighbour.getNum();
+            Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+            sendIntent.setData(Uri.parse("smsto:" + neighboursNum));
+            sendIntent.putExtra("sms_body", "Security Alert: Hi, could you please check " +
+                    "my home as there has been action recorded on my security camera. Thanks!");
+            try {
+                startActivity(sendIntent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                ex.printStackTrace();
             }
+        }
 
-            //if 999 button pressed, check if they are sure
-            if(view == emergencyCall) {
+        //if 999 button pressed, check if they are sure
+        if (view == emergencyCall) {
                 /*if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
                         != PackageManager.PERMISSION_GRANTED) {
                     showMessage("You do not have permission");
                     return;
                 }*/
-                emergencyServicesCheck();
-            }
+            emergencyServicesCheck();
+        }
 
-            //SSH Connection to arm the camera
-            if(view == startCamera) {
-               showMessage("Camera Armed");
-                Thread t = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            JSch jsch = new JSch();
-                            Session session = jsch.getSession("pi", myHost, 22);
-                            session.setPassword("raspberry");
+        //SSH Connection to arm the camera
+        if (view == startCamera) {
+            showMessage("Camera Armed");
+            Thread t = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        JSch jsch = new JSch();
+                        Session session = jsch.getSession("pi", myHost, 22);
+                        session.setPassword("raspberry");
 
-                            // Avoid asking for key confirmation
-                            Properties prop = new Properties();
-                            prop.put("StrictHostKeyChecking", "no");
-                            session.setConfig(prop);
+                        // Avoid asking for key confirmation
+                        Properties prop = new Properties();
+                        prop.put("StrictHostKeyChecking", "no");
+                        session.setConfig(prop);
 
-                            Log.d(TAG, "SSH Connecting");
-                            session.connect();
-                            Log.d(TAG, "SSH connected");
+                        Log.d(TAG, "SSH Connecting");
+                        session.connect();
+                        Log.d(TAG, "SSH connected");
 
 
-                            Channel channelssh = session.openChannel("exec");
-                            ((ChannelExec) channelssh).setCommand("python /home/pi/securiPi/pi_surveillance.py --conf /home/pi/securiPi/conf.json ");
-                            channelssh.setInputStream(null);
-                            ((ChannelExec) channelssh).setErrStream(System.err);
-                            InputStream in = channelssh.getInputStream();
+                        Channel channelssh = session.openChannel("exec");
+                        ((ChannelExec) channelssh).setCommand("python /home/pi/securiPi/pi_surveillance.py --conf /home/pi/securiPi/conf.json ");
+                        channelssh.setInputStream(null);
+                        ((ChannelExec) channelssh).setErrStream(System.err);
+                        InputStream in = channelssh.getInputStream();
 
-                            channelssh.connect();
+                        channelssh.connect();
                            /* byte[] tmp = new byte[1024];
                             while (true)
                             {
@@ -302,18 +309,18 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                                 {
                                 }
                             }*/
-                            channelssh.disconnect();
-                            session.disconnect();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        channelssh.disconnect();
+                        session.disconnect();
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                });
-                t.start();
-            }
+                }
+            });
+            t.start();
+        }
 
         //connection to disarm the camera's motion detection
-        if(view == stopCamera){
+        if (view == stopCamera) {
             Thread t = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -375,17 +382,26 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
     //Make Sure user wants to call emergency services
     public void emergencyServicesCheck() {
+        String number = "999";
+        Uri call = Uri.parse("tel:" + number);
+        final Intent surf = new Intent(Intent.ACTION_CALL, call);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("Emergency Dial")
                 .setMessage("Are you sure you want to call Emergency Services?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String number = "999";
-                        Uri call = Uri.parse("tel:" + number);
-                        final Intent surf = new Intent(Intent.ACTION_CALL, call);
                         startActivity(surf);
                     }
 
