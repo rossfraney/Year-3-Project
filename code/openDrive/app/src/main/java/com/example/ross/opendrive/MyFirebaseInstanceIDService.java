@@ -21,6 +21,7 @@ import okhttp3.RequestBody;
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIDService";
 
+    //Called when the app deletes tokken or server side deleted
     @Override
     public void onTokenRefresh() {
         //get updated token
@@ -29,6 +30,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         registerToken(token);
     }
 
+    //Sending POST to php script to add user to SQL DB
     private void registerToken(String token) {
         Log.d(TAG, "register is calling");
         OkHttpClient client = new OkHttpClient();

@@ -16,8 +16,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -60,13 +58,14 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     private Button textNeighbour;
     private Button startCamera;
     private Button stopCamera;
-    //private WebView webView;
     private static final String TAG = "BaseDriveActivity";
     protected static final int REQUEST_CODE_RESOLUTION = 1;
     private static final int REQUEST_CODE_DELETER = 2;
     private static final int REQUEST_CODE_OPENER = 3;
-    private static String myHost = "192.168.43.50";
-
+    //private static String myHost = "192.168.43.50";
+    private static String myHost = "192.168.1.6";
+    private String lastKey = "placeholderid";
+    private String token;
 
     public String neighboursNum;
     /**
@@ -107,29 +106,18 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        /*webView = new WebView(this);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setUserAgentString("Android WebView");
-        webView.setWebChromeClient(new WebChromeClient());
-        webView.getSettings().setBuiltInZoomControls(false);
-        webView.getSettings().setSupportZoom(false);
-        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        webView.getSettings().setAllowFileAccess(true);
-        webView.getSettings().setDomStorageEnabled(true);
-
-        webView.setVisibility(View.INVISIBLE);*/
-
-        //FirebaseMessaging.getInstance().subscribeToTopic("test");
-        FirebaseInstanceId.getInstance().getToken();
+        //Generating Token for registering user with firebase for notifications
+        token = FirebaseInstanceId.getInstance().getToken();
+        //showMessage(FirebaseInstanceId.getInstance().getToken());
 
     }
 
-    /**
-     * Called when activity gets visible. A connection to Drive services need to
-     * be initiated as soon as the activity is visible. Registers
-     * {@code ConnectionCallbacks} and {@code OnConnectionFailedListener} on the
-     * activities itself.
+     /*
+     Called when activity gets visible. Registers
+     code ConnectionCallbacks and OnConnectionFailedListener on the
+     activity itself.
      */
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode,
                                     Intent data) {
@@ -149,6 +137,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+
+    //If activity opened and user is not logged in, build a connection
     @Override
     protected void onResume() {
         super.onResume();
@@ -156,7 +146,6 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addApi(Drive.API)
                     .addScope(Drive.SCOPE_FILE)
-                    //.addScope(Drive.SCOPE_APPFOLDER) // required for App Folder sample
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .build();
@@ -179,8 +168,44 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         tv1.setText("Welcome Back!");
         showMessage("Registered for notifications");
 
-    }
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    JSch jsch = new JSch();
+                    Session session = jsch.getSession("pi", Main2Activity.getHost(), 22);
+                    session.setPassword("raspberry");
 
+                    // Avoid asking for key confirmation
+                    Properties prop = new Properties();
+                    prop.put("StrictHostKeyChecking", "no");
+                    session.setConfig(prop);
+
+                    Log.d(TAG, "SSH Connecting");
+                    session.connect();
+                    Log.d(TAG, "SSH connected");
+
+
+                    Channel channelssh = session.openChannel("exec");
+                    ((ChannelExec) channelssh).setCommand("sed -i -e 's/"+lastKey+"/"+token+"/g' /home/pi/securiPi/notify.py");
+                    channelssh.setInputStream(null);
+                    ((ChannelExec) channelssh).setErrStream(System.err);
+                    //InputStream in = channelssh.getInputStream();
+
+                    channelssh.connect();
+
+                    //exec here
+
+                    channelssh.disconnect();
+                    session.disconnect();
+                    return;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                lastKey = token;
+            }
+        });t.start();
+    }
 
     @Override
     public void onConnectionSuspended(int cause) {
@@ -192,7 +217,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         Log.i(TAG, "GoogleApiClient connection failed: " + result.toString());
         if (!result.hasResolution()) {
             // show the localized error dialog.
-            GoogleApiAvailability.getInstance().getErrorDialog(this, result.getErrorCode(), 0).show();
+            GoogleApiAvailability.getInstance().getErrorDialog(this, result.getErrorCode(), 0)
+                    .show();
             return;
         }
         try {
@@ -202,36 +228,20 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    public void showMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-    }
-
-    public GoogleApiClient getGoogleApiClient() {
-        return mGoogleApiClient;
-    }
-
 
     @Override
     public void onClick(View view) {
             if(view == openButton) {
-                /*Toast.makeText(this, "Opening Drive...", Toast.LENGTH_SHORT).show();
-                IntentSender intentSender = Drive.DriveApi
-                        .newOpenFileActivityBuilder()
-                        .setMimeType(new String[]{"image/jpeg"})
-                        .build(getGoogleApiClient());
-                try {
-                    startIntentSenderForResult(intentSender, REQUEST_CODE_OPENER, null, 0, 0, 0);
-                } catch (IntentSender.SendIntentException e) {
-                    Log.w(TAG, "Unable to send intent", e);
-                }*/
-                openImageOptions();
+                openImageOptions(); //if user hits the open button
             }
 
+            //Changes neighbour's number variable and pre-creates the text message
             if(view == textNeighbour) {
                 neighboursNum = setNeighbour.getNum();
                 Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
                 sendIntent.setData(Uri.parse("smsto:" + neighboursNum));
-                sendIntent.putExtra("sms_body", "Security Alert: Hi, could you please check my home as there has been action recorded on my security camera. Thanks!");
+                sendIntent.putExtra("sms_body", "Security Alert: Hi, could you please check" +
+                        "my home as there has been action recorded on my security camera. Thanks!");
                 try {
                     startActivity(sendIntent);
                 } catch (android.content.ActivityNotFoundException ex) {
@@ -239,16 +249,19 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 }
             }
 
+            //if 999 button pressed, check if they are sure
             if(view == emergencyCall) {
-
-                if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                /*if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
+                        != PackageManager.PERMISSION_GRANTED) {
                     showMessage("You do not have permission");
                     return;
-                }
+                }*/
                 emergencyServicesCheck();
             }
 
+            //SSH Connection to arm the camera
             if(view == startCamera) {
+               showMessage("Camera Armed");
                 Thread t = new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -269,13 +282,12 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
                             Channel channelssh = session.openChannel("exec");
                             ((ChannelExec) channelssh).setCommand("python /home/pi/securiPi/pi_surveillance.py --conf /home/pi/securiPi/conf.json ");
-                           // ((ChannelExec) channelssh).setCommand("pkill -f python");
                             channelssh.setInputStream(null);
                             ((ChannelExec) channelssh).setErrStream(System.err);
                             InputStream in = channelssh.getInputStream();
 
                             channelssh.connect();
-                            byte[] tmp = new byte[1024];
+                           /* byte[] tmp = new byte[1024];
                             while (true)
                             {
                                 while (in.available() > 0)
@@ -297,8 +309,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                                 catch (Exception ee)
                                 {
                                 }
-                            }
-
+                            }*/
                             channelssh.disconnect();
                             session.disconnect();
                         } catch (Exception e) {
@@ -307,9 +318,9 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                     }
                 });
                 t.start();
-                //findViewById(R.id.webView).setVisibility(View.VISIBLE);
-                //open connection to website hosting stream
             }
+
+        //connection to disarm the camera's motion detection
         if(view == stopCamera){
             Thread t = new Thread(new Runnable() {
                 @Override
@@ -336,7 +347,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                         InputStream in = channelssh.getInputStream();
 
                         channelssh.connect();
-                        byte[] tmp = new byte[1024];
+                        /*byte[] tmp = new byte[1024];
                         while (true)
                         {
                             while (in.available() > 0)
@@ -358,8 +369,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                             catch (Exception ee)
                             {
                             }
-                        }
-
+                        }*/
                         channelssh.disconnect();
                         session.disconnect();
                     } catch (Exception e) {
@@ -371,8 +381,9 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+    //Make Sure user wants to call emergency services
     public void emergencyServicesCheck() {
-        String number = "0861921718";
+        String number = "999";
         Uri call = Uri.parse("tel:" + number);
         final Intent surf = new Intent(Intent.ACTION_CALL, call);
         new AlertDialog.Builder(this)
@@ -391,6 +402,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 .show();
     }
 
+    //Open images in browser or through the app itself
     public void openImageOptions() {
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -417,16 +429,14 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/drive"));
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.drive.google.com"));
                         startActivity(browserIntent);
-                        //findViewById(R.id.imageViewpic).setVisibility(View.INVISIBLE);
-                        //webView.setVisibility(View.VISIBLE);
-                        //webView.loadUrl("https://www.google.com/drive/");
                     }
                 })
                 .show();
     }
 
+    //option menu initiation
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -437,16 +447,17 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
-            case R.id.signOut:
+            case R.id.signOut: //sign out user after finishing current activity
                 finish();
                 signOut();
                 startActivity(new Intent(this, LoggedOut.class));
                 return true;
 
-            case R.id.deleteFiles:
+            case R.id.deleteFiles: //Open drive where select works as a delete button
                 showMessage("Opening Drive..");
                 IntentSender intentSender = Drive.DriveApi
                         .newOpenFileActivityBuilder()
@@ -459,11 +470,11 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 }
                 return true;
 
-            case R.id.setNeighbour:
+            case R.id.setNeighbour: //Change neighbour's number
                 startActivity(new Intent(this, setNeighbour.class));
                 return true;
 
-            case R.id.alarmSound:
+            case R.id.alarmSound: //Choose the sound for the pi to play when cam triggered
                 startActivity(new Intent(this, AlarmSound.class));
 
             default:
@@ -472,6 +483,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
+    //Opening the Drive in app
     private void open() {
         DriveFile driveFile = mSelectedFileDriveId.asDriveFile();
         driveFile.open(getGoogleApiClient(), DriveFile.MODE_READ_ONLY, null)
@@ -479,6 +491,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         mSelectedFileDriveId = null;
     }
 
+    //Call back to return a bitmap of the image selected and display it
     private ResultCallback<DriveApi.DriveContentsResult> driveContentsCallback =
             new ResultCallback<DriveApi.DriveContentsResult>() {
                 @Override
@@ -492,10 +505,10 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                     Bitmap bitmap = BitmapFactory.decodeStream(is);
                     ImageView imageView = (ImageView) findViewById(R.id.imageViewpic);
                     imageView.setImageBitmap(bitmap);
-                    showMessage("Working");
                 }
             };
 
+    //Deleting a file in app
     private void delete(){
         DriveFile driveFile = mSelectedFileDriveId.asDriveFile();
         driveFile.open(getGoogleApiClient(), DriveFile.MODE_READ_ONLY, null)
@@ -503,6 +516,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         mSelectedFileDriveId = null;
     }
 
+    //call back to clear the image view on the main page and delete
     private ResultCallback<DriveApi.DriveContentsResult> driveContentsCallback1 =
             new ResultCallback<DriveApi.DriveContentsResult>() {
                 @Override
@@ -532,6 +546,14 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
     public static String getHost(){
         return myHost;
+    }
+
+    public void showMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    public GoogleApiClient getGoogleApiClient() {
+        return mGoogleApiClient;
     }
 
 }

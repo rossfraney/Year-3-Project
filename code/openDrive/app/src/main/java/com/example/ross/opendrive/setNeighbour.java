@@ -13,6 +13,7 @@ public class setNeighbour extends Main2Activity {
     private Button btn;
     private static String str;
 
+    //Creates button with a listener to register above editText and set String str to result
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class setNeighbour extends Main2Activity {
         });
     }
 
+    //getter
     public static String getNum(){
         return str;
     }
