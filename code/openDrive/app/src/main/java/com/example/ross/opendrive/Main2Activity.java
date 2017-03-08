@@ -63,7 +63,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     private static final int REQUEST_CODE_DELETER = 2;
     private static final int REQUEST_CODE_OPENER = 3;
     //private static String myHost = "192.168.43.50";
-    private static String myHost = "192.168.1.6";
+    public static String myHost = "192.168.1.6";
     private String lastKey = "placeholderid";
     private String token;
 
@@ -440,10 +440,12 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.pisetup, menu);
         inflater.inflate(R.menu.deletefiles, menu); //your file name
-        inflater.inflate(R.menu.signout, menu);
         inflater.inflate(R.menu.setneighbour, menu);
         inflater.inflate(R.menu.alarmsound, menu);
+        inflater.inflate(R.menu.signout, menu);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -455,6 +457,10 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 finish();
                 signOut();
                 startActivity(new Intent(this, LoggedOut.class));
+                return true;
+
+            case R.id.setIp:
+                startActivity(new Intent(this, setSshId.class));
                 return true;
 
             case R.id.deleteFiles: //Open drive where select works as a delete button

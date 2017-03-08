@@ -42,7 +42,8 @@
         </service>
 
         <activity android:name=".setNeighbour" />
-        <activity android:name=".AlarmSound"></activity>
+        <activity android:name=".AlarmSound" />
+        <activity android:name=".setSshId"></activity>
     </application>
 
 </manifest>
