@@ -1,0 +1,117 @@
+1 - Raspberry Pi Set – up
+=========================
+
+Initialize the script and settings
+----------------------------------
+
+Before running the script the user should ensure all settings are as they desire by opening the “conf.json” file with a text editor. Here the user can choose to enable/disable a live camera feed of the webcam, SMS notifications, automatic authentication and sound functionality. All will be disabled by default. They can also adjust the resolution of the image frame, how often they receive notifications to the app, the fps, and technical configurations like the delta threshold, and how many consecutive frames must be detected before an image is uploaded. This is also where the user supplies their SMS credentials, i.e their phone number, email address, and account hash token. The user must register with “TextLocal” to avail of this service.
+
+The first time the script is run, the user is required to log in to their google account to gain authentication credentials, which will register an authentication key with google services. This key is then stored and check for each time the python program runs, in order to allow the Pi to access their google account. SSH is enabled on the Raspberry Pi, which is accessed through port 22 by default, and as such, requires that port 22 is open on the router from which the system operates. The default username for the Pi is Pi, while the password is Raspberry, though these can be changed by the user if necessary. It is these login details that are used to establish the SSH connection.
+
+Once this is complete, from now on, all that is required is to plug in the Raspberry Pi to a power source, ensure they are connected to the internet, ensure that a camera and speaker is attached (any cheap webcam and portable speaker will do), and download the SecuriPi application.
+
+2 - Android Application
+=======================
+
+Installation Guides for the application can be seen in the accompanying technical manual.
+
+### 2.1 - Set-up Step 1: 
+
+The first thing that should be done upon download is logging in to one’s Google account, or creating a new account in order to view files uploaded by the Raspberry Pi system. This will be used in future to log in to the application (which will be handled automatically if an account is already logged in on the android device), and to view the google drive folder.
+
+<img src="media/image1.jpeg" width="218" height="347" />
+
+Successful log in is signaled by the changing of the “welcome” message to “welcome back”.
+
+<img src="media/image2.JPG" width="373" height="131" />
+
+### 2.2 - Set-up Step 2:
+
+The next thing to do is ensure that the application can connect to the Raspberry Pi. To do this, open the options menu in the top right corner of the application, and select “Connect Via SSH”.
+
+Now, enter the IP Address that was taken note of earlier in the Raspberry Pi set up guide, and click
+
+<img src="media/image3.jpeg" width="231" height="186" />
+
+Note: Please ensure the Raspberry Pi is powered on and connected to the internet before attempting this step.
+
+### 2.3 - Setting up a neighbor “Quick-Text” number:
+
+<img src="media/image4.jpeg" width="227" height="182" /><img src="media/image5.jpeg" width="216" height="186" />The
+next step is to set up a number for your neighbor, to avail of the quick text feature. To do this, open the options menu again, and choose the “Set neighbor number” option. From here, simply enter the number of the neighbor that should be notified when the motion detection has been triggered, and hit save. Now, when the “Quick Text” button is tapped, a pre-written message will be set up, with the recipient set to that particular number.
+
+Now that the application is configured to interact with the raspberry pi, the core functionality of the app is unlocked.
+
+### 2.4 - Arming and Disarming the camera:
+
+<img src="media/image6.JPG" width="407" height="145" />To start the
+camera’s motion detection capabilities, simply hit the “start camera”
+button in the bottom left of the application’s main screen. This will
+result in a message which will inform the user that the camera has been
+armed.
+
+To stop the camera’s motion detection, or to shut down the alarm in the
+event of detection that has already been deemed to be of no interest or
+a false flag, simply tap the “stop camera” button. The camera can be
+restarted at any time.
+
+### 
+
+### 2.5 - Changing the Alarm sound:
+
+To change the type of alarm that will be sounded when motion is detected on the SecuriPi system, open the menu and choose the “Change Alarm Sound” option. This will make accessible a dropdown menu with four options to choose from. 
+
+<img src="media/image7.jpeg" width="204" height="191" />
+
+The default alarm is the general, all-purpose standard alarm. If the monitored area is outside, the barking dog sound may be more suitable. In the case of monitoring a child, the lullaby option may be selected. Finally, if the camera is being used to monitor an area for security/anti-theft reasons, a police siren can be chosen. 
+
+### 2.6 - Enabling Notifications:
+
+In order to ensure that the device will receive notifications when motion has been detected, make sure the Notification button is set to on as can be seen here: 
+<img src="media/image8.JPG" width="217" height="82" />
+
+To turn notifications off but continue capturing images when motion is detected, set the button to off:
+
+<img src="media/image9.JPG" width="220" height="82" />
+
+### 
+
+### 2.6.1 - Reacting to notifications:
+
+When a notification is received, it will appear in the dropdown tray at the top of the mobile device’s screen. Simply tap this notification to be brought to the SecuriPi App, or navigate back to it if it is already opened.
+
+### 2.7 - Viewing Captured Files:
+
+As well as a notification, the device will also receive an SMS message with a link to the image that triggered the motion detection. To view the image, one option is to simply click the link provided in the SMS from SecuriPi.
+
+Alternatively, go to the application and tap the “Open Images”.
+
+<img src="media/image10.jpeg" width="240" height="274" />
+From here, an option to open in browser or open drive will appear. The drive option will connect to Google drive from within the SecuriPi app and allow for images to be expanded in the main screen of the app, to be inspected more thoroughly
+
+<img src="media/image11.jpeg" width="197" height="295" /><img src="media/image12.JPG" width="260" height="199" />
+
+The browser option will open Google Drive in the default mobile internet browser, however if the google drive app is installed on the device, this will be opened, to get a thumbnail view of all images uploaded to drive.
+
+### 2.7.1 - Deleting Files:
+
+Files can be deleted through either of the two pathways mentioned above to view the files. Through the menu -> delete images option, Images can be selected just as they are for being opened in-app, and deleted. If the image being displayed on the main screen is deleted, it will be cleared. 
+Alternatively, images can be deleted from the browser/app link mentioned above. 
+
+
+### Call 999:
+
+This button is only to be used in emergencies. If the system has captured evidence of a potential intrusion or criminal act, this button acts as a quick and easy method to call emergency services and report the incident. Photographic evidence has been gathered automatically by the SecuriPi system which may prove useful in identifying the perpetrator or resolving the legal incident.
+
+<img src="media/image13.jpeg" width="195" height="221" />
+
+Note from Developers
+====================
+
+*The SecuriPi development team would like to thank you for choosing our
+system, and are confident that the time spent with SecuriPi home
+surveillance system will be an enjoyable one.*
+
+*Regards.*
+
+*-Team SecuriPi*
