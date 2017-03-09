@@ -67,11 +67,17 @@ The center of the screen is a simple android logo, until the user opens a file f
 The team wanted to ensure that the 7 principles of Universal design were adhered to, without getting carried away with adding exotic color schemes and flashy animations. These principles are:
 
 ***1) Equitable use:*** The application is marketable to a wide range of users with varying abilities. This has been achieved through what is essentially a one-page, control panel layout for simplicity, as well as visual feedback on any change that is made or option that is selected, in the form of pop-up messages in the bottom of the screen.
+
 ***2) Flexibility in use:***  This application accommodates a wide range of preferences, such as allowing the user to choose how to use the surveillance functionality. For example, by changing the alarm sound to the "Lullaby" option, the system would work as a monitor for a sleeping baby, while selecting the "Siren" is a perfect tool to use for security purposes in order to prevent burglary. "The Dog bark" option on the other hand may be useful to ward off intruders from outside the home, where the camera is monitoring a garden or outdoor entrance.
+
 ***3) Intuitive use:***  Although the technology behind the system is complex, the language used to translate this functionality to the end user has been purposefully made very simple. Buttons and notifications are labelled with the non-tech savvy person in mind, in order to ensure user friendliness. Furthermore, the user is never more than one click away from the main control panel / home screen of the application, meaning the application does not require high concentration levels to navigate. 
+
 ***4) Perceptible information:***  While the application will display feedback to the user, no unnecessary information is displayed, to ensure the user does not become overwhelmed. Text is clear and concise, and the app avoids presenting long strings of text which the user may find off-putting. Color has been used in places such as the toggle button, in order to give the user intuitive feedback when notifications are toggle on(green) or off(red).
+
 ***5) Error handling:***  It is important that the end user knows when something has gone wrong, and is notified immediately. As such, if there happens to be loss of connection or a problem with Google’s servers for example, the user will be notified appropriately. This functionality is carried out using the google drive SDK.
+
 ***6) Low physical effort:***  As mentioned previously, the application is navigated through simple one click operations, with the user never being taken far away from their main control panel. This means navigating through the app never feels like a chore or something that is an inconvenience. 
+
 ***7) Spatial locality of functionality:***  Finally, the team wanted to ensure that the locality of each function in the application was intuitive and appropriately laid out. The Call 999 and Text neighbor options have been kept aligned on the left of the screen, while the remote toggling on and off of the motion detection software has been kept together on the right. Notifications can be toggled on or off through the toggle button in the top right of the main screen, meaning the user will not accidentally change this preference while accessing the rest of the app's functionality.
 
 
