@@ -206,13 +206,14 @@ Once downloaded from Git, the application may be opened using android studio.
 An SHA-1 Authentication key must be acquired from Google Developer Console in order to run this application from an emulator and gain access to google services. This requires the user to go to the development console and create a new project. Under the Credentials section, choose 0auth client ID:
 
 
-<img src="media/image3.png" width="264" height="166" />
+![](https://gyazo.com/d606741276fa7409babf4b0377f1f62c.png)
 
 Choose the Android application type, enter the package name from the AndroidManifest.xml file in the Android studio project, and enter the SHA1 Key.
 This SHA1 key can be found by entering the following command:
 
 
-<img src="media/image4.png" width="624" height="167" />
+![](https://gyazo.com/c4654b1ceca56bc1263d43fcb53e7dad.png)
+
 Where the password is set to android by default. Now click create and the android studio project should be ready to run the application. Please ensure the Studio and Emulator versions are up to date, and that the Google Drive, Token Service, and Firebase APIs are enabled in the console’s API manager.
 A Server will also be needed (WAMP if localhost), with the PHP script and a database written using the SQL code provided.
 
