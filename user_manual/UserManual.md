@@ -19,11 +19,11 @@ Installation Guides for the application can be seen in the accompanying technica
 
 The first thing that should be done upon download is logging in to one’s Google account, or creating a new account in order to view files uploaded by the Raspberry Pi system. This will be used in future to log in to the application (which will be handled automatically if an account is already logged in on the android device), and to view the google drive folder.
 
-<img src="media/image1.jpeg" width="218" height="347" />
+![](https://gyazo.com/716babda77f0a2fe66ec3a66e3d49237.png)
 
 Successful log in is signaled by the changing of the “welcome” message to “welcome back”.
 
-<img src="media/image2.JPG" width="373" height="131" />
+![](https://gyazo.com/f431c7c3213659670b4c3fdc4ed2b03d.png)
 
 ### 2.2 - Set-up Step 2:
 
@@ -31,24 +31,29 @@ The next thing to do is ensure that the application can connect to the Raspberry
 
 Now, enter the IP Address that was taken note of earlier in the Raspberry Pi set up guide, and click
 
-<img src="media/image3.jpeg" width="231" height="186" />
+![](https://gyazo.com/3d33cfb0ee91e7df7814bdcad4b50508.png)
 
 Note: Please ensure the Raspberry Pi is powered on and connected to the internet before attempting this step.
 
 ### 2.3 - Setting up a neighbor “Quick-Text” number:
 
-<img src="media/image4.jpeg" width="227" height="182" /><img src="media/image5.jpeg" width="216" height="186" />The
-next step is to set up a number for your neighbor, to avail of the quick text feature. To do this, open the options menu again, and choose the “Set neighbor number” option. From here, simply enter the number of the neighbor that should be notified when the motion detection has been triggered, and hit save. Now, when the “Quick Text” button is tapped, a pre-written message will be set up, with the recipient set to that particular number.
+![](https://gyazo.com/c1d20c2b2a5feeaa0eeffae69f3ffd47.png)
+
+The next step is to set up a number for your neighbor, to avail of the quick text feature. To do this, open the options menu again, and choose the “Set neighbor number” option. From here, simply enter the number of the neighbor that should be notified when the motion detection has been triggered, and hit save. Now, when the “Quick Text” button is tapped, a pre-written message will be set up, with the recipient set to that particular number.
+
+![](https://gyazo.com/ac4853de6622c94d29cab1e416fa19be.png)
 
 Now that the application is configured to interact with the raspberry pi, the core functionality of the app is unlocked.
 
 ### 2.4 - Arming and Disarming the camera:
 
-<img src="media/image6.JPG" width="407" height="145" />To start the
+To start the
 camera’s motion detection capabilities, simply hit the “start camera”
 button in the bottom left of the application’s main screen. This will
 result in a message which will inform the user that the camera has been
 armed.
+
+![](https://gyazo.com/08069b18767c88993a381f2926f8d383.png)
 
 To stop the camera’s motion detection, or to shut down the alarm in the
 event of detection that has already been deemed to be of no interest or
@@ -61,18 +66,18 @@ restarted at any time.
 
 To change the type of alarm that will be sounded when motion is detected on the SecuriPi system, open the menu and choose the “Change Alarm Sound” option. This will make accessible a dropdown menu with four options to choose from. 
 
-<img src="media/image7.jpeg" width="204" height="191" />
+![](https://gyazo.com/1109c7f86a851257b27550325fee061f.png)
 
 The default alarm is the general, all-purpose standard alarm. If the monitored area is outside, the barking dog sound may be more suitable. In the case of monitoring a child, the lullaby option may be selected. Finally, if the camera is being used to monitor an area for security/anti-theft reasons, a police siren can be chosen. 
 
 ### 2.6 - Enabling Notifications:
 
 In order to ensure that the device will receive notifications when motion has been detected, make sure the Notification button is set to on as can be seen here: 
-<img src="media/image8.JPG" width="217" height="82" />
+![](https://gyazo.com/185153dcdcbc24f725bbbe9ea843aeee.png)
 
 To turn notifications off but continue capturing images when motion is detected, set the button to off:
 
-<img src="media/image9.JPG" width="220" height="82" />
+![](https://gyazo.com/599a42ed95122cdda7c2972ba650bca6.png)
 
 ### 
 
@@ -86,10 +91,11 @@ As well as a notification, the device will also receive an SMS message with a li
 
 Alternatively, go to the application and tap the “Open Images”.
 
-<img src="media/image10.jpeg" width="240" height="274" />
+![](https://gyazo.com/8ef123da68a412da6e2a3ee6659c0146.png)
+
 From here, an option to open in browser or open drive will appear. The drive option will connect to Google drive from within the SecuriPi app and allow for images to be expanded in the main screen of the app, to be inspected more thoroughly
 
-<img src="media/image11.jpeg" width="197" height="295" /><img src="media/image12.JPG" width="260" height="199" />
+![](https://gyazo.com/d4b80f4b54eaefb04cb234942932b474.png)
 
 The browser option will open Google Drive in the default mobile internet browser, however if the google drive app is installed on the device, this will be opened, to get a thumbnail view of all images uploaded to drive.
 
@@ -103,7 +109,7 @@ Alternatively, images can be deleted from the browser/app link mentioned above.
 
 This button is only to be used in emergencies. If the system has captured evidence of a potential intrusion or criminal act, this button acts as a quick and easy method to call emergency services and report the incident. Photographic evidence has been gathered automatically by the SecuriPi system which may prove useful in identifying the perpetrator or resolving the legal incident.
 
-<img src="media/image13.jpeg" width="195" height="221" />
+![](https://gyazo.com/fc6c91582c6aa1052c37432eec5f4f6b.png)
 
 Note from Developers
 ====================
