@@ -111,7 +111,7 @@ Google Drive is a cloud-based file storage system, accessible remotely from any 
 #### Firebase Messaging
 Firebase is a web application designed by google, facilitating push notifications in the SecuriPi system. A POST request is generated in python, and sent to google firebase's servers with a unique token. This token was generated in the android application's onCreate method. The application automatically uses an SSH connection to access the terminal of the Raspberry Pi, and assign the token to a variable in the python code. The POST request contains the message title and body, and is immediately delivered to the corresponding user's mobile device. Firebase can also be used to manually create messages to send out to specific users, users subscribed to a specific topic, or to all app users, which will no doubt be useful in notifying users of upcoming patches, bugs, or general news.
 
-### #WAMP Server
+#### WAMP Server
 WampServer refers to a web server software stack consisting of the Apache web server, OpenSSL, MySQL database, and PHPMyAdmin. This tool plays an important role in registering users for notifications with firebase messaging. Once a user connects to the application, the unique token mentioned above is generated and sent in a POST request to a PHP script located on the Apache web server, which stores the token in a mySQL database, and allows for the storage of unique user keys. These are the keys that are used to send user-specific notifications to the application.
 
 #### VLC Player
