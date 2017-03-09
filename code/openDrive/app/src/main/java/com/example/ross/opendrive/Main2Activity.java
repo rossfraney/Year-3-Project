@@ -74,23 +74,32 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        //welcome message
         tv1 = (TextView) findViewById(R.id.textView1);
         tv1.setText("Welcome");
 
+        //button opens the drive
         openButton = (Button) findViewById(R.id.openButton);
         openButton.setOnClickListener(this);
 
+
+        //calls emergency services button
         emergencyCall = (Button) findViewById(R.id.emergencyCall);
         emergencyCall.setOnClickListener(this);
 
+        //button brings user to text message pre written
         textNeighbour = (Button) findViewById(R.id.textNeighbour);
         textNeighbour.setOnClickListener(this);
 
+        //camera armed on raspberry Pi (SSH)
         startCamera = (Button) findViewById(R.id.startCamera);
         startCamera.setOnClickListener(this);
 
+        //stops camera
         stopCamera = (Button) findViewById(R.id.stopCamera);
         stopCamera.setOnClickListener(this);
+
+        //User will not receive notifications if toggle button is off.
         ToggleButton toggleButton = (ToggleButton) findViewById((R.id.toggleButton));
         toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -107,8 +116,6 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
         //Generating Token for registering user with firebase for notifications
         token = FirebaseInstanceId.getInstance().getToken();
-        //showMessage(FirebaseInstanceId.getInstance().getToken());
-
     }
 
      /*
@@ -152,6 +159,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         mGoogleApiClient.connect();
     }
 
+    //If App is closed but not shut down
     @Override
     protected void onPause() {
         if (mGoogleApiClient != null) {
@@ -160,12 +168,15 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         super.onPause();
     }
 
+    //google is connected to google services
     @Override
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
         tv1.setText("Welcome Back!");
         showMessage("Registered for notifications");
 
+        //Build an SSH Connection and update notification in Pi token in case it has changed
+        //In separate thread as it involves network activity
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -183,17 +194,14 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                     session.connect();
                     Log.d(TAG, "SSH connected");
 
-
                     Channel channelssh = session.openChannel("exec");
-                    ((ChannelExec) channelssh).setCommand("sed -i -e 's/" + lastKey + "/" + token + "/g' /home/pi/securiPi/notify.py");
+                    ((ChannelExec) channelssh).setCommand("sed -i -e 's/" + lastKey + "/" +
+                            token + "/g' /home/pi/securiPi/notify.py");
                     channelssh.setInputStream(null);
                     ((ChannelExec) channelssh).setErrStream(System.err);
-                    //InputStream in = channelssh.getInputStream();
 
                     channelssh.connect();
-
                     //exec here
-
                     channelssh.disconnect();
                     session.disconnect();
                     return;
@@ -228,6 +236,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
+    //Button Click Handlers
     @Override
     public void onClick(View view) {
         if (view == openButton) {
@@ -250,11 +259,6 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
         //if 999 button pressed, check if they are sure
         if (view == emergencyCall) {
-                /*if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE)
-                        != PackageManager.PERMISSION_GRANTED) {
-                    showMessage("You do not have permission");
-                    return;
-                }*/
             emergencyServicesCheck();
         }
 
@@ -278,37 +282,13 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                         session.connect();
                         Log.d(TAG, "SSH connected");
 
-
                         Channel channelssh = session.openChannel("exec");
-                        ((ChannelExec) channelssh).setCommand("python /home/pi/securiPi/pi_surveillance.py --conf /home/pi/securiPi/conf.json ");
+                        ((ChannelExec) channelssh).setCommand("python /home/pi/securiPi/" +
+                                "pi_surveillance.py --conf /home/pi/securiPi/conf.json ");
                         channelssh.setInputStream(null);
                         ((ChannelExec) channelssh).setErrStream(System.err);
-                        InputStream in = channelssh.getInputStream();
 
                         channelssh.connect();
-                           /* byte[] tmp = new byte[1024];
-                            while (true)
-                            {
-                                while (in.available() > 0)
-                                {
-                                    int i = in.read(tmp, 0, 1024);
-                                    if (i < 0)
-                                        break;
-                                    System.out.print(new String(tmp, 0, i));
-                                }
-                                if (channelssh.isClosed())
-                                {
-                                    System.out.println("exit-status: " + channelssh.getExitStatus());
-                                    break;
-                                }
-                                try
-                                {
-                                    Thread.sleep(1000);
-                                }
-                                catch (Exception ee)
-                                {
-                                }
-                            }*/
                         channelssh.disconnect();
                         session.disconnect();
                     } catch (Exception e) {
@@ -338,37 +318,12 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                         session.connect();
                         Log.d(TAG, "SSH connected");
 
-
                         Channel channelssh = session.openChannel("exec");
                         ((ChannelExec) channelssh).setCommand("pkill -f python");
                         channelssh.setInputStream(null);
                         ((ChannelExec) channelssh).setErrStream(System.err);
-                        InputStream in = channelssh.getInputStream();
 
                         channelssh.connect();
-                        /*byte[] tmp = new byte[1024];
-                        while (true)
-                        {
-                            while (in.available() > 0)
-                            {
-                                int i = in.read(tmp, 0, 1024);
-                                if (i < 0)
-                                    break;
-                                System.out.print(new String(tmp, 0, i));
-                            }
-                            if (channelssh.isClosed())
-                            {
-                                System.out.println("exit-status: " + channelssh.getExitStatus());
-                                break;
-                            }
-                            try
-                            {
-                                Thread.sleep(1000);
-                            }
-                            catch (Exception ee)
-                            {
-                            }
-                        }*/
                         channelssh.disconnect();
                         session.disconnect();
                     } catch (Exception e) {
@@ -385,14 +340,9 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         String number = "999";
         Uri call = Uri.parse("tel:" + number);
         final Intent surf = new Intent(Intent.ACTION_CALL, call);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+        if (ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            showMessage("Please enable permissions in your phone's settings");
             return;
         }
         new AlertDialog.Builder(this)
@@ -426,7 +376,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                                 .setMimeType(new String[]{"image/jpeg"})
                                 .build(getGoogleApiClient());
                         try {
-                            startIntentSenderForResult(intentSender, REQUEST_CODE_OPENER, null, 0, 0, 0);
+                            startIntentSenderForResult(intentSender, REQUEST_CODE_OPENER,
+                                    null, 0, 0, 0);
                         } catch (IntentSender.SendIntentException e) {
                             Log.w(TAG, "Unable to send intent", e);
                         }
@@ -437,7 +388,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.drive.google.com"));
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse("http://www.drive.google.com"));
                         startActivity(browserIntent);
                     }
                 })
@@ -549,7 +501,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
     private void signOut() {
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.clearDefaultAccountAndReconnect().setResultCallback(new ResultCallback<Status>() {
+            mGoogleApiClient.clearDefaultAccountAndReconnect()
+                    .setResultCallback(new ResultCallback<Status>() {
                 @Override
                 public void onResult(Status status) {
                     mGoogleApiClient.disconnect();

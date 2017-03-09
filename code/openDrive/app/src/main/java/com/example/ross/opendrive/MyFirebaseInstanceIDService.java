@@ -21,7 +21,7 @@ import okhttp3.RequestBody;
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIDService";
 
-    //Called when the app deletes tokken or server side deleted
+    //Called when the app deletes token or server side deleted
     @Override
     public void onTokenRefresh() {
         //get updated token
@@ -39,7 +39,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
                 .build();
 
         Request request = new Request.Builder()
-                .url("http://192.168.100.243/fcm/myregister.php")
+                .url("http://192.168.100.243/fcm/myregister.php") // WAMP LOCALHOST Server
                 .post(body)
                 .build();
 

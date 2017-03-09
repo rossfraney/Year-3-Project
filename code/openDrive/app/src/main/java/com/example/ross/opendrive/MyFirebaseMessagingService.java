@@ -13,13 +13,6 @@ import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.Session;
-
-import java.io.InputStream;
-import java.util.Properties;
 
 /**
  * Created by Ross on 21-Feb-17.
@@ -33,39 +26,7 @@ public class  MyFirebaseMessagingService extends FirebaseMessagingService{
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         if(notis) {
-            //id = remoteMessage.getData().get("message");
-            //Uri notificationSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION); //could change to alarm?
             sendNotification(remoteMessage.getData().get("message"));
-            /*try {
-                JSch jsch = new JSch();
-                Session session = jsch.getSession("pi", Main2Activity.getHost(), 22);
-                session.setPassword("raspberry");
-
-                // Avoid asking for key confirmation
-                Properties prop = new Properties();
-                prop.put("StrictHostKeyChecking", "no");
-                session.setConfig(prop);
-
-                Log.d(TAG, "SSH Connecting");
-                session.connect();
-                Log.d(TAG, "SSH connected");
-
-
-                Channel channelssh = session.openChannel("exec");
-                ((ChannelExec) channelssh).setCommand("omxplayer -o local /home/pi/securiPi/soundFiles/Dog.mp3");
-                channelssh.setInputStream(null);
-                ((ChannelExec) channelssh).setErrStream(System.err);
-                //InputStream in = channelssh.getInputStream();
-
-                channelssh.connect();
-
-                //exec here
-
-                channelssh.disconnect();
-                session.disconnect();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
         }
         else
             Log.d(TAG, "Notifications toggled off");

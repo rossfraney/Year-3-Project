@@ -48,9 +48,6 @@ public class setSshId extends Main2Activity {
     }
 
     //getter
-    public static String getIp(){
-        return str;
-    }
     public void tester(){
         Thread t = new Thread(new Runnable() {
             @Override
@@ -67,12 +64,9 @@ public class setSshId extends Main2Activity {
                     session.connect();
                     Success = "Connection Successfully Saved";
 
-
                     Channel channelssh = session.openChannel("exec");
-                    //((ChannelExec) channelssh).setCommand("python /home/pi/securiPi/pi_surveillance.py --conf /home/pi/securiPi/conf.json ");
                     channelssh.setInputStream(null);
                     ((ChannelExec) channelssh).setErrStream(System.err);
-                    InputStream in = channelssh.getInputStream();
 
                     channelssh.connect();
                     channelssh.disconnect();

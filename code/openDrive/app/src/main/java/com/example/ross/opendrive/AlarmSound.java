@@ -45,28 +45,39 @@ public class AlarmSound extends AppCompatActivity implements View.OnClickListene
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 final int choice = parent.getSelectedItemPosition();
+
                 if (choice == 0) {
-                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/soundFiles/FireAlarm.mp3#g' /home/pi/securiPi/pi_surveillance.py";
-                    // fill here with the stringname
-                    Toast.makeText(getBaseContext(), "Alarm: Standard Alarm", Toast.LENGTH_LONG).show();
+                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/" +
+                            "soundFiles/FireAlarm.mp3#g' /home/pi/securiPi/pi_surveillance.py";
+
+                    Toast.makeText(getBaseContext(), "Alarm: Standard Alarm",
+                            Toast.LENGTH_LONG).show();
                 }
+
                 if (choice == 1) {
-                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/soundFiles/Dog.mp3#g' /home/pi/securiPi/pi_surveillance.py";
-                    Toast.makeText(getBaseContext(), "Alarm: Dog Barking", Toast.LENGTH_LONG).show();
+                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/" +
+                            "soundFiles/Dog.mp3#g' /home/pi/securiPi/pi_surveillance.py";
+
+                    Toast.makeText(getBaseContext(), "Alarm: Dog Barking",
+                            Toast.LENGTH_LONG).show();
                 }
+
                 if (choice == 2) {
-                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/soundFiles/Lullaby.mp3#g' /home/pi/securiPi/pi_surveillance.py";
-                    Toast.makeText(getBaseContext(), "Alarm: Lullaby", Toast.LENGTH_LONG).show();
+                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/" +
+                            "soundFiles/Lullaby.mp3#g' /home/pi/securiPi/pi_surveillance.py";
+
+                    Toast.makeText(getBaseContext(), "Alarm: Lullaby",
+                            Toast.LENGTH_LONG).show();
                 }
+
                 if (choice == 3) {
                     alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/soundFiles/Siren.mp3#g' /home/pi/securiPi/pi_surveillance.py";
                     Toast.makeText(getBaseContext(), "Alarm: Police Siren", Toast.LENGTH_LONG).show();
                 } else {
                     return;
                 }
-                /*TODO Need to add a sed for each of the other possible mp3 files when changing, or find some way to reset it back to alarmSound once I am finished
-                  TODO Wait till goose has finished downloading and gives me the whole classpath*/
             }
 
             @Override
@@ -91,12 +102,10 @@ public class AlarmSound extends AppCompatActivity implements View.OnClickListene
             session.connect();
             Log.d(TAG, "SSH connected");
 
-
             Channel channelssh = session.openChannel("exec");
             ((ChannelExec) channelssh).setCommand(alarmSound);
             channelssh.setInputStream(null);
             ((ChannelExec) channelssh).setErrStream(System.err);
-            InputStream in = channelssh.getInputStream();
 
             channelssh.connect();
 
