@@ -134,7 +134,7 @@ The Component Model outlines how the system’s various components break down in
 3.2 - Data Flow Diagram 
 ------------------------
 
-![](https://gyazo.com/09d532c0257bbda7aec28eab6855db7f.jpg)
+![](https://gyazo.com/09d532c0257bbda7aec28eab6855db7f.jpeg)
 
 The data flow Diagram documents the various pieces of data sent between the components of the system. Above is a complete overview of the system’s various components and the data they must send/receive for the system to function.
 
