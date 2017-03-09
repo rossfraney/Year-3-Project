@@ -102,22 +102,22 @@ The open button in app can also be used to view this image. If the user opens dr
 
 2.3 - System Components
 -----------------------
-####Google Developer's Console
+#### Google Developer's Console
 The Developer's Console was used in the generating of SHA-1 and AUTHO2 Keys for the application, which along with the corresponding Json file inserted into the android studio project, allows for authentication and security to be handled. Although not present in the actual running of the system, it is the backbone on which the system operates, and is relied on to securely transfer the sensitive data that this, and indeed any security system deals with. 
 
-####Google Drive
+#### Google Drive
 Google Drive is a cloud-based file storage system, accessible remotely from any computer around the world. This remote capability makes Google Drive an ideal platform on which to present users of SecuriPi their files in a cost effective and convenient manner. As such, in this system, the Drive acts as a storage bucket for Jpeg files generated on the Raspberry Pi once movement has been detected on an attached web camera. Google drive plays an integral part in the SecuriPi system, as it is not only the medium through which users can view images taken by their camera remotely, but also acts as an authentication mechanism for the application itself. The user simply signs in with their preexisting google account (or indeed create one), and can begin using the app.
 
-####Firebase Messaging
+#### Firebase Messaging
 Firebase is a web application designed by google, facilitating push notifications in the SecuriPi system. A POST request is generated in python, and sent to google firebase's servers with a unique token. This token was generated in the android application's onCreate method. The application automatically uses an SSH connection to access the terminal of the Raspberry Pi, and assign the token to a variable in the python code. The POST request contains the message title and body, and is immediately delivered to the corresponding user's mobile device. Firebase can also be used to manually create messages to send out to specific users, users subscribed to a specific topic, or to all app users, which will no doubt be useful in notifying users of upcoming patches, bugs, or general news.
 
-####WAMP Server
+### #WAMP Server
 WampServer refers to a web server software stack consisting of the Apache web server, OpenSSL, MySQL database, and PHPMyAdmin. This tool plays an important role in registering users for notifications with firebase messaging. Once a user connects to the application, the unique token mentioned above is generated and sent in a POST request to a PHP script located on the Apache web server, which stores the token in a mySQL database, and allows for the storage of unique user keys. These are the keys that are used to send user-specific notifications to the application.
 
-####VLC Player
+#### VLC Player
 The sound output functionality on the pi relies on VLC player. The user can easily disable this functionality in the conf.json file if they so wish.
 
-####TextLocal
+#### TextLocal
 TextLocal is a 3rd party SMS service that allows us to send SMS notifications to the user’s phone directly from the python code on the pi. The user must create an account with TextLocal which is free to do, they receive 10 free texts and from then on must purchase credit much like with a normal phone provider. To initialize this the user must simply enter their phone number, email address, and account-specific hash, into our conf.json file to set up their details. The user can disable this service in the conf.json file also if they do not wish to avail of it.
 
 
