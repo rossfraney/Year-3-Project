@@ -125,7 +125,7 @@ TextLocal is a 3rd party SMS service that allows us to send SMS notifications to
 =====================
 3.1 - Component Model
 ----------------------------------------------------------------------------
-<img src="media/image1.png" width="478" height="288" />
+![](https://i.gyazo.com/71a7ffb573c6b2c3fe9fd8c71d406386.png)
 
 The Component Model outlines how the system’s various components break down into, or interact with other components in order to achieve the system’s various tasks. If we look at the push notifications component for the Android App for example, it uses the WAMP server component, which provides the PHP and SQL components, which then interacts with the Firebase component in order to register the user to receive push notifications
 
@@ -212,6 +212,7 @@ This SHA1 key can be found by entering the following command:
 
 <img src="media/image4.png" width="624" height="167" />
 Where the password is set to android by default. Now click create and the android studio project should be ready to run the application. Please ensure the Studio and Emulator versions are up to date, and that the Google Drive, Token Service, and Firebase APIs are enabled in the console’s API manager.
+A Server will also be needed (WAMP if localhost), with the PHP script and a database written using the SQL code provided.
 
 5.2 - Raspberry Pi Configuration & Initial Set up
 -------------------------------------------------
