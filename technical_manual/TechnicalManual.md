@@ -212,7 +212,7 @@ Choose the Android application type, enter the package name from the AndroidMani
 This SHA1 key can be found by entering the following command:
 
 
-![](https://gyazo.com/c4654b1ceca56bc1263d43fcb53e7dad.png)
+![](https://gyazo.com/95e0a1f6603762e0d58c81ae87848bcb.png)
 
 Where the password is set to android by default. Now click create and the android studio project should be ready to run the application. Please ensure the Studio and Emulator versions are up to date, and that the Google Drive, Token Service, and Firebase APIs are enabled in the console’s API manager.
 A Server will also be needed (WAMP if localhost), with the PHP script and a database written using the SQL code provided.
