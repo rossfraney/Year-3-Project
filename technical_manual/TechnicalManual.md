@@ -268,7 +268,7 @@ Where the password is set to android by default. Now click create and the androi
 
 -   Downloads and unzips OpenCV 3.1.0
 
-> *4: Pip and NumPy*
+*4: Pip and NumPy*
 
 -   Get source Code
 
