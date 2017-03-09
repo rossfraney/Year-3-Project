@@ -125,7 +125,7 @@ TextLocal is a 3rd party SMS service that allows us to send SMS notifications to
 =====================
 3.1 - Component Model
 ----------------------------------------------------------------------------
-![](https://i.gyazo.com/71a7ffb573c6b2c3fe9fd8c71d406386.png)
+![](https://gyazo.com/09d532c0257bbda7aec28eab6855db7f.png)
 
 The Component Model outlines how the system’s various components break down into, or interact with other components in order to achieve the system’s various tasks. If we look at the push notifications component for the Android App for example, it uses the WAMP server component, which provides the PHP and SQL components, which then interacts with the Firebase component in order to register the user to receive push notifications
 
