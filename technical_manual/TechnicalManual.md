@@ -1,72 +1,38 @@
-Contents
+- [1 - Introduction:](#1---introduction-)
+  * [1.1 - Overview](#11---overview)
+  * [1.2 - Glossary:](#12---glossary-)
+- [2 - System Architecture](#2---system-architecture)
+  * [2.1 - Development Environment](#21---development-environment)
+    + [The Application](#the-application)
+    + [Raspberry Pi](#raspberry-pi)
+  * [2.2 - System Design](#22---system-design)
+    + [Application Remote Functionality](#application-remote-functionality)
+    + [Application UI](#application-ui)
+    + [Motion Detection and notification](#motion-detection-and-notification)
+  * [2.3 - System Components](#23---system-components)
+      - [Google Developer's Console](#google-developer-s-console)
+      - [Google Drive](#google-drive)
+      - [Firebase Messaging](#firebase-messaging)
+      - [WAMP Server](#wamp-server)
+      - [VLC Player](#vlc-player)
+      - [TextLocal](#textlocal)
+- [3 – High Level Design](#3---high-level-design)
+  * [3.1 - Component Model](#31---component-model)
+  * [3.2 - Data Flow Diagram](#32---data-flow-diagram)
+- [4 – Problems and Resolution](#4---problems-and-resolution)
+    + [Alarm sounds freezing capture frame](#alarm-sounds-freezing-capture-frame)
+    + [Dropbox support depreciated](#dropbox-support-depreciated)
+    + [Port forwarding for remote view of live stream server](#port-forwarding-for-remote-view-of-live-stream-server)
+    + [Creating RESTful architecture and Web-hook for notifications](#creating-restful-architecture-and-web-hook-for-notifications)
+    + [Notification Token needed to be hardcoded on Raspberry Pi:](#notification-token-needed-to-be-hardcoded-on-raspberry-pi-)
+    + [Motion detection alert if phone has no internet connection](#motion-detection-alert-if-phone-has-no-internet-connection)
+    + [Keep track of all client tokens for mass / selective notification](#keep-track-of-all-client-tokens-for-mass---selective-notification)
+    + [User having to open the Pi-side code to change Alarm Sound](#user-having-to-open-the-pi-side-code-to-change-alarm-sound)
+    + [Shutting down SecuriPi remotely](#shutting-down-securipi-remotely)
+- [5 – Installation & Configuration](#5---installation---configuration)
+  * [5.1 - Application Configuration & Initial Set up](#51---application-configuration---initial-set-up)
+  * [5.2 - Raspberry Pi Configuration & Initial Set up](#52---raspberry-pi-configuration---initial-set-up)
 
-1 - Introduction:        2
-
-1.1 - Overview        2
-
-1.2 - Glossary:        2
-
-2 - System Architecture        3
-
-2.1 - Development Environment        3
-
-- The Application        3
-
-- Raspberry Pi        3
-
-2.2 - System Design        3
-
-- Application Remote Functionality        3
-
-- Application UI        4
-    
-- Motion Detection and notification        5
-
-2.3 - System Components        6
-
-- Google Developer&#39;s Console        6
-
-- Google Drive        6
-
-- Firebase Messaging        6
-
-- WAMP Server        6
-
-- VLC Player        6
-
-- TextLocal        6
-
-3 – High Level Design        7
-
-3.1 - Component Model        7
-
-3.2 - Data Flow Diagram        7
-
-4 – Problems and Resolution        8
-
-- Alarm sounds freezing capture frame        8
-
-- Dropbox support depreciated        8
-
-- Port forwarding for remote view of live stream server        8
-
-- Creating RESTful architecture and Web-hook for notifications        8
-
-- Notification Token needed to be hardcoded on Raspberry Pi:        8
-
-- Motion detection alert if phone has no internet connection        9
-
-- Keep track of all client tokens for mass / selective notification        9
-
-- User having to open the Pi-side code to change Alarm Sound        9
-
-- Shutting down SecuriPi remotely        9
-
-5 – Installation &amp; Configuration        9
-
-5.1 - Application Configuration &amp; Initial Set up        9
-
-5.2 - Raspberry Pi Configuration &amp; Initial Set up        10
 
 1 - Introduction:
 =================
