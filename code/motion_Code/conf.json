@@ -1,12 +1,24 @@
 {
-	"show_video": true,
-	"min_upload_seconds": 3.0,
-	"min_motion_frames": 8,
-	"camera_warmup_time": 2.5,
-	"delta_thresh": 5,
 
-	"Height": 1280,
-	"Width": 720,
-	"fps": 16,
-	"min_area": 2000
+	"show_video": true,
+	"auto_auth": true,
+	"enable_sms": true,
+	"enable_audio": true,
+
+	"sms_email": "kieranturgoose@gmail.com",
+	"sms_hash": "2fb8de34ce32f131b14f003b1619586fc066bbe2f975f4074892aeed1662d2b8",
+	"phone_number": 353879609224,
+		
+	"height": 1920,
+	"width": 1080,
+	"fps": 60,
+
+	"notification_period": 10,
+	
+	"min_upload_seconds": 3.0,
+	"min_motion_frames": 6,
+	"camera_warmup_time": 2,
+	"delta_thresh": 5,
+	"min_area": 1000
+
 }
