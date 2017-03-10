@@ -1,6 +1,3 @@
-#!/usr/bin/python
-
-# Import required libraries
 import urllib      # URL functions
 import urllib2     # URL functions
 import g_drive
@@ -8,19 +5,22 @@ import conf
 
 conf = conf.config()
 
-# Sender name must alphanumeric and between 3 and 11 characters in length.
+# initialise email address of user from conf.json
 email = conf["sms_email"]
+
+# sender name must be between 3 and 11 characters.
 sender = 'SecuriPi'
 
-# Your unique hash is available from the docs page https://control.txtlocal.co.uk/docs/
+# get your accounts unique hash from https://control.txtlocal.co.uk/docs/
+# initialise from conf.json
 hash = conf["sms_hash"]
 
-# Set flag to 1 to simulate sending
-# This saves your credits while you are testing your code.
-# To send real message set this flag to 0
+# set flag to 1 to simulate sending, 0 for real texts
 test_flag = 1
 
+# send the SMS
 def sms(phoneNumber):
+  # get the link to the image uploaded, to be sent as the text message
   image_content_link = "https://drive.google.com/open?id="+g_drive.get_file_id()
   message = image_content_link
 
@@ -31,6 +31,7 @@ def sms(phoneNumber):
             'from'    : sender,
             'selectednums' : phoneNumber }
 
+  # 3rd party enabled text service
   url = 'http://www.txtlocal.com/sendsmspost.php'
 
   postdata = urllib.urlencode(values)
