@@ -215,7 +215,7 @@ The data flow Diagram documents the various pieces of data sent between the comp
 
 The last component to be added to this project was the camera, which originally had been connected using the GPIO connectors. However, after realizing the sound limitations of this connection method, the team opted for a portable camera connected through a 3.5mm audio jack. An OS system call from python was originally used to execute OmxPlayer, a built-in music player on the pi, and force the mp3 file through local output using “local -o sound.mp3”. Unfortunately, when the alarm would sound, the motion detection camera frame would freeze until the music had stopped playing and throw a resource busy warning the next time the camera was armed. 
 
-**Solution**: Used VLS Player instead, as OmxPlayer apparently utilizes the GPU of the device. 
+**Solution**: Used VLC Player instead, as OmxPlayer apparently utilizes the GPU of the device. 
 
 ### Dropbox support depreciated
 
