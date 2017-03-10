@@ -1,8 +1,9 @@
 Contents
+========================
 
 1 - Raspberry Pi Set – up        2
 
-Initialize the script and settings        2
+- Initialize the script and settings        2
 
 2 - Android Application        3
 
