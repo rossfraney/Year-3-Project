@@ -1,72 +1,72 @@
 Contents
 
-1 - Introduction:                        2
+1 - Introduction....................2
 
-1.1 - Overview        2
+1.1 - Overview....................2
 
-1.2 - Glossary:        2
+1.2 - Glossary....................2
 
-2 - System Architecture        3
+2 - System Architecture....................3
 
-2.1 - Development Environment        3
+2.1 - Development Environment....................3
 
-- The Application        3
+- The Application....................3
 
-- Raspberry Pi        3
+- Raspberry Pi....................3
 
-2.2 - System Design        3
+2.2 - System Design....................3
 
-- Application Remote Functionality        3
+- Application Remote Functionality....................3
 
-- Application UI        4
+- Application UI....................4
     
-- Motion Detection and notification        5
+- Motion Detection and notification....................5
 
-2.3 - System Components        6
+2.3 - System Components....................6
 
-- Google Developer&#39;s Console        6
+- Google Developer&#39;s Console....................6
 
-- Google Drive        6
+- Google Drive....................6
 
-- Firebase Messaging        6
+- Firebase Messaging....................6
 
-- WAMP Server        6
+- WAMP Server....................6
 
-- VLC Player        6
+- VLC Player....................6
 
-- TextLocal        6
+- TextLocal....................6
 
-3 – High Level Design        7
+3 – High Level Design....................7
 
-3.1 - Component Model        7
+3.1 - Component Model....................7
 
-3.2 - Data Flow Diagram        7
+3.2 - Data Flow Diagram....................7
 
-4 – Problems and Resolution        8
+4 – Problems and Resolution....................8
 
-- Alarm sounds freezing capture frame        8
+- Alarm sounds freezing capture frame....................8
 
-- Dropbox support depreciated        8
+- Dropbox support depreciated....................8
 
-- Port forwarding for remote view of live stream server        8
+- Port forwarding for remote view of live stream server....................8
 
-- Creating RESTful architecture and Web-hook for notifications        8
+- Creating RESTful architecture and Web-hook for notifications....................8
 
-- Notification Token needed to be hardcoded on Raspberry Pi:        8
+- Notification Token needed to be hardcoded on Raspberry Pi:....................8
 
-- Motion detection alert if phone has no internet connection        9
+- Motion detection alert if phone has no internet connection....................9
 
-- Keep track of all client tokens for mass / selective notification        9
+- Keep track of all client tokens for mass / selective notification....................9
 
-- User having to open the Pi-side code to change Alarm Sound        9
+- User having to open the Pi-side code to change Alarm Sound....................9
 
-- Shutting down SecuriPi remotely        9
+- Shutting down SecuriPi remotely....................9
 
-5 – Installation &amp; Configuration        9
+5 – Installation &amp; Configuration....................9
 
-5.1 - Application Configuration &amp; Initial Set up        9
+5.1 - Application Configuration &amp; Initial Set up....................9
 
-5.2 - Raspberry Pi Configuration &amp; Initial Set up        10
+5.2 - Raspberry Pi Configuration &amp; Initial Set up....................10
 
 1 - Introduction:
 =================
