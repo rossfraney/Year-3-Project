@@ -18,7 +18,7 @@ import com.jcraft.jsch.Session;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class AlarmSound extends AppCompatActivity implements View.OnClickListener {
+public class AlarmSound extends Main2Activity implements View.OnClickListener {
 
     private String alarmSound;
     private String TAG = "ALARM_SOUND_CONTEXT";
@@ -90,7 +90,7 @@ public class AlarmSound extends AppCompatActivity implements View.OnClickListene
     private void makeSelection(){
         try {
             JSch jsch = new JSch();
-            Session session = jsch.getSession("pi", Main2Activity.getHost(), 22);
+            Session session = jsch.getSession("pi", myHost, 22);
             session.setPassword("raspberry");
 
             // Avoid asking for key confirmation

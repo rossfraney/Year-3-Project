@@ -1,5 +1,6 @@
 package com.example.ross.opendrive;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,8 +35,24 @@ public class setSshId extends Main2Activity {
             public void onClick(View v) {
                 if(v == btn) {
                     str = eText.getText().toString();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("IP", str);
+                    editor.apply();
+                    ((EditText) findViewById(R.id.edittext)).setText(str);
                     myHost = str;
-                    tester();
+                    Thread t = new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            tester();
+                        }
+                    });
+                    t.start();
+                    try {
+                        t.join();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     if(Success != null){
                         showMessage(Success);
                     }else{
@@ -49,34 +66,27 @@ public class setSshId extends Main2Activity {
 
     //getter
     public void tester(){
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    JSch jsch = new JSch();
-                    Session session = jsch.getSession("pi", myHost, 22);
-                    session.setPassword("raspberry");
+        try {
+            JSch jsch = new JSch();
+            Session session = jsch.getSession("pi", myHost, 22);
+            session.setPassword("raspberry");
+            // Avoid asking for key confirmation
+            Properties prop = new Properties();
+            prop.put("StrictHostKeyChecking", "no");
+            session.setConfig(prop);
+            session.connect();
+            Success = "Connection Successfully Saved";
 
-                    // Avoid asking for key confirmation
-                    Properties prop = new Properties();
-                    prop.put("StrictHostKeyChecking", "no");
-                    session.setConfig(prop);
-                    session.connect();
-                    Success = "Connection Successfully Saved";
+            Channel channelssh = session.openChannel("exec");
+            channelssh.setInputStream(null);
+            ((ChannelExec) channelssh).setErrStream(System.err);
 
-                    Channel channelssh = session.openChannel("exec");
-                    channelssh.setInputStream(null);
-                    ((ChannelExec) channelssh).setErrStream(System.err);
-
-                    channelssh.connect();
-                    channelssh.disconnect();
-                    session.disconnect();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        t.start();
+            channelssh.connect();
+            channelssh.disconnect();
+            session.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
 

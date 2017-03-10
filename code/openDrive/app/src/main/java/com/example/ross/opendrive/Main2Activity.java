@@ -1,13 +1,16 @@
 package com.example.ross.opendrive;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -59,11 +62,14 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     protected static final int REQUEST_CODE_RESOLUTION = 1;
     private static final int REQUEST_CODE_DELETER = 2;
     private static final int REQUEST_CODE_OPENER = 3;
-    private String lastKey = "placeholderid";
-    private String token;
-    public static String myHost = "192.168.1.6";
+    public String MyPREFERENCES;
+    public String lastKey = "placeholderid";
+    public String token;
+    public String myHost = "192.168.43.50";
     public TextView tv1;
-    public String neighboursNum;
+    public String neighboursNum = "0861921718";
+
+    SharedPreferences sharedPreferences;
 
     /**
      * File that is selected with the open file activity.
@@ -74,6 +80,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         //welcome message
         tv1 = (TextView) findViewById(R.id.textView1);
         tv1.setText("Welcome");
@@ -113,6 +121,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                 }
             }
         });
+
 
         //Generating Token for registering user with firebase for notifications
         token = FirebaseInstanceId.getInstance().getToken();
@@ -182,7 +191,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             public void run() {
                 try {
                     JSch jsch = new JSch();
-                    Session session = jsch.getSession("pi", Main2Activity.getHost(), 22);
+                    Session session = jsch.getSession("pi", myHost, 22);
                     session.setPassword("raspberry");
 
                     // Avoid asking for key confirmation
@@ -245,9 +254,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
 
         //Changes neighbour's number variable and pre-creates the text message
         if (view == textNeighbour) {
-            neighboursNum = setNeighbour.getNum();
             Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
-            sendIntent.setData(Uri.parse("smsto:" + neighboursNum));
+            sendIntent.setData(Uri.parse("smsto:" + sharedPreferences.getString("Num", null)));
             sendIntent.putExtra("sms_body", "Security Alert: Hi, could you please check " +
                     "my home as there has been action recorded on my security camera. Thanks!");
             try {
@@ -511,9 +519,9 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    public static String getHost(){
-        return myHost;
-    }
+    //public static String getHost(){
+      //  return myHost;
+    //}
 
     public void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
