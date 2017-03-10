@@ -2,8 +2,13 @@ import json
 import argparse
 
 def config():
+    # allows use of conf.json from command line argument
     ap = argparse.ArgumentParser()
-    ap.add_argument("-c", "--conf", required=True, help="path to the JSON configuration file")
+
+    # argument for command line. i.e python file.py "--conf conf.json"
+    ap.add_argument("--conf", required=True)
     args = vars(ap.parse_args())
+    
+    # allows conf to be loaded into files
     conf = json.load(open(args["conf"]))
     return conf
