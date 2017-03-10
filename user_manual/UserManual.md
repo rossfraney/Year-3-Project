@@ -1,31 +1,31 @@
 Contents
 ========================
 
-1 - Raspberry Pi Set – up        2
+1 - Raspberry Pi Set – up......................................................2
 
-- Initialize the script and settings        2
+- Initialize the script and settings...........................................2
 
-2 - Android Application        3
+2 - Android Application........................................................3
 
-2.1 - Set-up Step 1:        3
+2.1 - Set-up Step 1............................................................3
 
-2.2 - Set-up Step 2:        3
+2.2 - Set-up Step 2............................................................3
 
-2.3 - Setting up a neighbor &quot;Quick-Text&quot; number:        4
+2.3 - Setting up a neighbor &quot;Quick-Text&quot; number......................4
 
-2.4 - Arming and Disarming the camera:        5
+2.4 - Arming and Disarming the camera..........................................5
 
-2.5 - Changing the Alarm sound:        5
+2.5 - Changing the Alarm sound.................................................5
 
-2.6 - Enabling Notifications:        6
+2.6 - Enabling Notifications...................................................6
 
-2.6.1 - Reacting to notifications:        6
+2.6.1 - Reacting to notifications..............................................6
 
-2.7 - Viewing Captured Files:        6
+2.7 - Viewing Captured Files...................................................6
 
-2.7.1 - Deleting Files:        7
+2.7.1 - Deleting Files.........................................................7
 
-Call 999:        7
+Call 999.......................................................................7
 
 1 - Raspberry Pi Set – up
 =========================
