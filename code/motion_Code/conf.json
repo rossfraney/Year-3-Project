@@ -4,6 +4,7 @@
 	"auto_auth": true,
 	"enable_sms": true,
 	"enable_audio": true,
+	"sound_time": 3,
 
 	"sms_email": "kieranturgoose@gmail.com",
 	"sms_hash": "2fb8de34ce32f131b14f003b1619586fc066bbe2f975f4074892aeed1662d2b8",
