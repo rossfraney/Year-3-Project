@@ -1,46 +1,25 @@
-Contents
-
-The Application        2
-
-Real World Resting        2
-
-Automated Instrument / User Interface Tests        3
-
-Functionality testing &amp; Verification        5
-
-Activity Testing        5
-
-Problems Identified using this method, Solution, and Validation:        6
-
-Structural Testing        7
-
-Compatibility/Portability tests        8
-
-The Raspberry Pi        9
-
-Stress - Test        9
-
-Branch Testing        9
-
-Testing for Various Web Cams        10
-
-Network Test        10
-
-Detecting movement        10
-
-Completely dark room        10
-
-Small light presence        11
-
-Drastic change in lighting conditions        12
-
-Detecting images at a distance        12
-
-User Testing        13
-
-Tasks        13
-
-End of Document        16
+  * [Testing](#testing)
+- [The Application](#the-application)
+  * [Real World Resting](#real-world-resting)
+  * [Automated Instrument / User Interface Tests](#automated-instrument---user-interface-tests)
+  * [Functionality testing &amp; Verification](#functionality-testing--amp--verification)
+  * [Activity Testing](#activity-testing)
+    + [Problems Identified using this method, Solution, and Validation:](#problems-identified-using-this-method--solution--and-validation-)
+  * [Structural Testing](#structural-testing)
+  * [Compatibility/Portability tests](#compatibility-portability-tests)
+- [The Raspberry Pi](#the-raspberry-pi)
+  * [Stress - Test](#stress---test)
+  * [Branch Testing](#branch-testing)
+  * [Testing for Various Web Cams](#testing-for-various-web-cams)
+  * [Network Test](#network-test)
+  * [Detecting movement](#detecting-movement)
+  * [Completely dark room](#completely-dark-room)
+  * [Small light presence](#small-light-presence)
+  * [Drastic change in lighting conditions](#drastic-change-in-lighting-conditions)
+  * [Detecting images at a distance](#detecting-images-at-a-distance)
+- [User Testing](#user-testing)
+  * [Tasks](#tasks)
+- [End of Document](#end-of-document)
 
 
 ## Testing
