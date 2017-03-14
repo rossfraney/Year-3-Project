@@ -1,4 +1,6 @@
 package com.example.ross.opendrive;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -7,9 +9,10 @@ import android.widget.EditText;
 
 public class setNeighbour extends Main2Activity {
 
-    private EditText eText;
+
     private Button btn;
-    private static String str;
+    private EditText eText;
+    public static String str = neighboursNum;
 
     //Creates button with a listener to register above editText and set String str to result
     @Override
@@ -23,14 +26,15 @@ public class setNeighbour extends Main2Activity {
             public void onClick(View v) {
                 if(v == btn && eText.getText().toString().length() == 10) {
                     str = eText.getText().toString();
-                    ((EditText) findViewById(R.id.edittext)).setText(
-                            sharedPreferences.getString("Num", null));
                     neighboursNum = str;
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("Num", neighboursNum);
                     editor.apply();
+                    //((EditText) findViewById(R.id.edittext)).setText(
+                            //sharedPreferences.getString("Num", null));
                     showMessage("New Number: " + sharedPreferences.getString("Num", null));
                     finish();
+                    startActivity(new Intent(getApplicationContext(), Main2Activity.class));
                 }
                 else{
                     showMessage("Error, Please enter a valid mobile phone number");

@@ -1,9 +1,7 @@
 package com.example.ross.opendrive;
 
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +11,6 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
-import java.io.InputStream;
 import java.util.Properties;
 
 public class setSshId extends Main2Activity {
@@ -54,9 +51,9 @@ public class setSshId extends Main2Activity {
                     }
 
                     if(Success != null){
-                        showMessage(Success);
+                        showMessage("Connection Successful");
                     }else{
-                        showMessage("Connection Failed");
+                        showMessage("Unsuccessful");
                     }
                     finish();
                 }

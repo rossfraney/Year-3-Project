@@ -9,11 +9,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.SharedPreferencesCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,6 +23,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -37,17 +37,13 @@ import com.google.android.gms.drive.DriveFile;
 import com.google.android.gms.drive.DriveId;
 import com.google.android.gms.drive.OpenFileActivityBuilder;
 import com.google.firebase.iid.FirebaseInstanceId;
-
-import java.util.Properties;
-
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
-import android.widget.ToggleButton;
-
 import java.io.InputStream;
+import java.util.Properties;
 
 public class Main2Activity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
@@ -67,7 +63,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     public String token;
     public String myHost = "192.168.43.50";
     public TextView tv1;
-    public String neighboursNum = "0861921718";
+    public static String neighboursNum = "0861921718";
 
     SharedPreferences sharedPreferences;
 
@@ -75,6 +71,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
      * File that is selected with the open file activity.
      */
     private DriveId mSelectedFileDriveId;
+    private int Flag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +163,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
                     .build();
         }
         mGoogleApiClient.connect();
+        //Flag = 1;
     }
 
     //If App is closed but not shut down
@@ -175,6 +173,7 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
             mGoogleApiClient.disconnect();
         }
         super.onPause();
+        Flag = 1;
     }
 
     //google is connected to google services
@@ -182,7 +181,8 @@ public class Main2Activity extends AppCompatActivity implements GoogleApiClient.
     public void onConnected(Bundle connectionHint) {
         Log.i(TAG, "GoogleApiClient connected");
         tv1.setText("Welcome Back!");
-        showMessage("Registered for notifications");
+        if(Flag == 0)
+            showMessage("Registered for notifications");
 
         //Build an SSH Connection and update notification in Pi token in case it has changed
         //In separate thread as it involves network activity

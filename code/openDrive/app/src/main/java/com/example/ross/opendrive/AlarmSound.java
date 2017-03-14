@@ -1,6 +1,5 @@
 package com.example.ross.opendrive;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 
-import java.io.InputStream;
 import java.util.Properties;
 
 public class AlarmSound extends Main2Activity implements View.OnClickListener {
@@ -34,6 +32,7 @@ public class AlarmSound extends Main2Activity implements View.OnClickListener {
         alarmSoundButton = (Button) findViewById(R.id.alarmSoundButton);
         alarmSoundButton.setOnClickListener(this);
 
+        //Spinner is the dropdown list/menu
         spinner = (Spinner) findViewById(R.id.alarmSpinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         adapter = ArrayAdapter.createFromResource(this,
@@ -42,6 +41,8 @@ public class AlarmSound extends Main2Activity implements View.OnClickListener {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+
+        //Listener for user's choice
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -49,7 +50,7 @@ public class AlarmSound extends Main2Activity implements View.OnClickListener {
                 final int choice = parent.getSelectedItemPosition();
 
                 if (choice == 0) {
-                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/" +
+                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*mp3#/home/pi/securiPi/" +
                             "soundFiles/FireAlarm.mp3#g' /home/pi/securiPi/pi_surveillance.py";
 
                     Toast.makeText(getBaseContext(), "Alarm: Standard Alarm",
@@ -57,7 +58,7 @@ public class AlarmSound extends Main2Activity implements View.OnClickListener {
                 }
 
                 if (choice == 1) {
-                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/" +
+                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*mp3#/home/pi/securiPi/" +
                             "soundFiles/Dog.mp3#g' /home/pi/securiPi/pi_surveillance.py";
 
                     Toast.makeText(getBaseContext(), "Alarm: Dog Barking",
@@ -65,7 +66,7 @@ public class AlarmSound extends Main2Activity implements View.OnClickListener {
                 }
 
                 if (choice == 2) {
-                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/" +
+                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*mp3#/home/pi/securiPi/" +
                             "soundFiles/Lullaby.mp3#g' /home/pi/securiPi/pi_surveillance.py";
 
                     Toast.makeText(getBaseContext(), "Alarm: Lullaby",
@@ -73,7 +74,8 @@ public class AlarmSound extends Main2Activity implements View.OnClickListener {
                 }
 
                 if (choice == 3) {
-                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*#/home/pi/securiPi/soundFiles/Siren.mp3#g' /home/pi/securiPi/pi_surveillance.py";
+                    alarmSound = "sed -i -e 's#/home/pi/securiPi/soundFiles/.*mp3#/home/pi/securiPi/" +
+                            "soundFiles/Siren.mp3#g' /home/pi/securiPi/pi_surveillance.py";
                     Toast.makeText(getBaseContext(), "Alarm: Police Siren", Toast.LENGTH_LONG).show();
                 } else {
                     return;
@@ -87,6 +89,7 @@ public class AlarmSound extends Main2Activity implements View.OnClickListener {
         });
     }
 
+    //SSH Connections
     private void makeSelection(){
         try {
             JSch jsch = new JSch();
