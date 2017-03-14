@@ -291,9 +291,7 @@ Overall the testing of the Raspberry Pi went about without any major drawbacks o
 
 # User Testing
 
-As part of the testing for SecuriPi the team decided that user testing would be a good way of demonstrating the ease at which our system could be set-up and used. With the given time constraints, since the system has been fully built, it has been tested on one external user. The user, who opted to remain nameless, is a 20-year-old, female, computer science &amp; infrastructure student currently in 3
-
-# rd
+As part of the testing for SecuriPi the team decided that user testing would be a good way of demonstrating the ease at which our system could be set-up and used. With the given time constraints, since the system has been fully built, it has been tested on one external user. The user, who opted to remain nameless, is a 20-year-old, female, computer science &amp; infrastructure student currently in  3rd
  year in DIT.
 
 The user was given a list of tasks to do with regards to basic set-up and use of both the raspberry pi and the android app. When going into this test scenario the user had prior knowledge of what the project was but had no experience in viewing the system&#39;s interface or using any of the features. The user had plenty of experience with phone applications but had never used a raspberry pi before.
